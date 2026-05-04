@@ -1920,3 +1920,605 @@ job.batch/parsec-radix created
 [02:40:43] Waiting for job 'parsec-radix' to complete...
 [02:40:43] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
 [02:40:43]   Still running... (0s elapsed)
+[02:40:58] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:40:59]   Still running... (15s elapsed)
+[02:41:14] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:41:14]   Still running... (30s elapsed)
+[02:41:29] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:41:29]   Still running... (46s elapsed)
+[02:41:44] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:41:45]   Still running... (61s elapsed)
+[02:42:00] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:42:00]   Still running... (76s elapsed)
+[02:42:15] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:42:15]   Still running... (92s elapsed)
+[02:42:30] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:42:30]   Still running... (107s elapsed)
+[02:42:45] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:42:47] Job 'parsec-radix' completed successfully (122s)
+[02:42:47] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[02:42:47] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[02:42:47] $ kubectl logs parsec-radix-m8xv8
+[02:42:47] Execution time: 112.4s
+[02:42:47] Cleaning up jobs and pods...
+[02:42:47] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[02:42:47] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:43:28] Results saved to part2a-experiments/run1/results.csv
+[02:43:28] 
+Progress: 41/49
+[02:43:28] 
+============================================================
+[02:43:28]   Benchmark:    streamcluster
+[02:43:28]   Interference: ibench-llc
+[02:43:28] ============================================================
+[02:43:28] Cleaning up jobs and pods...
+[02:43:28] $ kubectl delete jobs --all
+No resources found
+[02:43:28] $ kubectl delete pods --all
+No resources found
+[02:43:39] Starting interference: ibench-llc
+[02:43:39] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:43:39] Waiting 30s for interference to stabilise...
+[02:44:09] $ kubectl get pods -o wide
+[02:44:09] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          30s   100.96.1.78   parsec-server-xh60   <none>           <none>
+
+[02:44:09] Starting benchmark: streamcluster
+[02:44:09] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[02:44:09] Waiting for job 'parsec-streamcluster' to complete...
+[02:44:09] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:44:10]   Still running... (0s elapsed)
+[02:44:25] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:44:25]   Still running... (15s elapsed)
+[02:44:40] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:44:40] Job 'parsec-streamcluster' completed successfully (30s)
+[02:44:40] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[02:44:40] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[02:44:40] $ kubectl logs parsec-streamcluster-dtf6x
+[02:44:40] Execution time: 22.0s
+[02:44:40] Cleaning up jobs and pods...
+[02:44:40] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[02:44:41] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:45:22] Results saved to part2a-experiments/run1/results.csv
+[02:45:22] 
+Progress: 42/49
+[02:45:22] 
+============================================================
+[02:45:22]   Benchmark:    vips
+[02:45:22]   Interference: ibench-llc
+[02:45:22] ============================================================
+[02:45:22] Cleaning up jobs and pods...
+[02:45:22] $ kubectl delete jobs --all
+No resources found
+[02:45:22] $ kubectl delete pods --all
+No resources found
+[02:45:32] Starting interference: ibench-llc
+[02:45:32] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:45:32] Waiting 30s for interference to stabilise...
+[02:46:02] $ kubectl get pods -o wide
+[02:46:03] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          31s   100.96.1.80   parsec-server-xh60   <none>           <none>
+
+[02:46:03] Starting benchmark: vips
+[02:46:03] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[02:46:03] Waiting for job 'parsec-vips' to complete...
+[02:46:03] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:46:03]   Still running... (0s elapsed)
+[02:46:18] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:46:18]   Still running... (15s elapsed)
+[02:46:33] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:46:34]   Still running... (30s elapsed)
+[02:46:49] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:46:49]   Still running... (46s elapsed)
+[02:47:04] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:47:04]   Still running... (61s elapsed)
+[02:47:19] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:47:19]   Still running... (76s elapsed)
+[02:47:34] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:47:35]   Still running... (92s elapsed)
+[02:47:50] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:47:50]   Still running... (107s elapsed)
+[02:48:05] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:48:05]   Still running... (122s elapsed)
+[02:48:20] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:48:21]   Still running... (137s elapsed)
+[02:48:36] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:48:36]   Still running... (153s elapsed)
+[02:48:51] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:48:51]   Still running... (168s elapsed)
+[02:49:06] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:49:06]   Still running... (183s elapsed)
+[02:49:21] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:49:22]   Still running... (199s elapsed)
+[02:49:37] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:49:37]   Still running... (214s elapsed)
+[02:49:52] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:49:52]   Still running... (229s elapsed)
+[02:50:07] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:50:07]   Still running... (244s elapsed)
+[02:50:22] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:50:23] Job 'parsec-vips' completed successfully (260s)
+[02:50:23] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[02:50:23] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[02:50:23] $ kubectl logs parsec-vips-5h9lp
+[02:50:23] Execution time: 223.3s
+[02:50:23] Cleaning up jobs and pods...
+[02:50:23] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[02:50:23] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:51:04] Results saved to part2a-experiments/run1/results.csv
+[02:51:04] 
+Progress: 43/49
+[02:51:04] 
+============================================================
+[02:51:04]   Benchmark:    barnes
+[02:51:04]   Interference: ibench-membw
+[02:51:04] ============================================================
+[02:51:04] Cleaning up jobs and pods...
+[02:51:04] $ kubectl delete jobs --all
+No resources found
+[02:51:04] $ kubectl delete pods --all
+No resources found
+[02:51:14] Starting interference: ibench-membw
+[02:51:14] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[02:51:15] Waiting 30s for interference to stabilise...
+[02:51:45] $ kubectl get pods -o wide
+[02:51:45] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.82   parsec-server-xh60   <none>           <none>
+
+[02:51:45] Starting benchmark: barnes
+[02:51:45] $ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+job.batch/parsec-barnes created
+[02:51:45] Waiting for job 'parsec-barnes' to complete...
+[02:51:45] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:51:45]   Still running... (0s elapsed)
+[02:52:00] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:52:01]   Still running... (15s elapsed)
+[02:52:16] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:52:16]   Still running... (30s elapsed)
+[02:52:31] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:52:31]   Still running... (46s elapsed)
+[02:52:46] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:52:46]   Still running... (61s elapsed)
+[02:53:01] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:53:02]   Still running... (76s elapsed)
+[02:53:17] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:53:17]   Still running... (92s elapsed)
+[02:53:32] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:53:32]   Still running... (107s elapsed)
+[02:53:47] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:53:48]   Still running... (122s elapsed)
+[02:54:03] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:54:03]   Still running... (137s elapsed)
+[02:54:18] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:54:18]   Still running... (153s elapsed)
+[02:54:33] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:54:34]   Still running... (168s elapsed)
+[02:54:49] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:54:49]   Still running... (183s elapsed)
+[02:55:04] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:55:04]   Still running... (199s elapsed)
+[02:55:19] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:55:19]   Still running... (214s elapsed)
+[02:55:35] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:55:35]   Still running... (229s elapsed)
+[02:55:50] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:55:50]   Still running... (245s elapsed)
+[02:56:05] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:56:05] Job 'parsec-barnes' completed successfully (260s)
+[02:56:05] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath='{.items[*].metadata.name}')
+[02:56:05] $ kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath={.items[*].metadata.name}
+[02:56:06] $ kubectl logs parsec-barnes-mh94t
+[02:56:06] Execution time: 250.3s
+[02:56:06] Cleaning up jobs and pods...
+[02:56:06] $ kubectl delete jobs --all
+job.batch "parsec-barnes" deleted from default namespace
+[02:56:06] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[02:56:47] Results saved to part2a-experiments/run1/results.csv
+[02:56:47] 
+Progress: 44/49
+[02:56:47] 
+============================================================
+[02:56:47]   Benchmark:    blackscholes
+[02:56:47]   Interference: ibench-membw
+[02:56:47] ============================================================
+[02:56:47] Cleaning up jobs and pods...
+[02:56:47] $ kubectl delete jobs --all
+No resources found
+[02:56:48] $ kubectl delete pods --all
+No resources found
+[02:56:58] Starting interference: ibench-membw
+[02:56:58] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[02:56:58] Waiting 30s for interference to stabilise...
+[02:57:28] $ kubectl get pods -o wide
+[02:57:28] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.84   parsec-server-xh60   <none>           <none>
+
+[02:57:28] Starting benchmark: blackscholes
+[02:57:28] $ kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
+job.batch/parsec-blackscholes created
+[02:57:29] Waiting for job 'parsec-blackscholes' to complete...
+[02:57:29] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[02:57:29]   Still running... (0s elapsed)
+[02:57:44] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[02:57:44] Job 'parsec-blackscholes' completed successfully (15s)
+[02:57:44] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}')
+[02:57:44] $ kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath={.items[*].metadata.name}
+[02:57:44] $ kubectl logs parsec-blackscholes-qqgdh
+[02:57:44] Execution time: 1.2s
+[02:57:44] Cleaning up jobs and pods...
+[02:57:44] $ kubectl delete jobs --all
+job.batch "parsec-blackscholes" deleted from default namespace
+[02:57:45] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[02:58:26] Results saved to part2a-experiments/run1/results.csv
+[02:58:26] 
+Progress: 45/49
+[02:58:26] 
+============================================================
+[02:58:26]   Benchmark:    canneal
+[02:58:26]   Interference: ibench-membw
+[02:58:26] ============================================================
+[02:58:26] Cleaning up jobs and pods...
+[02:58:26] $ kubectl delete jobs --all
+No resources found
+[02:58:26] $ kubectl delete pods --all
+No resources found
+[02:58:36] Starting interference: ibench-membw
+[02:58:36] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[02:58:36] Waiting 30s for interference to stabilise...
+[02:59:06] $ kubectl get pods -o wide
+[02:59:07] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          31s   100.96.1.86   parsec-server-xh60   <none>           <none>
+
+[02:59:07] Starting benchmark: canneal
+[02:59:07] $ kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
+job.batch/parsec-canneal created
+[02:59:07] Waiting for job 'parsec-canneal' to complete...
+[02:59:07] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:59:07]   Still running... (0s elapsed)
+[02:59:22] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:59:22]   Still running... (15s elapsed)
+[02:59:37] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:59:38] Job 'parsec-canneal' completed successfully (30s)
+[02:59:38] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}')
+[02:59:38] $ kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath={.items[*].metadata.name}
+[02:59:38] $ kubectl logs parsec-canneal-84f72
+[02:59:38] Execution time: 14.7s
+[02:59:38] Cleaning up jobs and pods...
+[02:59:38] $ kubectl delete jobs --all
+job.batch "parsec-canneal" deleted from default namespace
+[02:59:38] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:00:19] Results saved to part2a-experiments/run1/results.csv
+[03:00:19] 
+Progress: 46/49
+[03:00:19] 
+============================================================
+[03:00:19]   Benchmark:    freqmine
+[03:00:19]   Interference: ibench-membw
+[03:00:19] ============================================================
+[03:00:19] Cleaning up jobs and pods...
+[03:00:19] $ kubectl delete jobs --all
+No resources found
+[03:00:19] $ kubectl delete pods --all
+No resources found
+[03:00:30] Starting interference: ibench-membw
+[03:00:30] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[03:00:30] Waiting 30s for interference to stabilise...
+[03:01:00] $ kubectl get pods -o wide
+[03:01:00] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.88   parsec-server-xh60   <none>           <none>
+
+[03:01:00] Starting benchmark: freqmine
+[03:01:00] $ kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
+job.batch/parsec-freqmine created
+[03:01:00] Waiting for job 'parsec-freqmine' to complete...
+[03:01:00] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[03:01:00]   Still running... (0s elapsed)
+[03:01:15] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[03:01:16]   Still running... (15s elapsed)
+[03:01:31] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[03:01:31] Job 'parsec-freqmine' completed successfully (30s)
+[03:01:31] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}')
+[03:01:31] $ kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath={.items[*].metadata.name}
+[03:01:31] $ kubectl logs parsec-freqmine-c7sdf
+[03:01:32] Execution time: 12.0s
+[03:01:32] Cleaning up jobs and pods...
+[03:01:32] $ kubectl delete jobs --all
+job.batch "parsec-freqmine" deleted from default namespace
+[03:01:32] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:02:12] Results saved to part2a-experiments/run1/results.csv
+[03:02:12] 
+Progress: 47/49
+[03:02:12] 
+============================================================
+[03:02:12]   Benchmark:    radix
+[03:02:12]   Interference: ibench-membw
+[03:02:12] ============================================================
+[03:02:12] Cleaning up jobs and pods...
+[03:02:12] $ kubectl delete jobs --all
+No resources found
+[03:02:13] $ kubectl delete pods --all
+No resources found
+[03:02:23] Starting interference: ibench-membw
+[03:02:23] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[03:02:23] Waiting 30s for interference to stabilise...
+[03:02:53] $ kubectl get pods -o wide
+[03:02:54] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          31s   100.96.1.90   parsec-server-xh60   <none>           <none>
+
+[03:02:54] Starting benchmark: radix
+[03:02:54] $ kubectl create -f parsec-benchmarks/part2a/parsec-radix.yaml
+job.batch/parsec-radix created
+[03:02:54] Waiting for job 'parsec-radix' to complete...
+[03:02:54] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:02:54]   Still running... (0s elapsed)
+[03:03:09] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:03:09]   Still running... (15s elapsed)
+[03:03:24] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:03:25]   Still running... (30s elapsed)
+[03:03:40] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:03:40]   Still running... (46s elapsed)
+[03:03:55] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:03:55]   Still running... (61s elapsed)
+[03:04:10] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:04:10]   Still running... (76s elapsed)
+[03:04:25] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:04:26] Job 'parsec-radix' completed successfully (92s)
+[03:04:26] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[03:04:26] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[03:04:26] $ kubectl logs parsec-radix-25xfp
+[03:04:26] Execution time: 80.4s
+[03:04:26] Cleaning up jobs and pods...
+[03:04:26] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[03:04:26] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:05:07] Results saved to part2a-experiments/run1/results.csv
+[03:05:07] 
+Progress: 48/49
+[03:05:07] 
+============================================================
+[03:05:07]   Benchmark:    streamcluster
+[03:05:07]   Interference: ibench-membw
+[03:05:07] ============================================================
+[03:05:07] Cleaning up jobs and pods...
+[03:05:07] $ kubectl delete jobs --all
+No resources found
+[03:05:07] $ kubectl delete pods --all
+No resources found
+[03:05:17] Starting interference: ibench-membw
+[03:05:17] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[03:05:18] Waiting 30s for interference to stabilise...
+[03:05:48] $ kubectl get pods -o wide
+[03:05:48] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.92   parsec-server-xh60   <none>           <none>
+
+[03:05:48] Starting benchmark: streamcluster
+[03:05:48] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[03:05:48] Waiting for job 'parsec-streamcluster' to complete...
+[03:05:48] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[03:05:48]   Still running... (0s elapsed)
+[03:06:03] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[03:06:04]   Still running... (15s elapsed)
+[03:06:19] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[03:06:19] Job 'parsec-streamcluster' completed successfully (30s)
+[03:06:19] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[03:06:19] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[03:06:19] $ kubectl logs parsec-streamcluster-hkc6m
+[03:06:19] Execution time: 14.9s
+[03:06:19] Cleaning up jobs and pods...
+[03:06:19] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[03:06:20] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:07:00] Results saved to part2a-experiments/run1/results.csv
+[03:07:00] 
+Progress: 49/49
+[03:07:00] 
+============================================================
+[03:07:00]   Benchmark:    vips
+[03:07:00]   Interference: ibench-membw
+[03:07:00] ============================================================
+[03:07:00] Cleaning up jobs and pods...
+[03:07:00] $ kubectl delete jobs --all
+No resources found
+[03:07:01] $ kubectl delete pods --all
+No resources found
+[03:07:11] Starting interference: ibench-membw
+[03:07:11] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[03:07:11] Waiting 30s for interference to stabilise...
+[03:07:41] $ kubectl get pods -o wide
+[03:07:41] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.94   parsec-server-xh60   <none>           <none>
+
+[03:07:41] Starting benchmark: vips
+[03:07:41] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[03:07:42] Waiting for job 'parsec-vips' to complete...
+[03:07:42] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:07:42]   Still running... (0s elapsed)
+[03:07:57] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:07:57]   Still running... (15s elapsed)
+[03:08:12] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:08:12]   Still running... (30s elapsed)
+[03:08:27] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:08:28]   Still running... (46s elapsed)
+[03:08:43] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:08:43]   Still running... (61s elapsed)
+[03:08:58] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:08:58]   Still running... (76s elapsed)
+[03:09:13] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:09:14]   Still running... (92s elapsed)
+[03:09:29] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:09:29]   Still running... (107s elapsed)
+[03:09:44] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:09:44]   Still running... (122s elapsed)
+[03:09:59] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:09:59]   Still running... (138s elapsed)
+[03:10:14] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:10:15]   Still running... (153s elapsed)
+[03:10:30] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:10:30]   Still running... (168s elapsed)
+[03:10:45] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:10:45]   Still running... (184s elapsed)
+[03:11:00] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:11:01]   Still running... (199s elapsed)
+[03:11:16] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:11:16]   Still running... (214s elapsed)
+[03:11:31] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:11:31] Job 'parsec-vips' completed successfully (229s)
+[03:11:31] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[03:11:31] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[03:11:31] $ kubectl logs parsec-vips-jm8hk
+[03:11:32] Execution time: 210.1s
+[03:11:32] Cleaning up jobs and pods...
+[03:11:32] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[03:11:32] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:12:13] Results saved to part2a-experiments/run1/results.csv
+[03:12:13] 
+============================================================
+[03:12:13] All experiments done! Results in part2a-experiments/run1
+[03:12:13] ============================================================
+[03:12:13] Deleting cluster...
+[03:12:13] $ kops delete cluster part2a.k8s.local --yes
+I0504 03:12:14.633757   62034 delete_cluster.go:143] Looking for cloud resources to delete
+I0504 03:12:15.223460   62034 gce.go:97] Scanning zones: [europe-west1-b europe-west1-d europe-west1-c]
+TYPE			NAME							ID
+Address			api-europe-west1-part2a-k8s-local			api-europe-west1-part2a-k8s-local
+Address			api-part2a-k8s-local					api-part2a-k8s-local
+BackendService		api-part2a-k8s-local					api-part2a-k8s-local
+Disk			a-etcd-events-part2a-k8s-local				a-etcd-events-part2a-k8s-local
+Disk			a-etcd-main-part2a-k8s-local				a-etcd-main-part2a-k8s-local
+FirewallRule		https-api-ipv6-part2a-k8s-local				https-api-ipv6-part2a-k8s-local
+FirewallRule		https-api-part2a-k8s-local				https-api-part2a-k8s-local
+FirewallRule		kops-controller-ipv6-part2a-k8s-local			kops-controller-ipv6-part2a-k8s-local
+FirewallRule		kops-controller-part2a-k8s-local			kops-controller-part2a-k8s-local
+FirewallRule		lb-health-checks-part2a-k8s-local			lb-health-checks-part2a-k8s-local
+FirewallRule		master-to-master-part2a-k8s-local			master-to-master-part2a-k8s-local
+FirewallRule		master-to-node-part2a-k8s-local				master-to-node-part2a-k8s-local
+FirewallRule		node-to-master-part2a-k8s-local				node-to-master-part2a-k8s-local
+FirewallRule		node-to-node-part2a-k8s-local				node-to-node-part2a-k8s-local
+FirewallRule		nodeport-external-to-node-ipv6-part2a-k8s-local		nodeport-external-to-node-ipv6-part2a-k8s-local
+FirewallRule		nodeport-external-to-node-part2a-k8s-local		nodeport-external-to-node-part2a-k8s-local
+FirewallRule		pod-cidrs-to-node-ipv6-part2a-k8s-local			pod-cidrs-to-node-ipv6-part2a-k8s-local
+FirewallRule		pod-cidrs-to-node-part2a-k8s-local			pod-cidrs-to-node-part2a-k8s-local
+FirewallRule		ssh-external-to-master-ipv6-part2a-k8s-local		ssh-external-to-master-ipv6-part2a-k8s-local
+FirewallRule		ssh-external-to-master-part2a-k8s-local			ssh-external-to-master-part2a-k8s-local
+FirewallRule		ssh-external-to-node-ipv6-part2a-k8s-local		ssh-external-to-node-ipv6-part2a-k8s-local
+FirewallRule		ssh-external-to-node-part2a-k8s-local			ssh-external-to-node-part2a-k8s-local
+ForwardingRule		api-europe-west1-part2a-k8s-local			api-europe-west1-part2a-k8s-local
+ForwardingRule		api-part2a-k8s-local					api-part2a-k8s-local
+ForwardingRule		kops-controller-europe-west1-part2a-k8s-local		kops-controller-europe-west1-part2a-k8s-local
+HTTP HealthCheck	api-part2a-k8s-local					api-part2a-k8s-local
+HealthCheck		api-part2a-k8s-local					api-part2a-k8s-local
+Instance		master-europe-west1-b-r97k				europe-west1-b/master-europe-west1-b-r97k
+Instance		parsec-server-xh60					europe-west1-b/parsec-server-xh60
+InstanceGroupManager	b-master-europe-west1-b-part2a-k8s-local		europe-west1-b/b-master-europe-west1-b-part2a-k8s-local
+InstanceGroupManager	b-parsec-server-part2a-k8s-local			europe-west1-b/b-parsec-server-part2a-k8s-local
+InstanceTemplate	master-europe-west1-b-par-itvn9c-1777847370		master-europe-west1-b-par-itvn9c-1777847370
+InstanceTemplate	parsec-server-part2a-k8s-local-1777847370		parsec-server-part2a-k8s-local-1777847370
+Network			part2a-k8s-local					part2a-k8s-local
+Route			part2a-k8s-local-1f467a78-c4e9-4513-a687-9d8c27f69732	part2a-k8s-local-1f467a78-c4e9-4513-a687-9d8c27f69732
+Route			part2a-k8s-local-ac9a5834-86a5-4937-94ed-bd9fa59611d9	part2a-k8s-local-ac9a5834-86a5-4937-94ed-bd9fa59611d9
+Subnet			europe-west1-part2a-k8s-local				europe-west1-part2a-k8s-local
+TargetPool		api-part2a-k8s-local					api-part2a-k8s-local
+
+Address:api-europe-west1-part2a-k8s-local	error deleting resources, will retry: error deleting Address https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/regions/europe-west1/addresses/api-europe-west1-part2a-k8s-local: googleapi: Error 400: The address resource 'projects/cca-eth-2026-group-087/regions/europe-west1/addresses/api-europe-west1-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/forwardingRules/kops-controller-europe-west1-part2a-k8s-local', resourceInUseByAnotherResource
+HealthCheck:api-part2a-k8s-local	still has dependencies, will retry
+BackendService:api-part2a-k8s-local	still has dependencies, will retry
+Address:api-part2a-k8s-local	ok
+E0504 03:12:26.250252   62034 op.go:137] GCE operation failed: googleapi: Error 400: The instance_group_manager resource 'projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/backendServices/api-part2a-k8s-local'
+InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local	error deleting resources, will retry: googleapi: Error 400: The instance_group_manager resource 'projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/backendServices/api-part2a-k8s-local'
+FirewallRule:ssh-external-to-master-ipv6-part2a-k8s-local	ok
+FirewallRule:kops-controller-ipv6-part2a-k8s-local	ok
+FirewallRule:ssh-external-to-node-ipv6-part2a-k8s-local	ok
+FirewallRule:pod-cidrs-to-node-ipv6-part2a-k8s-local	ok
+FirewallRule:https-api-ipv6-part2a-k8s-local	ok
+FirewallRule:nodeport-external-to-node-ipv6-part2a-k8s-local	ok
+FirewallRule:nodeport-external-to-node-part2a-k8s-local	ok
+FirewallRule:lb-health-checks-part2a-k8s-local	ok
+FirewallRule:pod-cidrs-to-node-part2a-k8s-local	ok
+FirewallRule:ssh-external-to-node-part2a-k8s-local	ok
+FirewallRule:node-to-master-part2a-k8s-local	ok
+FirewallRule:kops-controller-part2a-k8s-local	ok
+FirewallRule:master-to-master-part2a-k8s-local	ok
+FirewallRule:ssh-external-to-master-part2a-k8s-local	ok
+FirewallRule:master-to-node-part2a-k8s-local	ok
+FirewallRule:https-api-part2a-k8s-local	ok
+FirewallRule:node-to-node-part2a-k8s-local	ok
+ForwardingRule:api-europe-west1-part2a-k8s-local	ok
+ForwardingRule:kops-controller-europe-west1-part2a-k8s-local	ok
+ForwardingRule:api-part2a-k8s-local	ok
+Instance:europe-west1-b/parsec-server-xh60	ok
+I0504 03:13:25.136752   62034 op.go:123] waitForOperation: long operation (1m1.902788042s): {"endTime":"2026-05-03T18:13:25.007-07:00","id":"469649879415278744","insertTime":"2026-05-03T18:12:23.172-07:00","kind":"compute#operation","name":"operation-1777857142967-650f39f77caf8-6b261aa3-ae866b96","operationType":"delete","progress":100,"selfLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/operations/operation-1777857142967-650f39f77caf8-6b261aa3-ae866b96","startTime":"2026-05-03T18:12:23.189-07:00","status":"DONE","targetId":"6016056223245955727","targetLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/instances/master-europe-west1-b-r97k","user":"anikiforova@student.ethz.ch","zone":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b"}
+Instance:europe-west1-b/master-europe-west1-b-r97k	ok
+I0504 03:13:41.281968   62034 op.go:123] waitForOperation: long operation (1m17.97711225s): {"endTime":"2026-05-03T18:13:41.236-07:00","id":"5488286033413557400","insertTime":"2026-05-03T18:12:23.274-07:00","kind":"compute#operation","name":"operation-1777857142974-650f39f77e69a-cf6ce71f-8f42239f","operationType":"compute.instanceGroupManagers.delete","progress":100,"selfLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/operations/operation-1777857142974-650f39f77e69a-cf6ce71f-8f42239f","startTime":"2026-05-03T18:12:23.278-07:00","status":"DONE","targetId":"902811427299553982","targetLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-parsec-server-part2a-k8s-local","user":"anikiforova@student.ethz.ch","zone":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b"}
+InstanceGroupManager:europe-west1-b/b-parsec-server-part2a-k8s-local	ok
+Disk:a-etcd-events-part2a-k8s-local	ok
+Disk:a-etcd-main-part2a-k8s-local	ok
+InstanceTemplate:parsec-server-part2a-k8s-local-1777847370	ok
+TargetPool:api-part2a-k8s-local	ok
+Route:part2a-k8s-local-ac9a5834-86a5-4937-94ed-bd9fa59611d9	ok
+Route:part2a-k8s-local-1f467a78-c4e9-4513-a687-9d8c27f69732	ok
+HTTP HealthCheck:api-part2a-k8s-local	ok
+Not all resources deleted; waiting before reattempting deletion
+	Network:part2a-k8s-local
+	Address:api-europe-west1-part2a-k8s-local
+	InstanceTemplate:master-europe-west1-b-par-itvn9c-1777847370
+	Subnet:europe-west1-part2a-k8s-local
+	HealthCheck:api-part2a-k8s-local
+	BackendService:api-part2a-k8s-local
+	InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local
+HealthCheck:api-part2a-k8s-local	still has dependencies, will retry
+Address:api-europe-west1-part2a-k8s-local	ok
+E0504 03:14:08.406452   62034 op.go:137] GCE operation failed: googleapi: Error 400: The instance_group_manager resource 'projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/backendServices/api-part2a-k8s-local'
+InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local	error deleting resources, will retry: googleapi: Error 400: The instance_group_manager resource 'projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/backendServices/api-part2a-k8s-local'
+BackendService:api-part2a-k8s-local	ok
+Not all resources deleted; waiting before reattempting deletion
+	InstanceTemplate:master-europe-west1-b-par-itvn9c-1777847370
+	Subnet:europe-west1-part2a-k8s-local
+	HealthCheck:api-part2a-k8s-local
+	InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local
+	Network:part2a-k8s-local
+HealthCheck:api-part2a-k8s-local	ok
+I0504 03:15:49.651506   62034 op.go:123] waitForOperation: long operation (1m27.523202209s): {"endTime":"2026-05-03T18:15:49.592-07:00","id":"1742466444061985793","insertTime":"2026-05-03T18:14:22.096-07:00","kind":"compute#operation","name":"operation-1777857261996-650f3a6900b0a-01ef638e-9aea85fd","operationType":"compute.instanceGroupManagers.delete","progress":100,"selfLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/operations/operation-1777857261996-650f3a6900b0a-01ef638e-9aea85fd","startTime":"2026-05-03T18:14:22.100-07:00","status":"DONE","targetId":"6403464798785925820","targetLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local","user":"anikiforova@student.ethz.ch","zone":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b"}
+InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local	ok
+InstanceTemplate:master-europe-west1-b-par-itvn9c-1777847370	ok
+Subnet:europe-west1-part2a-k8s-local	ok
+Network:part2a-k8s-local	ok
+Deleted kubectl config for part2a.k8s.local
+
+Deleted cluster: "part2a.k8s.local"
+[03:16:56] Cluster deleted successfully.

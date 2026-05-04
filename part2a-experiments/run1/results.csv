@@ -38,3 +38,13 @@ barnes,ibench-llc,386.373,True
 blackscholes,ibench-llc,1.246,True
 canneal,ibench-llc,20.798,True
 freqmine,ibench-llc,16.08,True
+radix,ibench-llc,112.4,True
+streamcluster,ibench-llc,21.989,True
+vips,ibench-llc,223.347,True
+barnes,ibench-membw,250.274,True
+blackscholes,ibench-membw,1.162,True
+canneal,ibench-membw,14.663,True
+freqmine,ibench-membw,12.034,True
+radix,ibench-membw,80.418,True
+streamcluster,ibench-membw,14.893,True
+vips,ibench-membw,210.129,True
