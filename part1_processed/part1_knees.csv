@@ -1,0 +1,8 @@
+config,knee_qps,knee_target,knee_p95_ms,knee_slope_ms_per_1k_qps,method
+ibench-cpu,18382.666666666668,70000.0,10.569166666666668,1.9158023299511453,"first slope > max(3x early slope, 0.05 ms per 1K QPS); threshold=1.3504"
+ibench-l1d,25008.399999999998,25000.0,1.4064000000000003,0.16036637018212643,"first slope > max(3x early slope, 0.05 ms per 1K QPS); threshold=0.0500"
+ibench-l1i,18587.2,60000.0,11.301966666666667,2.2256771529211696,"first slope > max(3x early slope, 0.05 ms per 1K QPS); threshold=0.9710"
+ibench-l2,25103.86666666667,25000.0,1.1822,0.09945791688927687,"first slope > max(3x early slope, 0.05 ms per 1K QPS); threshold=0.0500"
+ibench-llc,19974.466666666664,20000.0,1.3121666666666667,0.09994941965711861,"first slope > max(3x early slope, 0.05 ms per 1K QPS); threshold=0.0998"
+ibench-membw,24962.733333333334,25000.0,1.1380333333333332,0.09284942002482743,"first slope > max(3x early slope, 0.05 ms per 1K QPS); threshold=0.0500"
+no-ibench,44755.13333333333,70000.0,2.6382,0.3727188042511749,"first slope > max(3x early slope, 0.05 ms per 1K QPS); threshold=0.0500"

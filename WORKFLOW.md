@@ -178,3 +178,126 @@ kops delete cluster part1.k8s.local --yes
 
 If you encounter an API permissions error, make sure to enable the IAM API by visiting https://console.cloud.google.com/apis/api/iam.googleapis.com/overview?project=<yourprojecthere>
 Make sure to replace the placeholder with your project name.
+
+# Part 1
+
+In Part 2 of this project, you will run eight different throughput-oriented (“batch”) workloads from
+the PARSEC (and SPLASH-2x) benchmark suite: barnes, blackscholes, canneal, freqmine, radix,
+streamcluster and vips. You will first explore each workload’s sensitivity to resource interference
+using iBench on a small 2 core VM (e2-standard-2). This is somewhat similar to what you did
+in Part 1 for memcache. Next, you will investigate how each workload benefits from parallelism by
+measuring the performance of each job with 1, 2, 4, 8 threads on a large 8 core VM (e2-standard-8).
+In the latter scenario, no interference is used.
+
+Follow the setup instructions below to deploy a Google Cloud cluster and run the batch applications. Please find the project report template containing the questions and free space you should
+use on Moodle.
+
+## PARSEC Behavior with Interference
+
+For the first half of Part 2, you will have to set up a single node cluster consisting of a VM with 2
+CPUs. For this, we will employ kops and make use of the part2a.yaml file (make sure to update
+the file with values for your GCP project and configBase):
+
+```sh
+export KOPS_STATE_STORE=<your-gcp-state-store>
+PROJECT=`gcloud config get-value project`
+kops create -f part2a.yaml
+kops update cluster part2a.k8s.local --yes --admin
+kops validate cluster --wait 10m
+kubectl get nodes -o wide
+```
+
+If successful, you should see something like this
+
+```
+
+```
+
+Now you should be able to connect to the parsec-server VM using ssh:
+
+```sh
+ssh -i ~/.ssh/cloud-computing ubuntu@35.234.110.58
+```
+
+To make sure that the jobs can be scheduled successfully, run the following command in order to
+assign the appropriate label to the parsec node (replace the <parsec-server-name> with the name
+of the parsec server observed in the output of the kubectl get nodes command):
+
+```sh
+kubectl label nodes <parsec-server-name> cca-project-nodetype=parsec
+```
+
+For this part of the study we will sometimes require to set up some form of interference, and also
+deploy a job. For this example, we will use the PARSEC barnes job together with iBench CPU
+interference. Here is where we will use kubectl together with some of the yaml files we provide.
+The following code snippet spins up the interference, and runs the PARSEC barnes job:
+```sh
+kubectl create -f interference/ibench-cpu.yaml # Wait for interference to start
+kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+```
+
+Please note that, for Part 2a, you should use the job templates contained in the parsec-benchmarks/part2a
+folder. blackscholes, canneal, streamcluster and freqmine use the simlarge dataset, while
+barnes, radix, and vips use the native dataset. This is specified in the startup command for the
+container in the template file.
+Make sure that the interference has properly started before running the PARSEC job. One way to
+see if the interference and the PARSEC job has started refers to ssh-ing into the VM and using the
+htop command to inspect running processes.
+
+You can get information on submitted jobs using:
+```sh
+kubectl get jobs
+```
+In order to get the output of the PARSEC job, you will have to collect the logs of its pods. To do
+so, you will have to run the following commands.
+
+```sh
+kubectl logs $(kubectl get pods --selector=job-name=<job_name> --output=jsonpath='{.items[*].metadata.name}')
+```
+
+Note that the job name needs to match the one you get from kubectl get jobs.
+Run experiments sequentially and wait for one benchmark to finish before you spin
+up the next one. Once you are done with running one experiment, make sure to terminate the
+started jobs. You can terminate them all together using:
+
+```sh
+kubectl delete jobs --all
+kubectl delete pods --all
+```
+
+Alternatively, you can do so one-by-one using the following command:
+
+```sh
+kubectl delete job <job_name>
+```
+
+IMPORTANT: you must delete your cluster when you are not using it! Otherwise,
+you will easily use up all of your cloud credits! When you are ready to work on the project,
+you can easily re-launch the cluster with the instructions above. To delete your cluster, use the
+command:
+```sh
+kops delete cluster part2a.k8s.local --yes
+```
+
+## PARSEC Parallel Behavior
+
+For the second half of Part 2, you will have to look into the parallel behavior of PARSEC, more
+specifically, how does the performance of various jobs in PARSEC change as more threads are added
+(more specifically 1, 2, 4 and 8 threads). For this part of the study, no interference is used.
+You will first have to spawn a cluster as in section 2.1.1, however, this time use the part2b.yaml
+file we provided (make sure to update the file with values for your GCP project and configBase).
+Once more, this will be a single node cluster with an 8 CPU VM. You will have to vary the number
+of threads for each PARSEC job. To do so, change the value of the -n parameter in the relevant yaml
+files. The corresponding .yaml files are in parsec-benchmarks/part2b folder of the GitHub repo.
+Note that, for Part 2b, all of the jobs use the native dataset.
+Other relevant instructions for this task can be found in section 2.1.1.
+
+IMPORTANT: you must delete your cluster when you are not using it! Otherwise,
+you will easily use up all of your cloud credits! When you are ready to work on the project,
+you can easily re-launch the cluster with the instructions above. To delete your cluster, use the
+command:
+
+```sh
+$ kops delete cluster part2b.k8s.local --yes
+```
+
