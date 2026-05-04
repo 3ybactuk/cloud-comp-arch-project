@@ -1,0 +1,27 @@
+benchmark: vips
+interference: ibench-l1i
+success: True
+execution_time_s: 209.499
+timestamp: 2026-05-04T02:04:16.010251
+
+--- raw logs ---
+Launching parsec.vips...
+[PARSEC] Benchmarks to run:  parsec.vips
+
+[PARSEC] [========== Running benchmark parsec.vips [1] ==========]
+[PARSEC] Setting up run directory.
+[PARSEC] Unpacking benchmark input 'native'.
+orion_18000x18000.v
+[PARSEC] Running 'time /parsec/pkgs/apps/vips/inst/amd64-linux.gcc/bin/vips im_benchmark orion_18000x18000.v output.v':
+[PARSEC] [---------- Beginning of output ----------]
+
+real	3m29.499s
+user	3m22.078s
+sys	0m4.163s
+[PARSEC] [----------    End of output    ----------]
+[PARSEC]
+[PARSEC] BIBLIOGRAPHY
+[PARSEC]
+[PARSEC] [1] Bienia. Benchmarking Modern Multiprocessors. Ph.D. Thesis, 2011.
+[PARSEC]
+[PARSEC] Done.
