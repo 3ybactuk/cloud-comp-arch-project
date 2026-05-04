@@ -1,0 +1,2524 @@
+[00:49:34] Starting Part 2a experiments — Run 1
+[00:49:34] Output directory: part2a-experiments/run1
+[00:49:34] Total experiments: 7 × 7 = 49
+[00:49:34] Labelling parsec node...
+[00:49:34] $ kubectl get nodes -o wide
+[00:49:35] Found parsec node: parsec-server-xh60
+[00:49:35] $ kubectl label nodes parsec-server-xh60 cca-project-nodetype=parsec --overwrite
+node/parsec-server-xh60 not labeled
+[00:49:35] 
+Progress: 1/49
+[00:49:35] 
+============================================================
+[00:49:35]   Benchmark:    barnes
+[00:49:35]   Interference: baseline
+[00:49:35] ============================================================
+[00:49:35] Cleaning up jobs and pods...
+[00:49:35] $ kubectl delete jobs --all
+No resources found
+[00:49:35] $ kubectl delete pods --all
+No resources found
+[00:49:45] No interference (baseline)
+[00:49:45] Starting benchmark: barnes
+[00:49:45] $ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+job.batch/parsec-barnes created
+[00:49:45] Waiting for job 'parsec-barnes' to complete...
+[00:49:45] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:49:46]   Still running... (0s elapsed)
+[00:50:01] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:50:01]   Still running... (15s elapsed)
+[00:50:16] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:50:16]   Still running... (30s elapsed)
+[00:50:31] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:50:31]   Still running... (46s elapsed)
+[00:50:46] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:50:47]   Still running... (61s elapsed)
+[00:51:02] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:51:02]   Still running... (76s elapsed)
+[00:51:17] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:51:17]   Still running... (91s elapsed)
+[00:51:32] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:51:33]   Still running... (107s elapsed)
+[00:51:48] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:51:48]   Still running... (122s elapsed)
+[00:52:03] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:52:03]   Still running... (137s elapsed)
+[00:52:18] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[00:52:18] Job 'parsec-barnes' completed successfully (153s)
+[00:52:18] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath='{.items[*].metadata.name}')
+[00:52:18] $ kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath={.items[*].metadata.name}
+[00:52:19] $ kubectl logs parsec-barnes-k92t5
+[00:52:19] Execution time: 141.3s
+[00:52:19] Cleaning up jobs and pods...
+[00:52:19] $ kubectl delete jobs --all
+job.batch "parsec-barnes" deleted from default namespace
+[00:52:19] $ kubectl delete pods --all
+No resources found
+[00:52:29] Results saved to part2a-experiments/run1/results.csv
+[00:52:29] 
+Progress: 2/49
+[00:52:29] 
+============================================================
+[00:52:29]   Benchmark:    blackscholes
+[00:52:29]   Interference: baseline
+[00:52:29] ============================================================
+[00:52:29] Cleaning up jobs and pods...
+[00:52:29] $ kubectl delete jobs --all
+No resources found
+[00:52:29] $ kubectl delete pods --all
+No resources found
+[00:52:40] No interference (baseline)
+[00:52:40] Starting benchmark: blackscholes
+[00:52:40] $ kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
+job.batch/parsec-blackscholes created
+[00:52:40] Waiting for job 'parsec-blackscholes' to complete...
+[00:52:40] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[00:52:40]   Still running... (0s elapsed)
+[00:52:55] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[00:52:55]   Still running... (15s elapsed)
+[00:53:10] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[00:53:11] Job 'parsec-blackscholes' completed successfully (30s)
+[00:53:11] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}')
+[00:53:11] $ kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath={.items[*].metadata.name}
+[00:53:11] $ kubectl logs parsec-blackscholes-gbwdb
+[00:53:11] Execution time: 0.9s
+[00:53:11] Cleaning up jobs and pods...
+[00:53:11] $ kubectl delete jobs --all
+job.batch "parsec-blackscholes" deleted from default namespace
+[00:53:11] $ kubectl delete pods --all
+No resources found
+[00:53:21] Results saved to part2a-experiments/run1/results.csv
+[00:53:21] 
+Progress: 3/49
+[00:53:21] 
+============================================================
+[00:53:21]   Benchmark:    canneal
+[00:53:21]   Interference: baseline
+[00:53:21] ============================================================
+[00:53:21] Cleaning up jobs and pods...
+[00:53:21] $ kubectl delete jobs --all
+No resources found
+[00:53:22] $ kubectl delete pods --all
+No resources found
+[00:53:32] No interference (baseline)
+[00:53:32] Starting benchmark: canneal
+[00:53:32] $ kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
+job.batch/parsec-canneal created
+[00:53:32] Waiting for job 'parsec-canneal' to complete...
+[00:53:32] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[00:53:32]   Still running... (0s elapsed)
+[00:53:47] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[00:53:47]   Still running... (15s elapsed)
+[00:54:02] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[00:54:03] Job 'parsec-canneal' completed successfully (30s)
+[00:54:03] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}')
+[00:54:03] $ kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath={.items[*].metadata.name}
+[00:54:03] $ kubectl logs parsec-canneal-7tmrw
+[00:54:03] Execution time: 9.1s
+[00:54:03] Cleaning up jobs and pods...
+[00:54:03] $ kubectl delete jobs --all
+job.batch "parsec-canneal" deleted from default namespace
+[00:54:03] $ kubectl delete pods --all
+No resources found
+[00:54:13] Results saved to part2a-experiments/run1/results.csv
+[00:54:13] 
+Progress: 4/49
+[00:54:13] 
+============================================================
+[00:54:13]   Benchmark:    freqmine
+[00:54:13]   Interference: baseline
+[00:54:13] ============================================================
+[00:54:13] Cleaning up jobs and pods...
+[00:54:13] $ kubectl delete jobs --all
+No resources found
+[00:54:14] $ kubectl delete pods --all
+No resources found
+[00:54:24] No interference (baseline)
+[00:54:24] Starting benchmark: freqmine
+[00:54:24] $ kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
+job.batch/parsec-freqmine created
+[00:54:24] Waiting for job 'parsec-freqmine' to complete...
+[00:54:24] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[00:54:24]   Still running... (0s elapsed)
+[00:54:39] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[00:54:40]   Still running... (15s elapsed)
+[00:54:55] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[00:54:55] Job 'parsec-freqmine' completed successfully (30s)
+[00:54:55] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}')
+[00:54:55] $ kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath={.items[*].metadata.name}
+[00:54:55] $ kubectl logs parsec-freqmine-g8wsf
+[00:54:55] Execution time: 6.4s
+[00:54:55] Cleaning up jobs and pods...
+[00:54:55] $ kubectl delete jobs --all
+job.batch "parsec-freqmine" deleted from default namespace
+[00:54:55] $ kubectl delete pods --all
+No resources found
+[00:55:06] Results saved to part2a-experiments/run1/results.csv
+[00:55:06] 
+Progress: 5/49
+[00:55:06] 
+============================================================
+[00:55:06]   Benchmark:    radix
+[00:55:06]   Interference: baseline
+[00:55:06] ============================================================
+[00:55:06] Cleaning up jobs and pods...
+[00:55:06] $ kubectl delete jobs --all
+No resources found
+[00:55:06] $ kubectl delete pods --all
+No resources found
+[00:55:16] No interference (baseline)
+[00:55:16] Starting benchmark: radix
+[00:55:16] $ kubectl create -f parsec-benchmarks/part2a/parsec-radix.yaml
+job.batch/parsec-radix created
+[00:55:16] Waiting for job 'parsec-radix' to complete...
+[00:55:16] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[00:55:16]   Still running... (0s elapsed)
+[00:55:31] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[00:55:32]   Still running... (15s elapsed)
+[00:55:47] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[00:55:47]   Still running... (30s elapsed)
+[00:56:02] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[00:56:02]   Still running... (46s elapsed)
+[00:56:17] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[00:56:17]   Still running... (61s elapsed)
+[00:56:32] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[00:56:33] Job 'parsec-radix' completed successfully (76s)
+[00:56:33] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[00:56:33] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[00:56:33] $ kubectl logs parsec-radix-j4dhw
+[00:56:33] Execution time: 61.0s
+[00:56:33] Cleaning up jobs and pods...
+[00:56:33] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[00:56:33] $ kubectl delete pods --all
+No resources found
+[00:56:43] Results saved to part2a-experiments/run1/results.csv
+[00:56:43] 
+Progress: 6/49
+[00:56:43] 
+============================================================
+[00:56:43]   Benchmark:    streamcluster
+[00:56:43]   Interference: baseline
+[00:56:43] ============================================================
+[00:56:43] Cleaning up jobs and pods...
+[00:56:43] $ kubectl delete jobs --all
+No resources found
+[00:56:44] $ kubectl delete pods --all
+No resources found
+[00:56:54] No interference (baseline)
+[00:56:54] Starting benchmark: streamcluster
+[00:56:54] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[00:56:54] Waiting for job 'parsec-streamcluster' to complete...
+[00:56:54] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[00:56:54]   Still running... (0s elapsed)
+[00:57:09] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[00:57:09]   Still running... (15s elapsed)
+[00:57:24] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[00:57:25] Job 'parsec-streamcluster' completed successfully (30s)
+[00:57:25] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[00:57:25] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[00:57:25] $ kubectl logs parsec-streamcluster-xvxqh
+[00:57:25] Execution time: 12.3s
+[00:57:25] Cleaning up jobs and pods...
+[00:57:25] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[00:57:25] $ kubectl delete pods --all
+No resources found
+[00:57:35] Results saved to part2a-experiments/run1/results.csv
+[00:57:35] 
+Progress: 7/49
+[00:57:35] 
+============================================================
+[00:57:35]   Benchmark:    vips
+[00:57:35]   Interference: baseline
+[00:57:35] ============================================================
+[00:57:35] Cleaning up jobs and pods...
+[00:57:35] $ kubectl delete jobs --all
+No resources found
+[00:57:36] $ kubectl delete pods --all
+No resources found
+[00:57:46] No interference (baseline)
+[00:57:46] Starting benchmark: vips
+[00:57:46] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[00:57:46] Waiting for job 'parsec-vips' to complete...
+[00:57:46] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:57:46]   Still running... (0s elapsed)
+[00:58:01] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:58:02]   Still running... (15s elapsed)
+[00:58:17] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:58:17]   Still running... (30s elapsed)
+[00:58:32] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:58:32]   Still running... (46s elapsed)
+[00:58:47] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:58:47]   Still running... (61s elapsed)
+[00:59:02] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:59:03]   Still running... (76s elapsed)
+[00:59:18] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:59:18]   Still running... (92s elapsed)
+[00:59:33] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:59:33]   Still running... (107s elapsed)
+[00:59:48] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[00:59:48]   Still running... (122s elapsed)
+[01:00:03] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:00:04]   Still running... (137s elapsed)
+[01:00:19] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:00:19]   Still running... (153s elapsed)
+[01:00:34] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:00:34]   Still running... (168s elapsed)
+[01:00:49] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:00:50]   Still running... (183s elapsed)
+[01:01:05] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:01:05] Job 'parsec-vips' completed successfully (198s)
+[01:01:05] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[01:01:05] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[01:01:05] $ kubectl logs parsec-vips-pvpmq
+[01:01:05] Execution time: 118.1s
+[01:01:05] Cleaning up jobs and pods...
+[01:01:05] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[01:01:05] $ kubectl delete pods --all
+No resources found
+[01:01:16] Results saved to part2a-experiments/run1/results.csv
+[01:01:16] 
+Progress: 8/49
+[01:01:16] 
+============================================================
+[01:01:16]   Benchmark:    barnes
+[01:01:16]   Interference: ibench-cpu
+[01:01:16] ============================================================
+[01:01:16] Cleaning up jobs and pods...
+[01:01:16] $ kubectl delete jobs --all
+No resources found
+[01:01:16] $ kubectl delete pods --all
+No resources found
+[01:01:26] Starting interference: ibench-cpu
+[01:01:26] $ kubectl create -f interference/part2a/ibench-cpu.yaml
+pod/ibench-cpu created
+[01:01:26] Waiting 30s for interference to stabilise...
+[01:01:56] $ kubectl get pods -o wide
+[01:01:57] Pods:
+NAME         READY   STATUS              RESTARTS   AGE   IP       NODE                 NOMINATED NODE   READINESS GATES
+ibench-cpu   0/1     ContainerCreating   0          31s   <none>   parsec-server-xh60   <none>           <none>
+
+[01:01:57] Starting benchmark: barnes
+[01:01:57] $ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+job.batch/parsec-barnes created
+[01:01:57] Waiting for job 'parsec-barnes' to complete...
+[01:01:57] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:01:57]   Still running... (0s elapsed)
+[01:02:12] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:02:12]   Still running... (15s elapsed)
+[01:02:27] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:02:28]   Still running... (30s elapsed)
+[01:02:43] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:02:43]   Still running... (46s elapsed)
+[01:02:58] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:02:58]   Still running... (61s elapsed)
+[01:03:13] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:03:13]   Still running... (76s elapsed)
+[01:03:28] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:03:29]   Still running... (92s elapsed)
+[01:03:44] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:03:44]   Still running... (107s elapsed)
+[01:03:59] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:03:59]   Still running... (122s elapsed)
+[01:04:14] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:04:14]   Still running... (137s elapsed)
+[01:04:29] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:04:30]   Still running... (153s elapsed)
+[01:04:45] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:04:45]   Still running... (168s elapsed)
+[01:05:00] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:05:00]   Still running... (183s elapsed)
+[01:05:15] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:05:16]   Still running... (199s elapsed)
+[01:05:31] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:05:31]   Still running... (214s elapsed)
+[01:05:46] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:05:46]   Still running... (229s elapsed)
+[01:06:01] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:06:01] Job 'parsec-barnes' completed successfully (244s)
+[01:06:01] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath='{.items[*].metadata.name}')
+[01:06:02] $ kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath={.items[*].metadata.name}
+[01:06:02] $ kubectl logs parsec-barnes-h57bh
+[01:06:02] Execution time: 220.0s
+[01:06:02] Cleaning up jobs and pods...
+[01:06:02] $ kubectl delete jobs --all
+job.batch "parsec-barnes" deleted from default namespace
+[01:06:02] $ kubectl delete pods --all
+pod "ibench-cpu" deleted from default namespace
+[01:06:43] Results saved to part2a-experiments/run1/results.csv
+[01:06:43] 
+Progress: 9/49
+[01:06:43] 
+============================================================
+[01:06:43]   Benchmark:    blackscholes
+[01:06:43]   Interference: ibench-cpu
+[01:06:43] ============================================================
+[01:06:43] Cleaning up jobs and pods...
+[01:06:43] $ kubectl delete jobs --all
+No resources found
+[01:06:43] $ kubectl delete pods --all
+No resources found
+[01:06:53] Starting interference: ibench-cpu
+[01:06:53] $ kubectl create -f interference/part2a/ibench-cpu.yaml
+pod/ibench-cpu created
+[01:06:54] Waiting 30s for interference to stabilise...
+[01:07:24] $ kubectl get pods -o wide
+[01:07:24] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-cpu   1/1     Running   0          30s   100.96.1.14   parsec-server-xh60   <none>           <none>
+
+[01:07:24] Starting benchmark: blackscholes
+[01:07:24] $ kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
+job.batch/parsec-blackscholes created
+[01:07:24] Waiting for job 'parsec-blackscholes' to complete...
+[01:07:24] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[01:07:24]   Still running... (0s elapsed)
+[01:07:39] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[01:07:40] Job 'parsec-blackscholes' completed successfully (15s)
+[01:07:40] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}')
+[01:07:40] $ kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath={.items[*].metadata.name}
+[01:07:40] $ kubectl logs parsec-blackscholes-v2lct
+[01:07:40] Execution time: 1.2s
+[01:07:40] Cleaning up jobs and pods...
+[01:07:40] $ kubectl delete jobs --all
+job.batch "parsec-blackscholes" deleted from default namespace
+[01:07:40] $ kubectl delete pods --all
+pod "ibench-cpu" deleted from default namespace
+[01:08:21] Results saved to part2a-experiments/run1/results.csv
+[01:08:21] 
+Progress: 10/49
+[01:08:21] 
+============================================================
+[01:08:21]   Benchmark:    canneal
+[01:08:21]   Interference: ibench-cpu
+[01:08:21] ============================================================
+[01:08:21] Cleaning up jobs and pods...
+[01:08:21] $ kubectl delete jobs --all
+No resources found
+[01:08:21] $ kubectl delete pods --all
+No resources found
+[01:08:31] Starting interference: ibench-cpu
+[01:08:31] $ kubectl create -f interference/part2a/ibench-cpu.yaml
+pod/ibench-cpu created
+[01:08:32] Waiting 30s for interference to stabilise...
+[01:09:02] $ kubectl get pods -o wide
+[01:09:02] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-cpu   1/1     Running   0          30s   100.96.1.16   parsec-server-xh60   <none>           <none>
+
+[01:09:02] Starting benchmark: canneal
+[01:09:02] $ kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
+job.batch/parsec-canneal created
+[01:09:02] Waiting for job 'parsec-canneal' to complete...
+[01:09:02] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:09:02]   Still running... (0s elapsed)
+[01:09:17] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:09:18]   Still running... (15s elapsed)
+[01:09:33] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:09:33] Job 'parsec-canneal' completed successfully (30s)
+[01:09:33] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}')
+[01:09:33] $ kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath={.items[*].metadata.name}
+[01:09:33] $ kubectl logs parsec-canneal-svmm6
+[01:09:34] Execution time: 13.7s
+[01:09:34] Cleaning up jobs and pods...
+[01:09:34] $ kubectl delete jobs --all
+job.batch "parsec-canneal" deleted from default namespace
+[01:09:34] $ kubectl delete pods --all
+pod "ibench-cpu" deleted from default namespace
+[01:10:15] Results saved to part2a-experiments/run1/results.csv
+[01:10:15] 
+Progress: 11/49
+[01:10:15] 
+============================================================
+[01:10:15]   Benchmark:    freqmine
+[01:10:15]   Interference: ibench-cpu
+[01:10:15] ============================================================
+[01:10:15] Cleaning up jobs and pods...
+[01:10:15] $ kubectl delete jobs --all
+No resources found
+[01:10:16] $ kubectl delete pods --all
+No resources found
+[01:10:26] Starting interference: ibench-cpu
+[01:10:26] $ kubectl create -f interference/part2a/ibench-cpu.yaml
+pod/ibench-cpu created
+[01:10:26] Waiting 30s for interference to stabilise...
+[01:10:56] $ kubectl get pods -o wide
+[01:10:56] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-cpu   1/1     Running   0          30s   100.96.1.18   parsec-server-xh60   <none>           <none>
+
+[01:10:56] Starting benchmark: freqmine
+[01:10:56] $ kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
+job.batch/parsec-freqmine created
+[01:10:57] Waiting for job 'parsec-freqmine' to complete...
+[01:10:57] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[01:10:57]   Still running... (0s elapsed)
+[01:11:12] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[01:11:12]   Still running... (15s elapsed)
+[01:11:27] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[01:11:27] Job 'parsec-freqmine' completed successfully (30s)
+[01:11:27] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}')
+[01:11:27] $ kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath={.items[*].metadata.name}
+[01:11:28] $ kubectl logs parsec-freqmine-cfjz5
+[01:11:28] Execution time: 13.2s
+[01:11:28] Cleaning up jobs and pods...
+[01:11:28] $ kubectl delete jobs --all
+job.batch "parsec-freqmine" deleted from default namespace
+[01:11:28] $ kubectl delete pods --all
+pod "ibench-cpu" deleted from default namespace
+[01:12:09] Results saved to part2a-experiments/run1/results.csv
+[01:12:09] 
+Progress: 12/49
+[01:12:09] 
+============================================================
+[01:12:09]   Benchmark:    radix
+[01:12:09]   Interference: ibench-cpu
+[01:12:09] ============================================================
+[01:12:09] Cleaning up jobs and pods...
+[01:12:09] $ kubectl delete jobs --all
+No resources found
+[01:12:09] $ kubectl delete pods --all
+No resources found
+[01:12:19] Starting interference: ibench-cpu
+[01:12:19] $ kubectl create -f interference/part2a/ibench-cpu.yaml
+pod/ibench-cpu created
+[01:12:19] Waiting 30s for interference to stabilise...
+[01:12:49] $ kubectl get pods -o wide
+[01:12:50] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-cpu   1/1     Running   0          31s   100.96.1.20   parsec-server-xh60   <none>           <none>
+
+[01:12:50] Starting benchmark: radix
+[01:12:50] $ kubectl create -f parsec-benchmarks/part2a/parsec-radix.yaml
+job.batch/parsec-radix created
+[01:12:50] Waiting for job 'parsec-radix' to complete...
+[01:12:50] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:12:50]   Still running... (0s elapsed)
+[01:13:05] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:13:05]   Still running... (15s elapsed)
+[01:13:20] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:13:21]   Still running... (30s elapsed)
+[01:13:36] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:13:36]   Still running... (46s elapsed)
+[01:13:51] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:13:51]   Still running... (61s elapsed)
+[01:14:06] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:14:06] Job 'parsec-radix' completed successfully (76s)
+[01:14:06] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[01:14:07] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[01:14:07] $ kubectl logs parsec-radix-tw7n2
+[01:14:07] Execution time: 70.5s
+[01:14:07] Cleaning up jobs and pods...
+[01:14:07] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[01:14:07] $ kubectl delete pods --all
+pod "ibench-cpu" deleted from default namespace
+[01:14:48] Results saved to part2a-experiments/run1/results.csv
+[01:14:48] 
+Progress: 13/49
+[01:14:48] 
+============================================================
+[01:14:48]   Benchmark:    streamcluster
+[01:14:48]   Interference: ibench-cpu
+[01:14:48] ============================================================
+[01:14:48] Cleaning up jobs and pods...
+[01:14:48] $ kubectl delete jobs --all
+No resources found
+[01:14:49] $ kubectl delete pods --all
+No resources found
+[01:14:59] Starting interference: ibench-cpu
+[01:14:59] $ kubectl create -f interference/part2a/ibench-cpu.yaml
+pod/ibench-cpu created
+[01:14:59] Waiting 30s for interference to stabilise...
+[01:15:29] $ kubectl get pods -o wide
+[01:15:29] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-cpu   1/1     Running   0          30s   100.96.1.22   parsec-server-xh60   <none>           <none>
+
+[01:15:29] Starting benchmark: streamcluster
+[01:15:29] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[01:15:30] Waiting for job 'parsec-streamcluster' to complete...
+[01:15:30] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:15:30]   Still running... (0s elapsed)
+[01:15:45] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:15:45]   Still running... (15s elapsed)
+[01:16:00] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:16:00] Job 'parsec-streamcluster' completed successfully (30s)
+[01:16:00] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[01:16:01] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[01:16:01] $ kubectl logs parsec-streamcluster-jtgf7
+[01:16:01] Execution time: 13.9s
+[01:16:01] Cleaning up jobs and pods...
+[01:16:01] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[01:16:01] $ kubectl delete pods --all
+pod "ibench-cpu" deleted from default namespace
+[01:16:42] Results saved to part2a-experiments/run1/results.csv
+[01:16:42] 
+Progress: 14/49
+[01:16:42] 
+============================================================
+[01:16:42]   Benchmark:    vips
+[01:16:42]   Interference: ibench-cpu
+[01:16:42] ============================================================
+[01:16:42] Cleaning up jobs and pods...
+[01:16:42] $ kubectl delete jobs --all
+No resources found
+[01:16:42] $ kubectl delete pods --all
+No resources found
+[01:16:52] Starting interference: ibench-cpu
+[01:16:52] $ kubectl create -f interference/part2a/ibench-cpu.yaml
+pod/ibench-cpu created
+[01:16:53] Waiting 30s for interference to stabilise...
+[01:17:23] $ kubectl get pods -o wide
+[01:17:23] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-cpu   1/1     Running   0          30s   100.96.1.24   parsec-server-xh60   <none>           <none>
+
+[01:17:23] Starting benchmark: vips
+[01:17:23] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[01:17:23] Waiting for job 'parsec-vips' to complete...
+[01:17:23] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:17:23]   Still running... (0s elapsed)
+[01:17:38] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:17:39]   Still running... (15s elapsed)
+[01:17:54] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:17:54]   Still running... (30s elapsed)
+[01:18:09] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:18:09]   Still running... (46s elapsed)
+[01:18:24] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:18:25]   Still running... (61s elapsed)
+[01:18:40] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:18:40]   Still running... (76s elapsed)
+[01:18:55] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:18:55]   Still running... (92s elapsed)
+[01:19:10] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:19:10]   Still running... (107s elapsed)
+[01:19:26] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:19:26]   Still running... (122s elapsed)
+[01:19:41] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:19:41]   Still running... (138s elapsed)
+[01:19:56] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:19:56]   Still running... (153s elapsed)
+[01:20:11] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:20:12]   Still running... (168s elapsed)
+[01:20:27] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:20:27]   Still running... (183s elapsed)
+[01:20:42] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:20:42]   Still running... (199s elapsed)
+[01:20:57] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:20:57] Job 'parsec-vips' completed successfully (214s)
+[01:20:57] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[01:20:58] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[01:20:58] $ kubectl logs parsec-vips-vvhkl
+[01:20:58] Execution time: 189.7s
+[01:20:58] Cleaning up jobs and pods...
+[01:20:58] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[01:20:58] $ kubectl delete pods --all
+pod "ibench-cpu" deleted from default namespace
+[01:21:39] Results saved to part2a-experiments/run1/results.csv
+[01:21:39] 
+Progress: 15/49
+[01:21:39] 
+============================================================
+[01:21:39]   Benchmark:    barnes
+[01:21:39]   Interference: ibench-l1d
+[01:21:39] ============================================================
+[01:21:39] Cleaning up jobs and pods...
+[01:21:39] $ kubectl delete jobs --all
+No resources found
+[01:21:39] $ kubectl delete pods --all
+No resources found
+[01:21:49] Starting interference: ibench-l1d
+[01:21:49] $ kubectl create -f interference/part2a/ibench-l1d.yaml
+pod/ibench-l1d created
+[01:21:50] Waiting 30s for interference to stabilise...
+[01:22:20] $ kubectl get pods -o wide
+[01:22:20] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1d   1/1     Running   0          30s   100.96.1.26   parsec-server-xh60   <none>           <none>
+
+[01:22:20] Starting benchmark: barnes
+[01:22:20] $ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+job.batch/parsec-barnes created
+[01:22:20] Waiting for job 'parsec-barnes' to complete...
+[01:22:20] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:22:20]   Still running... (0s elapsed)
+[01:22:35] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:22:36]   Still running... (15s elapsed)
+[01:22:51] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:22:51]   Still running... (30s elapsed)
+[01:23:06] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:23:06]   Still running... (46s elapsed)
+[01:23:21] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:23:22]   Still running... (61s elapsed)
+[01:23:37] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:23:37]   Still running... (76s elapsed)
+[01:23:52] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:23:52]   Still running... (92s elapsed)
+[01:24:07] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:24:07]   Still running... (107s elapsed)
+[01:24:22] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:24:23]   Still running... (122s elapsed)
+[01:24:38] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:24:38]   Still running... (138s elapsed)
+[01:24:53] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:24:53]   Still running... (153s elapsed)
+[01:25:08] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:25:09]   Still running... (168s elapsed)
+[01:25:24] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:25:24]   Still running... (184s elapsed)
+[01:25:39] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:25:39]   Still running... (199s elapsed)
+[01:25:54] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:25:55]   Still running... (214s elapsed)
+[01:26:10] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:26:10]   Still running... (229s elapsed)
+[01:26:25] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:26:25]   Still running... (245s elapsed)
+[01:26:40] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:26:41] Job 'parsec-barnes' completed successfully (260s)
+[01:26:41] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath='{.items[*].metadata.name}')
+[01:26:41] $ kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath={.items[*].metadata.name}
+[01:26:41] $ kubectl logs parsec-barnes-6xxr4
+[01:26:41] Execution time: 253.6s
+[01:26:41] Cleaning up jobs and pods...
+[01:26:41] $ kubectl delete jobs --all
+job.batch "parsec-barnes" deleted from default namespace
+[01:26:41] $ kubectl delete pods --all
+pod "ibench-l1d" deleted from default namespace
+[01:27:22] Results saved to part2a-experiments/run1/results.csv
+[01:27:22] 
+Progress: 16/49
+[01:27:22] 
+============================================================
+[01:27:22]   Benchmark:    blackscholes
+[01:27:22]   Interference: ibench-l1d
+[01:27:22] ============================================================
+[01:27:22] Cleaning up jobs and pods...
+[01:27:22] $ kubectl delete jobs --all
+No resources found
+[01:27:22] $ kubectl delete pods --all
+No resources found
+[01:27:32] Starting interference: ibench-l1d
+[01:27:32] $ kubectl create -f interference/part2a/ibench-l1d.yaml
+pod/ibench-l1d created
+[01:27:33] Waiting 30s for interference to stabilise...
+[01:28:03] $ kubectl get pods -o wide
+[01:28:03] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1d   1/1     Running   0          30s   100.96.1.28   parsec-server-xh60   <none>           <none>
+
+[01:28:03] Starting benchmark: blackscholes
+[01:28:03] $ kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
+job.batch/parsec-blackscholes created
+[01:28:03] Waiting for job 'parsec-blackscholes' to complete...
+[01:28:03] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[01:28:03]   Still running... (0s elapsed)
+[01:28:18] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[01:28:19] Job 'parsec-blackscholes' completed successfully (15s)
+[01:28:19] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}')
+[01:28:19] $ kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath={.items[*].metadata.name}
+[01:28:19] $ kubectl logs parsec-blackscholes-q4qpl
+[01:28:19] Execution time: 1.2s
+[01:28:19] Cleaning up jobs and pods...
+[01:28:19] $ kubectl delete jobs --all
+job.batch "parsec-blackscholes" deleted from default namespace
+[01:28:19] $ kubectl delete pods --all
+pod "ibench-l1d" deleted from default namespace
+[01:29:00] Results saved to part2a-experiments/run1/results.csv
+[01:29:00] 
+Progress: 17/49
+[01:29:00] 
+============================================================
+[01:29:00]   Benchmark:    canneal
+[01:29:00]   Interference: ibench-l1d
+[01:29:00] ============================================================
+[01:29:00] Cleaning up jobs and pods...
+[01:29:00] $ kubectl delete jobs --all
+No resources found
+[01:29:00] $ kubectl delete pods --all
+No resources found
+[01:29:10] Starting interference: ibench-l1d
+[01:29:10] $ kubectl create -f interference/part2a/ibench-l1d.yaml
+pod/ibench-l1d created
+[01:29:11] Waiting 30s for interference to stabilise...
+[01:29:41] $ kubectl get pods -o wide
+[01:29:41] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1d   1/1     Running   0          30s   100.96.1.30   parsec-server-xh60   <none>           <none>
+
+[01:29:41] Starting benchmark: canneal
+[01:29:41] $ kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
+job.batch/parsec-canneal created
+[01:29:41] Waiting for job 'parsec-canneal' to complete...
+[01:29:41] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:29:41]   Still running... (0s elapsed)
+[01:29:56] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:29:57]   Still running... (15s elapsed)
+[01:30:12] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:30:12] Job 'parsec-canneal' completed successfully (30s)
+[01:30:12] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}')
+[01:30:12] $ kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath={.items[*].metadata.name}
+[01:30:12] $ kubectl logs parsec-canneal-w6tkr
+[01:30:12] Execution time: 16.0s
+[01:30:12] Cleaning up jobs and pods...
+[01:30:12] $ kubectl delete jobs --all
+job.batch "parsec-canneal" deleted from default namespace
+[01:30:13] $ kubectl delete pods --all
+pod "ibench-l1d" deleted from default namespace
+[01:30:53] Results saved to part2a-experiments/run1/results.csv
+[01:30:53] 
+Progress: 18/49
+[01:30:53] 
+============================================================
+[01:30:53]   Benchmark:    freqmine
+[01:30:53]   Interference: ibench-l1d
+[01:30:53] ============================================================
+[01:30:53] Cleaning up jobs and pods...
+[01:30:53] $ kubectl delete jobs --all
+No resources found
+[01:30:54] $ kubectl delete pods --all
+No resources found
+[01:31:04] Starting interference: ibench-l1d
+[01:31:04] $ kubectl create -f interference/part2a/ibench-l1d.yaml
+pod/ibench-l1d created
+[01:31:04] Waiting 30s for interference to stabilise...
+[01:31:34] $ kubectl get pods -o wide
+[01:31:34] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1d   1/1     Running   0          30s   100.96.1.32   parsec-server-xh60   <none>           <none>
+
+[01:31:34] Starting benchmark: freqmine
+[01:31:34] $ kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
+job.batch/parsec-freqmine created
+[01:31:35] Waiting for job 'parsec-freqmine' to complete...
+[01:31:35] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[01:31:35]   Still running... (0s elapsed)
+[01:31:50] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[01:31:50] Job 'parsec-freqmine' completed successfully (15s)
+[01:31:50] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}')
+[01:31:50] $ kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath={.items[*].metadata.name}
+[01:31:50] $ kubectl logs parsec-freqmine-wnp57
+[01:31:50] Execution time: 8.7s
+[01:31:50] Cleaning up jobs and pods...
+[01:31:50] $ kubectl delete jobs --all
+job.batch "parsec-freqmine" deleted from default namespace
+[01:31:51] $ kubectl delete pods --all
+pod "ibench-l1d" deleted from default namespace
+[01:32:32] Results saved to part2a-experiments/run1/results.csv
+[01:32:32] 
+Progress: 19/49
+[01:32:32] 
+============================================================
+[01:32:32]   Benchmark:    radix
+[01:32:32]   Interference: ibench-l1d
+[01:32:32] ============================================================
+[01:32:32] Cleaning up jobs and pods...
+[01:32:32] $ kubectl delete jobs --all
+No resources found
+[01:32:32] $ kubectl delete pods --all
+No resources found
+[01:32:42] Starting interference: ibench-l1d
+[01:32:42] $ kubectl create -f interference/part2a/ibench-l1d.yaml
+pod/ibench-l1d created
+[01:32:42] Waiting 30s for interference to stabilise...
+[01:33:12] $ kubectl get pods -o wide
+[01:33:13] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1d   1/1     Running   0          31s   100.96.1.34   parsec-server-xh60   <none>           <none>
+
+[01:33:13] Starting benchmark: radix
+[01:33:13] $ kubectl create -f parsec-benchmarks/part2a/parsec-radix.yaml
+job.batch/parsec-radix created
+[01:33:13] Waiting for job 'parsec-radix' to complete...
+[01:33:13] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:33:13]   Still running... (0s elapsed)
+[01:33:28] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:33:28]   Still running... (15s elapsed)
+[01:33:43] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:33:44]   Still running... (30s elapsed)
+[01:33:59] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:33:59]   Still running... (46s elapsed)
+[01:34:14] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:34:14]   Still running... (61s elapsed)
+[01:34:29] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:34:29]   Still running... (76s elapsed)
+[01:34:44] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:34:45] Job 'parsec-radix' completed successfully (92s)
+[01:34:45] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[01:34:45] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[01:34:45] $ kubectl logs parsec-radix-j957p
+[01:34:45] Execution time: 81.9s
+[01:34:45] Cleaning up jobs and pods...
+[01:34:45] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[01:34:45] $ kubectl delete pods --all
+pod "ibench-l1d" deleted from default namespace
+[01:35:26] Results saved to part2a-experiments/run1/results.csv
+[01:35:26] 
+Progress: 20/49
+[01:35:26] 
+============================================================
+[01:35:26]   Benchmark:    streamcluster
+[01:35:26]   Interference: ibench-l1d
+[01:35:26] ============================================================
+[01:35:26] Cleaning up jobs and pods...
+[01:35:26] $ kubectl delete jobs --all
+No resources found
+[01:35:27] $ kubectl delete pods --all
+No resources found
+[01:35:37] Starting interference: ibench-l1d
+[01:35:37] $ kubectl create -f interference/part2a/ibench-l1d.yaml
+pod/ibench-l1d created
+[01:35:37] Waiting 30s for interference to stabilise...
+[01:36:07] $ kubectl get pods -o wide
+[01:36:07] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1d   1/1     Running   0          30s   100.96.1.36   parsec-server-xh60   <none>           <none>
+
+[01:36:07] Starting benchmark: streamcluster
+[01:36:07] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[01:36:08] Waiting for job 'parsec-streamcluster' to complete...
+[01:36:08] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:36:08]   Still running... (0s elapsed)
+[01:36:23] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:36:23]   Still running... (15s elapsed)
+[01:36:38] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:36:38] Job 'parsec-streamcluster' completed successfully (30s)
+[01:36:38] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[01:36:38] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[01:36:38] $ kubectl logs parsec-streamcluster-ld6fg
+[01:36:39] Execution time: 15.7s
+[01:36:39] Cleaning up jobs and pods...
+[01:36:39] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[01:36:39] $ kubectl delete pods --all
+pod "ibench-l1d" deleted from default namespace
+[01:37:20] Results saved to part2a-experiments/run1/results.csv
+[01:37:20] 
+Progress: 21/49
+[01:37:20] 
+============================================================
+[01:37:20]   Benchmark:    vips
+[01:37:20]   Interference: ibench-l1d
+[01:37:20] ============================================================
+[01:37:20] Cleaning up jobs and pods...
+[01:37:20] $ kubectl delete jobs --all
+No resources found
+[01:37:20] $ kubectl delete pods --all
+No resources found
+[01:37:30] Starting interference: ibench-l1d
+[01:37:30] $ kubectl create -f interference/part2a/ibench-l1d.yaml
+pod/ibench-l1d created
+[01:37:30] Waiting 30s for interference to stabilise...
+[01:38:00] $ kubectl get pods -o wide
+[01:38:01] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1d   1/1     Running   0          31s   100.96.1.38   parsec-server-xh60   <none>           <none>
+
+[01:38:01] Starting benchmark: vips
+[01:38:01] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[01:38:01] Waiting for job 'parsec-vips' to complete...
+[01:38:01] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:38:01]   Still running... (0s elapsed)
+[01:38:16] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:38:16]   Still running... (15s elapsed)
+[01:38:31] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:38:31]   Still running... (30s elapsed)
+[01:38:46] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:38:47]   Still running... (46s elapsed)
+[01:39:02] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:39:02]   Still running... (61s elapsed)
+[01:39:17] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:39:17]   Still running... (76s elapsed)
+[01:39:32] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:39:33]   Still running... (92s elapsed)
+[01:39:48] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:39:48]   Still running... (107s elapsed)
+[01:40:03] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:40:03]   Still running... (122s elapsed)
+[01:40:18] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:40:18]   Still running... (137s elapsed)
+[01:40:33] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:40:34]   Still running... (153s elapsed)
+[01:40:49] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:40:49]   Still running... (168s elapsed)
+[01:41:04] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:41:04]   Still running... (183s elapsed)
+[01:41:19] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:41:20]   Still running... (199s elapsed)
+[01:41:35] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:41:35]   Still running... (214s elapsed)
+[01:41:50] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:41:50]   Still running... (229s elapsed)
+[01:42:05] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[01:42:05] Job 'parsec-vips' completed successfully (244s)
+[01:42:05] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[01:42:06] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[01:42:06] $ kubectl logs parsec-vips-b2mz6
+[01:42:06] Execution time: 209.7s
+[01:42:06] Cleaning up jobs and pods...
+[01:42:06] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[01:42:06] $ kubectl delete pods --all
+pod "ibench-l1d" deleted from default namespace
+[01:42:47] Results saved to part2a-experiments/run1/results.csv
+[01:42:47] 
+Progress: 22/49
+[01:42:47] 
+============================================================
+[01:42:47]   Benchmark:    barnes
+[01:42:47]   Interference: ibench-l1i
+[01:42:47] ============================================================
+[01:42:47] Cleaning up jobs and pods...
+[01:42:47] $ kubectl delete jobs --all
+No resources found
+[01:42:47] $ kubectl delete pods --all
+No resources found
+[01:42:57] Starting interference: ibench-l1i
+[01:42:57] $ kubectl create -f interference/part2a/ibench-l1i.yaml
+pod/ibench-l1i created
+[01:42:57] Waiting 30s for interference to stabilise...
+[01:43:27] $ kubectl get pods -o wide
+[01:43:28] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1i   1/1     Running   0          31s   100.96.1.40   parsec-server-xh60   <none>           <none>
+
+[01:43:28] Starting benchmark: barnes
+[01:43:28] $ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+job.batch/parsec-barnes created
+[01:43:28] Waiting for job 'parsec-barnes' to complete...
+[01:43:28] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:43:28]   Still running... (0s elapsed)
+[01:43:43] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:43:43]   Still running... (15s elapsed)
+[01:43:58] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:43:59]   Still running... (30s elapsed)
+[01:44:14] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:44:14]   Still running... (46s elapsed)
+[01:44:29] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:44:29]   Still running... (61s elapsed)
+[01:44:44] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:44:44]   Still running... (76s elapsed)
+[01:44:59] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:45:00]   Still running... (92s elapsed)
+[01:45:15] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:45:15]   Still running... (107s elapsed)
+[01:45:30] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:45:30]   Still running... (122s elapsed)
+[01:45:45] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:45:46]   Still running... (137s elapsed)
+[01:46:01] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:46:01]   Still running... (153s elapsed)
+[01:46:16] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:46:16]   Still running... (168s elapsed)
+[01:46:31] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:46:32]   Still running... (184s elapsed)
+[01:46:47] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:46:47]   Still running... (199s elapsed)
+[01:47:02] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:47:02]   Still running... (214s elapsed)
+[01:47:17] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:47:17]   Still running... (229s elapsed)
+[01:47:32] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:47:33]   Still running... (245s elapsed)
+[01:47:48] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:47:48]   Still running... (260s elapsed)
+[01:48:03] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:48:03]   Still running... (275s elapsed)
+[01:48:18] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:48:19]   Still running... (290s elapsed)
+[01:48:34] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:48:34]   Still running... (306s elapsed)
+[01:48:49] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[01:48:49] Job 'parsec-barnes' completed successfully (321s)
+[01:48:49] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath='{.items[*].metadata.name}')
+[01:48:49] $ kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath={.items[*].metadata.name}
+[01:48:49] $ kubectl logs parsec-barnes-r47l8
+[01:48:50] Execution time: 301.3s
+[01:48:50] Cleaning up jobs and pods...
+[01:48:50] $ kubectl delete jobs --all
+job.batch "parsec-barnes" deleted from default namespace
+[01:48:50] $ kubectl delete pods --all
+pod "ibench-l1i" deleted from default namespace
+[01:49:31] Results saved to part2a-experiments/run1/results.csv
+[01:49:31] 
+Progress: 23/49
+[01:49:31] 
+============================================================
+[01:49:31]   Benchmark:    blackscholes
+[01:49:31]   Interference: ibench-l1i
+[01:49:31] ============================================================
+[01:49:31] Cleaning up jobs and pods...
+[01:49:31] $ kubectl delete jobs --all
+No resources found
+[01:49:31] $ kubectl delete pods --all
+No resources found
+[01:49:42] Starting interference: ibench-l1i
+[01:49:42] $ kubectl create -f interference/part2a/ibench-l1i.yaml
+pod/ibench-l1i created
+[01:49:42] Waiting 30s for interference to stabilise...
+[01:50:12] $ kubectl get pods -o wide
+[01:50:12] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1i   1/1     Running   0          30s   100.96.1.42   parsec-server-xh60   <none>           <none>
+
+[01:50:12] Starting benchmark: blackscholes
+[01:50:12] $ kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
+job.batch/parsec-blackscholes created
+[01:50:12] Waiting for job 'parsec-blackscholes' to complete...
+[01:50:12] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[01:50:12]   Still running... (0s elapsed)
+[01:50:27] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[01:50:28] Job 'parsec-blackscholes' completed successfully (15s)
+[01:50:28] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}')
+[01:50:28] $ kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath={.items[*].metadata.name}
+[01:50:28] $ kubectl logs parsec-blackscholes-nc6zv
+[01:50:28] Execution time: 1.4s
+[01:50:28] Cleaning up jobs and pods...
+[01:50:28] $ kubectl delete jobs --all
+job.batch "parsec-blackscholes" deleted from default namespace
+[01:50:28] $ kubectl delete pods --all
+pod "ibench-l1i" deleted from default namespace
+[01:51:09] Results saved to part2a-experiments/run1/results.csv
+[01:51:09] 
+Progress: 24/49
+[01:51:09] 
+============================================================
+[01:51:09]   Benchmark:    canneal
+[01:51:09]   Interference: ibench-l1i
+[01:51:09] ============================================================
+[01:51:09] Cleaning up jobs and pods...
+[01:51:09] $ kubectl delete jobs --all
+No resources found
+[01:51:10] $ kubectl delete pods --all
+No resources found
+[01:51:20] Starting interference: ibench-l1i
+[01:51:20] $ kubectl create -f interference/part2a/ibench-l1i.yaml
+pod/ibench-l1i created
+[01:51:20] Waiting 30s for interference to stabilise...
+[01:51:50] $ kubectl get pods -o wide
+[01:51:50] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1i   1/1     Running   0          30s   100.96.1.44   parsec-server-xh60   <none>           <none>
+
+[01:51:50] Starting benchmark: canneal
+[01:51:50] $ kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
+job.batch/parsec-canneal created
+[01:51:51] Waiting for job 'parsec-canneal' to complete...
+[01:51:51] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:51:51]   Still running... (0s elapsed)
+[01:52:06] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:52:06]   Still running... (15s elapsed)
+[01:52:21] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[01:52:21] Job 'parsec-canneal' completed successfully (30s)
+[01:52:21] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}')
+[01:52:21] $ kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath={.items[*].metadata.name}
+[01:52:22] $ kubectl logs parsec-canneal-mf7kg
+[01:52:22] Execution time: 15.3s
+[01:52:22] Cleaning up jobs and pods...
+[01:52:22] $ kubectl delete jobs --all
+job.batch "parsec-canneal" deleted from default namespace
+[01:52:22] $ kubectl delete pods --all
+pod "ibench-l1i" deleted from default namespace
+[01:53:03] Results saved to part2a-experiments/run1/results.csv
+[01:53:03] 
+Progress: 25/49
+[01:53:03] 
+============================================================
+[01:53:03]   Benchmark:    freqmine
+[01:53:03]   Interference: ibench-l1i
+[01:53:03] ============================================================
+[01:53:03] Cleaning up jobs and pods...
+[01:53:03] $ kubectl delete jobs --all
+No resources found
+[01:53:03] $ kubectl delete pods --all
+No resources found
+[01:53:13] Starting interference: ibench-l1i
+[01:53:13] $ kubectl create -f interference/part2a/ibench-l1i.yaml
+pod/ibench-l1i created
+[01:53:13] Waiting 30s for interference to stabilise...
+[01:53:44] $ kubectl get pods -o wide
+[01:53:44] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1i   1/1     Running   0          31s   100.96.1.46   parsec-server-xh60   <none>           <none>
+
+[01:53:44] Starting benchmark: freqmine
+[01:53:44] $ kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
+job.batch/parsec-freqmine created
+[01:53:44] Waiting for job 'parsec-freqmine' to complete...
+[01:53:44] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[01:53:44]   Still running... (0s elapsed)
+[01:53:59] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[01:53:59]   Still running... (15s elapsed)
+[01:54:14] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[01:54:15] Job 'parsec-freqmine' completed successfully (30s)
+[01:54:15] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}')
+[01:54:15] $ kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath={.items[*].metadata.name}
+[01:54:15] $ kubectl logs parsec-freqmine-rv669
+[01:54:15] Execution time: 13.3s
+[01:54:15] Cleaning up jobs and pods...
+[01:54:15] $ kubectl delete jobs --all
+job.batch "parsec-freqmine" deleted from default namespace
+[01:54:15] $ kubectl delete pods --all
+pod "ibench-l1i" deleted from default namespace
+[01:54:56] Results saved to part2a-experiments/run1/results.csv
+[01:54:56] 
+Progress: 26/49
+[01:54:56] 
+============================================================
+[01:54:56]   Benchmark:    radix
+[01:54:56]   Interference: ibench-l1i
+[01:54:56] ============================================================
+[01:54:56] Cleaning up jobs and pods...
+[01:54:56] $ kubectl delete jobs --all
+No resources found
+[01:54:56] $ kubectl delete pods --all
+No resources found
+[01:55:06] Starting interference: ibench-l1i
+[01:55:06] $ kubectl create -f interference/part2a/ibench-l1i.yaml
+pod/ibench-l1i created
+[01:55:07] Waiting 30s for interference to stabilise...
+[01:55:37] $ kubectl get pods -o wide
+[01:55:37] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1i   1/1     Running   0          30s   100.96.1.48   parsec-server-xh60   <none>           <none>
+
+[01:55:37] Starting benchmark: radix
+[01:55:37] $ kubectl create -f parsec-benchmarks/part2a/parsec-radix.yaml
+job.batch/parsec-radix created
+[01:55:37] Waiting for job 'parsec-radix' to complete...
+[01:55:37] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:55:37]   Still running... (0s elapsed)
+[01:55:52] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:55:53]   Still running... (15s elapsed)
+[01:56:08] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:56:08]   Still running... (30s elapsed)
+[01:56:23] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:56:23]   Still running... (46s elapsed)
+[01:56:38] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:56:38]   Still running... (61s elapsed)
+[01:56:53] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[01:56:54] Job 'parsec-radix' completed successfully (76s)
+[01:56:54] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[01:56:54] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[01:56:54] $ kubectl logs parsec-radix-9nb2x
+[01:56:54] Execution time: 69.4s
+[01:56:54] Cleaning up jobs and pods...
+[01:56:54] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[01:56:54] $ kubectl delete pods --all
+pod "ibench-l1i" deleted from default namespace
+[01:57:36] Results saved to part2a-experiments/run1/results.csv
+[01:57:36] 
+Progress: 27/49
+[01:57:36] 
+============================================================
+[01:57:36]   Benchmark:    streamcluster
+[01:57:36]   Interference: ibench-l1i
+[01:57:36] ============================================================
+[01:57:36] Cleaning up jobs and pods...
+[01:57:36] $ kubectl delete jobs --all
+No resources found
+[01:57:36] $ kubectl delete pods --all
+No resources found
+[01:57:46] Starting interference: ibench-l1i
+[01:57:46] $ kubectl create -f interference/part2a/ibench-l1i.yaml
+pod/ibench-l1i created
+[01:57:46] Waiting 30s for interference to stabilise...
+[01:58:16] $ kubectl get pods -o wide
+[01:58:17] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1i   1/1     Running   0          31s   100.96.1.50   parsec-server-xh60   <none>           <none>
+
+[01:58:17] Starting benchmark: streamcluster
+[01:58:17] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[01:58:17] Waiting for job 'parsec-streamcluster' to complete...
+[01:58:17] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:58:17]   Still running... (0s elapsed)
+[01:58:32] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:58:32]   Still running... (15s elapsed)
+[01:58:47] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[01:58:48] Job 'parsec-streamcluster' completed successfully (30s)
+[01:58:48] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[01:58:48] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[01:58:48] $ kubectl logs parsec-streamcluster-7d5nd
+[01:58:48] Execution time: 16.9s
+[01:58:48] Cleaning up jobs and pods...
+[01:58:48] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[01:58:48] $ kubectl delete pods --all
+pod "ibench-l1i" deleted from default namespace
+[01:59:29] Results saved to part2a-experiments/run1/results.csv
+[01:59:29] 
+Progress: 28/49
+[01:59:29] 
+============================================================
+[01:59:29]   Benchmark:    vips
+[01:59:29]   Interference: ibench-l1i
+[01:59:29] ============================================================
+[01:59:29] Cleaning up jobs and pods...
+[01:59:29] $ kubectl delete jobs --all
+No resources found
+[01:59:29] $ kubectl delete pods --all
+No resources found
+[01:59:39] Starting interference: ibench-l1i
+[01:59:39] $ kubectl create -f interference/part2a/ibench-l1i.yaml
+pod/ibench-l1i created
+[01:59:40] Waiting 30s for interference to stabilise...
+[02:00:10] $ kubectl get pods -o wide
+[02:00:10] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l1i   1/1     Running   0          30s   100.96.1.52   parsec-server-xh60   <none>           <none>
+
+[02:00:10] Starting benchmark: vips
+[02:00:10] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[02:00:10] Waiting for job 'parsec-vips' to complete...
+[02:00:10] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:00:10]   Still running... (0s elapsed)
+[02:00:25] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:00:26]   Still running... (15s elapsed)
+[02:00:41] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:00:41]   Still running... (30s elapsed)
+[02:00:56] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:00:56]   Still running... (46s elapsed)
+[02:01:11] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:01:12]   Still running... (61s elapsed)
+[02:01:27] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:01:27]   Still running... (76s elapsed)
+[02:01:42] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:01:42]   Still running... (92s elapsed)
+[02:01:57] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:01:57]   Still running... (107s elapsed)
+[02:02:12] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:02:13]   Still running... (122s elapsed)
+[02:02:28] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:02:28]   Still running... (137s elapsed)
+[02:02:43] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:02:43]   Still running... (153s elapsed)
+[02:02:58] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:02:59]   Still running... (168s elapsed)
+[02:03:14] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:03:14]   Still running... (183s elapsed)
+[02:03:29] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:03:29]   Still running... (199s elapsed)
+[02:03:44] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:03:45]   Still running... (214s elapsed)
+[02:04:00] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:04:00]   Still running... (229s elapsed)
+[02:04:15] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:04:15] Job 'parsec-vips' completed successfully (245s)
+[02:04:15] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[02:04:15] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[02:04:15] $ kubectl logs parsec-vips-tg2cs
+[02:04:16] Execution time: 209.5s
+[02:04:16] Cleaning up jobs and pods...
+[02:04:16] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[02:04:16] $ kubectl delete pods --all
+pod "ibench-l1i" deleted from default namespace
+[02:04:57] Results saved to part2a-experiments/run1/results.csv
+[02:04:57] 
+Progress: 29/49
+[02:04:57] 
+============================================================
+[02:04:57]   Benchmark:    barnes
+[02:04:57]   Interference: ibench-l2
+[02:04:57] ============================================================
+[02:04:57] Cleaning up jobs and pods...
+[02:04:57] $ kubectl delete jobs --all
+No resources found
+[02:04:57] $ kubectl delete pods --all
+No resources found
+[02:05:07] Starting interference: ibench-l2
+[02:05:07] $ kubectl create -f interference/part2a/ibench-l2.yaml
+pod/ibench-l2 created
+[02:05:07] Waiting 30s for interference to stabilise...
+[02:05:37] $ kubectl get pods -o wide
+[02:05:38] Pods:
+NAME        READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l2   1/1     Running   0          31s   100.96.1.54   parsec-server-xh60   <none>           <none>
+
+[02:05:38] Starting benchmark: barnes
+[02:05:38] $ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+job.batch/parsec-barnes created
+[02:05:38] Waiting for job 'parsec-barnes' to complete...
+[02:05:38] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:05:38]   Still running... (0s elapsed)
+[02:05:53] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:05:53]   Still running... (15s elapsed)
+[02:06:08] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:06:08]   Still running... (30s elapsed)
+[02:06:23] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:06:24]   Still running... (46s elapsed)
+[02:06:39] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:06:39]   Still running... (61s elapsed)
+[02:06:54] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:06:54]   Still running... (76s elapsed)
+[02:07:09] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:07:10]   Still running... (92s elapsed)
+[02:07:25] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:07:25]   Still running... (107s elapsed)
+[02:07:40] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:07:40]   Still running... (122s elapsed)
+[02:07:55] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:07:56]   Still running... (138s elapsed)
+[02:08:11] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:08:11]   Still running... (153s elapsed)
+[02:08:26] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:08:26]   Still running... (168s elapsed)
+[02:08:41] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:08:41]   Still running... (183s elapsed)
+[02:08:56] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:08:57]   Still running... (199s elapsed)
+[02:09:12] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:09:12]   Still running... (214s elapsed)
+[02:09:27] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:09:27]   Still running... (229s elapsed)
+[02:09:42] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:09:42]   Still running... (244s elapsed)
+[02:09:58] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:09:58]   Still running... (260s elapsed)
+[02:10:13] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:10:13] Job 'parsec-barnes' completed successfully (275s)
+[02:10:13] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath='{.items[*].metadata.name}')
+[02:10:13] $ kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath={.items[*].metadata.name}
+[02:10:13] $ kubectl logs parsec-barnes-r2p9h
+[02:10:14] Execution time: 269.7s
+[02:10:14] Cleaning up jobs and pods...
+[02:10:14] $ kubectl delete jobs --all
+job.batch "parsec-barnes" deleted from default namespace
+[02:10:14] $ kubectl delete pods --all
+pod "ibench-l2" deleted from default namespace
+[02:10:55] Results saved to part2a-experiments/run1/results.csv
+[02:10:55] 
+Progress: 30/49
+[02:10:55] 
+============================================================
+[02:10:55]   Benchmark:    blackscholes
+[02:10:55]   Interference: ibench-l2
+[02:10:55] ============================================================
+[02:10:55] Cleaning up jobs and pods...
+[02:10:55] $ kubectl delete jobs --all
+No resources found
+[02:10:55] $ kubectl delete pods --all
+No resources found
+[02:11:05] Starting interference: ibench-l2
+[02:11:05] $ kubectl create -f interference/part2a/ibench-l2.yaml
+pod/ibench-l2 created
+[02:11:05] Waiting 30s for interference to stabilise...
+[02:11:35] $ kubectl get pods -o wide
+[02:11:35] Pods:
+NAME        READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l2   1/1     Running   0          30s   100.96.1.56   parsec-server-xh60   <none>           <none>
+
+[02:11:35] Starting benchmark: blackscholes
+[02:11:35] $ kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
+job.batch/parsec-blackscholes created
+[02:11:36] Waiting for job 'parsec-blackscholes' to complete...
+[02:11:36] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[02:11:36]   Still running... (0s elapsed)
+[02:11:51] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[02:11:51] Job 'parsec-blackscholes' completed successfully (15s)
+[02:11:51] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}')
+[02:11:51] $ kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath={.items[*].metadata.name}
+[02:11:51] $ kubectl logs parsec-blackscholes-9d9bh
+[02:11:51] Execution time: 1.3s
+[02:11:51] Cleaning up jobs and pods...
+[02:11:51] $ kubectl delete jobs --all
+job.batch "parsec-blackscholes" deleted from default namespace
+[02:11:52] $ kubectl delete pods --all
+pod "ibench-l2" deleted from default namespace
+[02:12:33] Results saved to part2a-experiments/run1/results.csv
+[02:12:33] 
+Progress: 31/49
+[02:12:33] 
+============================================================
+[02:12:33]   Benchmark:    canneal
+[02:12:33]   Interference: ibench-l2
+[02:12:33] ============================================================
+[02:12:33] Cleaning up jobs and pods...
+[02:12:33] $ kubectl delete jobs --all
+No resources found
+[02:12:33] $ kubectl delete pods --all
+No resources found
+[02:12:43] Starting interference: ibench-l2
+[02:12:43] $ kubectl create -f interference/part2a/ibench-l2.yaml
+pod/ibench-l2 created
+[02:12:44] Waiting 30s for interference to stabilise...
+[02:13:14] $ kubectl get pods -o wide
+[02:13:14] Pods:
+NAME        READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l2   1/1     Running   0          30s   100.96.1.58   parsec-server-xh60   <none>           <none>
+
+[02:13:14] Starting benchmark: canneal
+[02:13:14] $ kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
+job.batch/parsec-canneal created
+[02:13:14] Waiting for job 'parsec-canneal' to complete...
+[02:13:14] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:13:14]   Still running... (0s elapsed)
+[02:13:29] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:13:29]   Still running... (15s elapsed)
+[02:13:44] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:13:45] Job 'parsec-canneal' completed successfully (30s)
+[02:13:45] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}')
+[02:13:45] $ kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath={.items[*].metadata.name}
+[02:13:45] $ kubectl logs parsec-canneal-dcdbl
+[02:13:45] Execution time: 15.8s
+[02:13:45] Cleaning up jobs and pods...
+[02:13:45] $ kubectl delete jobs --all
+job.batch "parsec-canneal" deleted from default namespace
+[02:13:45] $ kubectl delete pods --all
+pod "ibench-l2" deleted from default namespace
+[02:14:26] Results saved to part2a-experiments/run1/results.csv
+[02:14:26] 
+Progress: 32/49
+[02:14:26] 
+============================================================
+[02:14:26]   Benchmark:    freqmine
+[02:14:26]   Interference: ibench-l2
+[02:14:26] ============================================================
+[02:14:26] Cleaning up jobs and pods...
+[02:14:26] $ kubectl delete jobs --all
+No resources found
+[02:14:26] $ kubectl delete pods --all
+No resources found
+[02:14:37] Starting interference: ibench-l2
+[02:14:37] $ kubectl create -f interference/part2a/ibench-l2.yaml
+pod/ibench-l2 created
+[02:14:37] Waiting 30s for interference to stabilise...
+[02:15:07] $ kubectl get pods -o wide
+[02:15:07] Pods:
+NAME        READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l2   1/1     Running   0          30s   100.96.1.60   parsec-server-xh60   <none>           <none>
+
+[02:15:07] Starting benchmark: freqmine
+[02:15:07] $ kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
+job.batch/parsec-freqmine created
+[02:15:07] Waiting for job 'parsec-freqmine' to complete...
+[02:15:07] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[02:15:08]   Still running... (0s elapsed)
+[02:15:23] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[02:15:23]   Still running... (15s elapsed)
+[02:15:38] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[02:15:38] Job 'parsec-freqmine' completed successfully (30s)
+[02:15:38] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}')
+[02:15:38] $ kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath={.items[*].metadata.name}
+[02:15:38] $ kubectl logs parsec-freqmine-ckpvs
+[02:15:39] Execution time: 9.1s
+[02:15:39] Cleaning up jobs and pods...
+[02:15:39] $ kubectl delete jobs --all
+job.batch "parsec-freqmine" deleted from default namespace
+[02:15:39] $ kubectl delete pods --all
+pod "ibench-l2" deleted from default namespace
+[02:16:19] Results saved to part2a-experiments/run1/results.csv
+[02:16:19] 
+Progress: 33/49
+[02:16:19] 
+============================================================
+[02:16:19]   Benchmark:    radix
+[02:16:19]   Interference: ibench-l2
+[02:16:19] ============================================================
+[02:16:19] Cleaning up jobs and pods...
+[02:16:19] $ kubectl delete jobs --all
+No resources found
+[02:16:20] $ kubectl delete pods --all
+No resources found
+[02:16:30] Starting interference: ibench-l2
+[02:16:30] $ kubectl create -f interference/part2a/ibench-l2.yaml
+pod/ibench-l2 created
+[02:16:30] Waiting 30s for interference to stabilise...
+[02:17:00] $ kubectl get pods -o wide
+[02:17:00] Pods:
+NAME        READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l2   1/1     Running   0          30s   100.96.1.62   parsec-server-xh60   <none>           <none>
+
+[02:17:00] Starting benchmark: radix
+[02:17:00] $ kubectl create -f parsec-benchmarks/part2a/parsec-radix.yaml
+job.batch/parsec-radix created
+[02:17:01] Waiting for job 'parsec-radix' to complete...
+[02:17:01] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:17:01]   Still running... (0s elapsed)
+[02:17:16] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:17:16]   Still running... (15s elapsed)
+[02:17:31] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:17:31]   Still running... (30s elapsed)
+[02:17:46] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:17:47]   Still running... (46s elapsed)
+[02:18:02] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:18:02]   Still running... (61s elapsed)
+[02:18:17] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:18:17]   Still running... (76s elapsed)
+[02:18:32] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:18:32] Job 'parsec-radix' completed successfully (92s)
+[02:18:32] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[02:18:33] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[02:18:33] $ kubectl logs parsec-radix-g6nqp
+[02:18:33] Execution time: 80.3s
+[02:18:33] Cleaning up jobs and pods...
+[02:18:33] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[02:18:33] $ kubectl delete pods --all
+pod "ibench-l2" deleted from default namespace
+[02:19:14] Results saved to part2a-experiments/run1/results.csv
+[02:19:14] 
+Progress: 34/49
+[02:19:14] 
+============================================================
+[02:19:14]   Benchmark:    streamcluster
+[02:19:14]   Interference: ibench-l2
+[02:19:14] ============================================================
+[02:19:14] Cleaning up jobs and pods...
+[02:19:14] $ kubectl delete jobs --all
+No resources found
+[02:19:14] $ kubectl delete pods --all
+No resources found
+[02:19:24] Starting interference: ibench-l2
+[02:19:24] $ kubectl create -f interference/part2a/ibench-l2.yaml
+pod/ibench-l2 created
+[02:19:25] Waiting 30s for interference to stabilise...
+[02:19:55] $ kubectl get pods -o wide
+[02:19:55] Pods:
+NAME        READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l2   1/1     Running   0          30s   100.96.1.64   parsec-server-xh60   <none>           <none>
+
+[02:19:55] Starting benchmark: streamcluster
+[02:19:55] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[02:19:55] Waiting for job 'parsec-streamcluster' to complete...
+[02:19:55] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:19:55]   Still running... (0s elapsed)
+[02:20:10] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:20:11]   Still running... (15s elapsed)
+[02:20:26] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:20:26] Job 'parsec-streamcluster' completed successfully (30s)
+[02:20:26] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[02:20:26] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[02:20:26] $ kubectl logs parsec-streamcluster-rsmfb
+[02:20:26] Execution time: 15.7s
+[02:20:26] Cleaning up jobs and pods...
+[02:20:26] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[02:20:26] $ kubectl delete pods --all
+pod "ibench-l2" deleted from default namespace
+[02:21:07] Results saved to part2a-experiments/run1/results.csv
+[02:21:07] 
+Progress: 35/49
+[02:21:07] 
+============================================================
+[02:21:07]   Benchmark:    vips
+[02:21:07]   Interference: ibench-l2
+[02:21:07] ============================================================
+[02:21:07] Cleaning up jobs and pods...
+[02:21:07] $ kubectl delete jobs --all
+No resources found
+[02:21:08] $ kubectl delete pods --all
+No resources found
+[02:21:18] Starting interference: ibench-l2
+[02:21:18] $ kubectl create -f interference/part2a/ibench-l2.yaml
+pod/ibench-l2 created
+[02:21:18] Waiting 30s for interference to stabilise...
+[02:21:48] $ kubectl get pods -o wide
+[02:21:48] Pods:
+NAME        READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-l2   1/1     Running   0          30s   100.96.1.66   parsec-server-xh60   <none>           <none>
+
+[02:21:48] Starting benchmark: vips
+[02:21:48] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[02:21:49] Waiting for job 'parsec-vips' to complete...
+[02:21:49] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:21:49]   Still running... (0s elapsed)
+[02:22:04] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:22:04]   Still running... (15s elapsed)
+[02:22:19] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:22:19]   Still running... (30s elapsed)
+[02:22:34] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:22:35]   Still running... (46s elapsed)
+[02:22:50] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:22:50]   Still running... (61s elapsed)
+[02:23:05] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:23:05]   Still running... (76s elapsed)
+[02:23:20] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:23:20]   Still running... (92s elapsed)
+[02:23:35] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:23:36]   Still running... (107s elapsed)
+[02:23:51] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:23:51]   Still running... (122s elapsed)
+[02:24:06] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:24:06]   Still running... (138s elapsed)
+[02:24:21] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:24:22]   Still running... (153s elapsed)
+[02:24:37] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:24:37]   Still running... (168s elapsed)
+[02:24:52] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:24:52]   Still running... (183s elapsed)
+[02:25:07] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:25:08]   Still running... (199s elapsed)
+[02:25:23] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:25:23]   Still running... (214s elapsed)
+[02:25:38] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:25:38]   Still running... (229s elapsed)
+[02:25:53] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:25:54] Job 'parsec-vips' completed successfully (245s)
+[02:25:54] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[02:25:54] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[02:25:54] $ kubectl logs parsec-vips-f96w5
+[02:25:54] Execution time: 217.9s
+[02:25:54] Cleaning up jobs and pods...
+[02:25:54] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[02:25:54] $ kubectl delete pods --all
+pod "ibench-l2" deleted from default namespace
+[02:26:35] Results saved to part2a-experiments/run1/results.csv
+[02:26:35] 
+Progress: 36/49
+[02:26:35] 
+============================================================
+[02:26:35]   Benchmark:    barnes
+[02:26:35]   Interference: ibench-llc
+[02:26:35] ============================================================
+[02:26:35] Cleaning up jobs and pods...
+[02:26:35] $ kubectl delete jobs --all
+No resources found
+[02:26:36] $ kubectl delete pods --all
+No resources found
+[02:26:46] Starting interference: ibench-llc
+[02:26:46] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:26:46] Waiting 30s for interference to stabilise...
+[02:27:16] $ kubectl get pods -o wide
+[02:27:17] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          31s   100.96.1.68   parsec-server-xh60   <none>           <none>
+
+[02:27:17] Starting benchmark: barnes
+[02:27:17] $ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+job.batch/parsec-barnes created
+[02:27:17] Waiting for job 'parsec-barnes' to complete...
+[02:27:17] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:27:17]   Still running... (0s elapsed)
+[02:27:32] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:27:32]   Still running... (15s elapsed)
+[02:27:47] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:27:47]   Still running... (30s elapsed)
+[02:28:02] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:28:03]   Still running... (46s elapsed)
+[02:28:18] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:28:18]   Still running... (61s elapsed)
+[02:28:33] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:28:33]   Still running... (76s elapsed)
+[02:28:48] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:28:49]   Still running... (92s elapsed)
+[02:29:04] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:29:04]   Still running... (107s elapsed)
+[02:29:19] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:29:19]   Still running... (122s elapsed)
+[02:29:34] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:29:35]   Still running... (137s elapsed)
+[02:29:50] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:29:50]   Still running... (153s elapsed)
+[02:30:05] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:30:05]   Still running... (168s elapsed)
+[02:30:20] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:30:20]   Still running... (183s elapsed)
+[02:30:35] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:30:36]   Still running... (199s elapsed)
+[02:30:51] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:30:51]   Still running... (214s elapsed)
+[02:31:06] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:31:06]   Still running... (229s elapsed)
+[02:31:21] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:31:22]   Still running... (245s elapsed)
+[02:31:37] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:31:37]   Still running... (260s elapsed)
+[02:31:52] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:31:52]   Still running... (275s elapsed)
+[02:32:07] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:32:08]   Still running... (290s elapsed)
+[02:32:23] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:32:23]   Still running... (306s elapsed)
+[02:32:38] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:32:38]   Still running... (321s elapsed)
+[02:32:53] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:32:53]   Still running... (336s elapsed)
+[02:33:08] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:33:09]   Still running... (352s elapsed)
+[02:33:24] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:33:24]   Still running... (367s elapsed)
+[02:33:39] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:33:39]   Still running... (382s elapsed)
+[02:33:54] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:33:55] Job 'parsec-barnes' completed successfully (398s)
+[02:33:55] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath='{.items[*].metadata.name}')
+[02:33:55] $ kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath={.items[*].metadata.name}
+[02:33:55] $ kubectl logs parsec-barnes-xfttx
+[02:33:55] Execution time: 386.4s
+[02:33:55] Cleaning up jobs and pods...
+[02:33:55] $ kubectl delete jobs --all
+job.batch "parsec-barnes" deleted from default namespace
+[02:33:55] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:34:37] Results saved to part2a-experiments/run1/results.csv
+[02:34:37] 
+Progress: 37/49
+[02:34:37] 
+============================================================
+[02:34:37]   Benchmark:    blackscholes
+[02:34:37]   Interference: ibench-llc
+[02:34:37] ============================================================
+[02:34:37] Cleaning up jobs and pods...
+[02:34:37] $ kubectl delete jobs --all
+No resources found
+[02:34:37] $ kubectl delete pods --all
+No resources found
+[02:34:47] Starting interference: ibench-llc
+[02:34:47] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:34:47] Waiting 30s for interference to stabilise...
+[02:35:17] $ kubectl get pods -o wide
+[02:35:18] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          31s   100.96.1.70   parsec-server-xh60   <none>           <none>
+
+[02:35:18] Starting benchmark: blackscholes
+[02:35:18] $ kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
+job.batch/parsec-blackscholes created
+[02:35:18] Waiting for job 'parsec-blackscholes' to complete...
+[02:35:18] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[02:35:18]   Still running... (0s elapsed)
+[02:35:33] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[02:35:33] Job 'parsec-blackscholes' completed successfully (15s)
+[02:35:33] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}')
+[02:35:33] $ kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath={.items[*].metadata.name}
+[02:35:33] $ kubectl logs parsec-blackscholes-dfl9c
+[02:35:34] Execution time: 1.2s
+[02:35:34] Cleaning up jobs and pods...
+[02:35:34] $ kubectl delete jobs --all
+job.batch "parsec-blackscholes" deleted from default namespace
+[02:35:34] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:36:15] Results saved to part2a-experiments/run1/results.csv
+[02:36:15] 
+Progress: 38/49
+[02:36:15] 
+============================================================
+[02:36:15]   Benchmark:    canneal
+[02:36:15]   Interference: ibench-llc
+[02:36:15] ============================================================
+[02:36:15] Cleaning up jobs and pods...
+[02:36:15] $ kubectl delete jobs --all
+No resources found
+[02:36:15] $ kubectl delete pods --all
+No resources found
+[02:36:25] Starting interference: ibench-llc
+[02:36:25] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:36:26] Waiting 30s for interference to stabilise...
+[02:36:56] $ kubectl get pods -o wide
+[02:36:56] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          30s   100.96.1.72   parsec-server-xh60   <none>           <none>
+
+[02:36:56] Starting benchmark: canneal
+[02:36:56] $ kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
+job.batch/parsec-canneal created
+[02:36:56] Waiting for job 'parsec-canneal' to complete...
+[02:36:56] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:36:56]   Still running... (0s elapsed)
+[02:37:11] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:37:12]   Still running... (15s elapsed)
+[02:37:27] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:37:27] Job 'parsec-canneal' completed successfully (30s)
+[02:37:27] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}')
+[02:37:27] $ kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath={.items[*].metadata.name}
+[02:37:27] $ kubectl logs parsec-canneal-7nqbs
+[02:37:27] Execution time: 20.8s
+[02:37:27] Cleaning up jobs and pods...
+[02:37:27] $ kubectl delete jobs --all
+job.batch "parsec-canneal" deleted from default namespace
+[02:37:28] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:38:09] Results saved to part2a-experiments/run1/results.csv
+[02:38:09] 
+Progress: 39/49
+[02:38:09] 
+============================================================
+[02:38:09]   Benchmark:    freqmine
+[02:38:09]   Interference: ibench-llc
+[02:38:09] ============================================================
+[02:38:09] Cleaning up jobs and pods...
+[02:38:09] $ kubectl delete jobs --all
+No resources found
+[02:38:09] $ kubectl delete pods --all
+No resources found
+[02:38:19] Starting interference: ibench-llc
+[02:38:19] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:38:19] Waiting 30s for interference to stabilise...
+[02:38:49] $ kubectl get pods -o wide
+[02:38:50] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          31s   100.96.1.74   parsec-server-xh60   <none>           <none>
+
+[02:38:50] Starting benchmark: freqmine
+[02:38:50] $ kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
+job.batch/parsec-freqmine created
+[02:38:50] Waiting for job 'parsec-freqmine' to complete...
+[02:38:50] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[02:38:50]   Still running... (0s elapsed)
+[02:39:05] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[02:39:05]   Still running... (15s elapsed)
+[02:39:20] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[02:39:20] Job 'parsec-freqmine' completed successfully (30s)
+[02:39:20] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}')
+[02:39:20] $ kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath={.items[*].metadata.name}
+[02:39:21] $ kubectl logs parsec-freqmine-gzwjj
+[02:39:21] Execution time: 16.1s
+[02:39:21] Cleaning up jobs and pods...
+[02:39:21] $ kubectl delete jobs --all
+job.batch "parsec-freqmine" deleted from default namespace
+[02:39:21] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:40:02] Results saved to part2a-experiments/run1/results.csv
+[02:40:02] 
+Progress: 40/49
+[02:40:02] 
+============================================================
+[02:40:02]   Benchmark:    radix
+[02:40:02]   Interference: ibench-llc
+[02:40:02] ============================================================
+[02:40:02] Cleaning up jobs and pods...
+[02:40:02] $ kubectl delete jobs --all
+No resources found
+[02:40:02] $ kubectl delete pods --all
+No resources found
+[02:40:13] Starting interference: ibench-llc
+[02:40:13] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:40:13] Waiting 30s for interference to stabilise...
+[02:40:43] $ kubectl get pods -o wide
+[02:40:43] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          30s   100.96.1.76   parsec-server-xh60   <none>           <none>
+
+[02:40:43] Starting benchmark: radix
+[02:40:43] $ kubectl create -f parsec-benchmarks/part2a/parsec-radix.yaml
+job.batch/parsec-radix created
+[02:40:43] Waiting for job 'parsec-radix' to complete...
+[02:40:43] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:40:43]   Still running... (0s elapsed)
+[02:40:58] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:40:59]   Still running... (15s elapsed)
+[02:41:14] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:41:14]   Still running... (30s elapsed)
+[02:41:29] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:41:29]   Still running... (46s elapsed)
+[02:41:44] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:41:45]   Still running... (61s elapsed)
+[02:42:00] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:42:00]   Still running... (76s elapsed)
+[02:42:15] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:42:15]   Still running... (92s elapsed)
+[02:42:30] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:42:30]   Still running... (107s elapsed)
+[02:42:45] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[02:42:47] Job 'parsec-radix' completed successfully (122s)
+[02:42:47] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[02:42:47] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[02:42:47] $ kubectl logs parsec-radix-m8xv8
+[02:42:47] Execution time: 112.4s
+[02:42:47] Cleaning up jobs and pods...
+[02:42:47] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[02:42:47] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:43:28] Results saved to part2a-experiments/run1/results.csv
+[02:43:28] 
+Progress: 41/49
+[02:43:28] 
+============================================================
+[02:43:28]   Benchmark:    streamcluster
+[02:43:28]   Interference: ibench-llc
+[02:43:28] ============================================================
+[02:43:28] Cleaning up jobs and pods...
+[02:43:28] $ kubectl delete jobs --all
+No resources found
+[02:43:28] $ kubectl delete pods --all
+No resources found
+[02:43:39] Starting interference: ibench-llc
+[02:43:39] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:43:39] Waiting 30s for interference to stabilise...
+[02:44:09] $ kubectl get pods -o wide
+[02:44:09] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          30s   100.96.1.78   parsec-server-xh60   <none>           <none>
+
+[02:44:09] Starting benchmark: streamcluster
+[02:44:09] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[02:44:09] Waiting for job 'parsec-streamcluster' to complete...
+[02:44:09] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:44:10]   Still running... (0s elapsed)
+[02:44:25] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:44:25]   Still running... (15s elapsed)
+[02:44:40] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[02:44:40] Job 'parsec-streamcluster' completed successfully (30s)
+[02:44:40] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[02:44:40] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[02:44:40] $ kubectl logs parsec-streamcluster-dtf6x
+[02:44:40] Execution time: 22.0s
+[02:44:40] Cleaning up jobs and pods...
+[02:44:40] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[02:44:41] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:45:22] Results saved to part2a-experiments/run1/results.csv
+[02:45:22] 
+Progress: 42/49
+[02:45:22] 
+============================================================
+[02:45:22]   Benchmark:    vips
+[02:45:22]   Interference: ibench-llc
+[02:45:22] ============================================================
+[02:45:22] Cleaning up jobs and pods...
+[02:45:22] $ kubectl delete jobs --all
+No resources found
+[02:45:22] $ kubectl delete pods --all
+No resources found
+[02:45:32] Starting interference: ibench-llc
+[02:45:32] $ kubectl create -f interference/part2a/ibench-llc.yaml
+pod/ibench-llc created
+[02:45:32] Waiting 30s for interference to stabilise...
+[02:46:02] $ kubectl get pods -o wide
+[02:46:03] Pods:
+NAME         READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-llc   1/1     Running   0          31s   100.96.1.80   parsec-server-xh60   <none>           <none>
+
+[02:46:03] Starting benchmark: vips
+[02:46:03] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[02:46:03] Waiting for job 'parsec-vips' to complete...
+[02:46:03] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:46:03]   Still running... (0s elapsed)
+[02:46:18] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:46:18]   Still running... (15s elapsed)
+[02:46:33] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:46:34]   Still running... (30s elapsed)
+[02:46:49] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:46:49]   Still running... (46s elapsed)
+[02:47:04] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:47:04]   Still running... (61s elapsed)
+[02:47:19] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:47:19]   Still running... (76s elapsed)
+[02:47:34] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:47:35]   Still running... (92s elapsed)
+[02:47:50] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:47:50]   Still running... (107s elapsed)
+[02:48:05] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:48:05]   Still running... (122s elapsed)
+[02:48:20] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:48:21]   Still running... (137s elapsed)
+[02:48:36] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:48:36]   Still running... (153s elapsed)
+[02:48:51] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:48:51]   Still running... (168s elapsed)
+[02:49:06] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:49:06]   Still running... (183s elapsed)
+[02:49:21] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:49:22]   Still running... (199s elapsed)
+[02:49:37] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:49:37]   Still running... (214s elapsed)
+[02:49:52] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:49:52]   Still running... (229s elapsed)
+[02:50:07] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:50:07]   Still running... (244s elapsed)
+[02:50:22] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[02:50:23] Job 'parsec-vips' completed successfully (260s)
+[02:50:23] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[02:50:23] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[02:50:23] $ kubectl logs parsec-vips-5h9lp
+[02:50:23] Execution time: 223.3s
+[02:50:23] Cleaning up jobs and pods...
+[02:50:23] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[02:50:23] $ kubectl delete pods --all
+pod "ibench-llc" deleted from default namespace
+[02:51:04] Results saved to part2a-experiments/run1/results.csv
+[02:51:04] 
+Progress: 43/49
+[02:51:04] 
+============================================================
+[02:51:04]   Benchmark:    barnes
+[02:51:04]   Interference: ibench-membw
+[02:51:04] ============================================================
+[02:51:04] Cleaning up jobs and pods...
+[02:51:04] $ kubectl delete jobs --all
+No resources found
+[02:51:04] $ kubectl delete pods --all
+No resources found
+[02:51:14] Starting interference: ibench-membw
+[02:51:14] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[02:51:15] Waiting 30s for interference to stabilise...
+[02:51:45] $ kubectl get pods -o wide
+[02:51:45] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.82   parsec-server-xh60   <none>           <none>
+
+[02:51:45] Starting benchmark: barnes
+[02:51:45] $ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml
+job.batch/parsec-barnes created
+[02:51:45] Waiting for job 'parsec-barnes' to complete...
+[02:51:45] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:51:45]   Still running... (0s elapsed)
+[02:52:00] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:52:01]   Still running... (15s elapsed)
+[02:52:16] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:52:16]   Still running... (30s elapsed)
+[02:52:31] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:52:31]   Still running... (46s elapsed)
+[02:52:46] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:52:46]   Still running... (61s elapsed)
+[02:53:01] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:53:02]   Still running... (76s elapsed)
+[02:53:17] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:53:17]   Still running... (92s elapsed)
+[02:53:32] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:53:32]   Still running... (107s elapsed)
+[02:53:47] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:53:48]   Still running... (122s elapsed)
+[02:54:03] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:54:03]   Still running... (137s elapsed)
+[02:54:18] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:54:18]   Still running... (153s elapsed)
+[02:54:33] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:54:34]   Still running... (168s elapsed)
+[02:54:49] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:54:49]   Still running... (183s elapsed)
+[02:55:04] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:55:04]   Still running... (199s elapsed)
+[02:55:19] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:55:19]   Still running... (214s elapsed)
+[02:55:35] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:55:35]   Still running... (229s elapsed)
+[02:55:50] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:55:50]   Still running... (245s elapsed)
+[02:56:05] $ kubectl get jobs parsec-barnes -o jsonpath={.status.conditions[*].type}
+[02:56:05] Job 'parsec-barnes' completed successfully (260s)
+[02:56:05] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath='{.items[*].metadata.name}')
+[02:56:05] $ kubectl get pods --selector=job-name=parsec-barnes --output=jsonpath={.items[*].metadata.name}
+[02:56:06] $ kubectl logs parsec-barnes-mh94t
+[02:56:06] Execution time: 250.3s
+[02:56:06] Cleaning up jobs and pods...
+[02:56:06] $ kubectl delete jobs --all
+job.batch "parsec-barnes" deleted from default namespace
+[02:56:06] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[02:56:47] Results saved to part2a-experiments/run1/results.csv
+[02:56:47] 
+Progress: 44/49
+[02:56:47] 
+============================================================
+[02:56:47]   Benchmark:    blackscholes
+[02:56:47]   Interference: ibench-membw
+[02:56:47] ============================================================
+[02:56:47] Cleaning up jobs and pods...
+[02:56:47] $ kubectl delete jobs --all
+No resources found
+[02:56:48] $ kubectl delete pods --all
+No resources found
+[02:56:58] Starting interference: ibench-membw
+[02:56:58] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[02:56:58] Waiting 30s for interference to stabilise...
+[02:57:28] $ kubectl get pods -o wide
+[02:57:28] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.84   parsec-server-xh60   <none>           <none>
+
+[02:57:28] Starting benchmark: blackscholes
+[02:57:28] $ kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
+job.batch/parsec-blackscholes created
+[02:57:29] Waiting for job 'parsec-blackscholes' to complete...
+[02:57:29] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[02:57:29]   Still running... (0s elapsed)
+[02:57:44] $ kubectl get jobs parsec-blackscholes -o jsonpath={.status.conditions[*].type}
+[02:57:44] Job 'parsec-blackscholes' completed successfully (15s)
+[02:57:44] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}')
+[02:57:44] $ kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath={.items[*].metadata.name}
+[02:57:44] $ kubectl logs parsec-blackscholes-qqgdh
+[02:57:44] Execution time: 1.2s
+[02:57:44] Cleaning up jobs and pods...
+[02:57:44] $ kubectl delete jobs --all
+job.batch "parsec-blackscholes" deleted from default namespace
+[02:57:45] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[02:58:26] Results saved to part2a-experiments/run1/results.csv
+[02:58:26] 
+Progress: 45/49
+[02:58:26] 
+============================================================
+[02:58:26]   Benchmark:    canneal
+[02:58:26]   Interference: ibench-membw
+[02:58:26] ============================================================
+[02:58:26] Cleaning up jobs and pods...
+[02:58:26] $ kubectl delete jobs --all
+No resources found
+[02:58:26] $ kubectl delete pods --all
+No resources found
+[02:58:36] Starting interference: ibench-membw
+[02:58:36] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[02:58:36] Waiting 30s for interference to stabilise...
+[02:59:06] $ kubectl get pods -o wide
+[02:59:07] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          31s   100.96.1.86   parsec-server-xh60   <none>           <none>
+
+[02:59:07] Starting benchmark: canneal
+[02:59:07] $ kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
+job.batch/parsec-canneal created
+[02:59:07] Waiting for job 'parsec-canneal' to complete...
+[02:59:07] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:59:07]   Still running... (0s elapsed)
+[02:59:22] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:59:22]   Still running... (15s elapsed)
+[02:59:37] $ kubectl get jobs parsec-canneal -o jsonpath={.status.conditions[*].type}
+[02:59:38] Job 'parsec-canneal' completed successfully (30s)
+[02:59:38] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}')
+[02:59:38] $ kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath={.items[*].metadata.name}
+[02:59:38] $ kubectl logs parsec-canneal-84f72
+[02:59:38] Execution time: 14.7s
+[02:59:38] Cleaning up jobs and pods...
+[02:59:38] $ kubectl delete jobs --all
+job.batch "parsec-canneal" deleted from default namespace
+[02:59:38] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:00:19] Results saved to part2a-experiments/run1/results.csv
+[03:00:19] 
+Progress: 46/49
+[03:00:19] 
+============================================================
+[03:00:19]   Benchmark:    freqmine
+[03:00:19]   Interference: ibench-membw
+[03:00:19] ============================================================
+[03:00:19] Cleaning up jobs and pods...
+[03:00:19] $ kubectl delete jobs --all
+No resources found
+[03:00:19] $ kubectl delete pods --all
+No resources found
+[03:00:30] Starting interference: ibench-membw
+[03:00:30] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[03:00:30] Waiting 30s for interference to stabilise...
+[03:01:00] $ kubectl get pods -o wide
+[03:01:00] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.88   parsec-server-xh60   <none>           <none>
+
+[03:01:00] Starting benchmark: freqmine
+[03:01:00] $ kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
+job.batch/parsec-freqmine created
+[03:01:00] Waiting for job 'parsec-freqmine' to complete...
+[03:01:00] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[03:01:00]   Still running... (0s elapsed)
+[03:01:15] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[03:01:16]   Still running... (15s elapsed)
+[03:01:31] $ kubectl get jobs parsec-freqmine -o jsonpath={.status.conditions[*].type}
+[03:01:31] Job 'parsec-freqmine' completed successfully (30s)
+[03:01:31] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}')
+[03:01:31] $ kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath={.items[*].metadata.name}
+[03:01:31] $ kubectl logs parsec-freqmine-c7sdf
+[03:01:32] Execution time: 12.0s
+[03:01:32] Cleaning up jobs and pods...
+[03:01:32] $ kubectl delete jobs --all
+job.batch "parsec-freqmine" deleted from default namespace
+[03:01:32] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:02:12] Results saved to part2a-experiments/run1/results.csv
+[03:02:12] 
+Progress: 47/49
+[03:02:12] 
+============================================================
+[03:02:12]   Benchmark:    radix
+[03:02:12]   Interference: ibench-membw
+[03:02:12] ============================================================
+[03:02:12] Cleaning up jobs and pods...
+[03:02:12] $ kubectl delete jobs --all
+No resources found
+[03:02:13] $ kubectl delete pods --all
+No resources found
+[03:02:23] Starting interference: ibench-membw
+[03:02:23] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[03:02:23] Waiting 30s for interference to stabilise...
+[03:02:53] $ kubectl get pods -o wide
+[03:02:54] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          31s   100.96.1.90   parsec-server-xh60   <none>           <none>
+
+[03:02:54] Starting benchmark: radix
+[03:02:54] $ kubectl create -f parsec-benchmarks/part2a/parsec-radix.yaml
+job.batch/parsec-radix created
+[03:02:54] Waiting for job 'parsec-radix' to complete...
+[03:02:54] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:02:54]   Still running... (0s elapsed)
+[03:03:09] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:03:09]   Still running... (15s elapsed)
+[03:03:24] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:03:25]   Still running... (30s elapsed)
+[03:03:40] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:03:40]   Still running... (46s elapsed)
+[03:03:55] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:03:55]   Still running... (61s elapsed)
+[03:04:10] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:04:10]   Still running... (76s elapsed)
+[03:04:25] $ kubectl get jobs parsec-radix -o jsonpath={.status.conditions[*].type}
+[03:04:26] Job 'parsec-radix' completed successfully (92s)
+[03:04:26] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-radix --output=jsonpath='{.items[*].metadata.name}')
+[03:04:26] $ kubectl get pods --selector=job-name=parsec-radix --output=jsonpath={.items[*].metadata.name}
+[03:04:26] $ kubectl logs parsec-radix-25xfp
+[03:04:26] Execution time: 80.4s
+[03:04:26] Cleaning up jobs and pods...
+[03:04:26] $ kubectl delete jobs --all
+job.batch "parsec-radix" deleted from default namespace
+[03:04:26] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:05:07] Results saved to part2a-experiments/run1/results.csv
+[03:05:07] 
+Progress: 48/49
+[03:05:07] 
+============================================================
+[03:05:07]   Benchmark:    streamcluster
+[03:05:07]   Interference: ibench-membw
+[03:05:07] ============================================================
+[03:05:07] Cleaning up jobs and pods...
+[03:05:07] $ kubectl delete jobs --all
+No resources found
+[03:05:07] $ kubectl delete pods --all
+No resources found
+[03:05:17] Starting interference: ibench-membw
+[03:05:17] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[03:05:18] Waiting 30s for interference to stabilise...
+[03:05:48] $ kubectl get pods -o wide
+[03:05:48] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.92   parsec-server-xh60   <none>           <none>
+
+[03:05:48] Starting benchmark: streamcluster
+[03:05:48] $ kubectl create -f parsec-benchmarks/part2a/parsec-streamcluster.yaml
+job.batch/parsec-streamcluster created
+[03:05:48] Waiting for job 'parsec-streamcluster' to complete...
+[03:05:48] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[03:05:48]   Still running... (0s elapsed)
+[03:06:03] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[03:06:04]   Still running... (15s elapsed)
+[03:06:19] $ kubectl get jobs parsec-streamcluster -o jsonpath={.status.conditions[*].type}
+[03:06:19] Job 'parsec-streamcluster' completed successfully (30s)
+[03:06:19] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath='{.items[*].metadata.name}')
+[03:06:19] $ kubectl get pods --selector=job-name=parsec-streamcluster --output=jsonpath={.items[*].metadata.name}
+[03:06:19] $ kubectl logs parsec-streamcluster-hkc6m
+[03:06:19] Execution time: 14.9s
+[03:06:19] Cleaning up jobs and pods...
+[03:06:19] $ kubectl delete jobs --all
+job.batch "parsec-streamcluster" deleted from default namespace
+[03:06:20] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:07:00] Results saved to part2a-experiments/run1/results.csv
+[03:07:00] 
+Progress: 49/49
+[03:07:00] 
+============================================================
+[03:07:00]   Benchmark:    vips
+[03:07:00]   Interference: ibench-membw
+[03:07:00] ============================================================
+[03:07:00] Cleaning up jobs and pods...
+[03:07:00] $ kubectl delete jobs --all
+No resources found
+[03:07:01] $ kubectl delete pods --all
+No resources found
+[03:07:11] Starting interference: ibench-membw
+[03:07:11] $ kubectl create -f interference/part2a/ibench-membw.yaml
+pod/ibench-membw created
+[03:07:11] Waiting 30s for interference to stabilise...
+[03:07:41] $ kubectl get pods -o wide
+[03:07:41] Pods:
+NAME           READY   STATUS    RESTARTS   AGE   IP            NODE                 NOMINATED NODE   READINESS GATES
+ibench-membw   1/1     Running   0          30s   100.96.1.94   parsec-server-xh60   <none>           <none>
+
+[03:07:41] Starting benchmark: vips
+[03:07:41] $ kubectl create -f parsec-benchmarks/part2a/parsec-vips.yaml
+job.batch/parsec-vips created
+[03:07:42] Waiting for job 'parsec-vips' to complete...
+[03:07:42] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:07:42]   Still running... (0s elapsed)
+[03:07:57] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:07:57]   Still running... (15s elapsed)
+[03:08:12] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:08:12]   Still running... (30s elapsed)
+[03:08:27] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:08:28]   Still running... (46s elapsed)
+[03:08:43] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:08:43]   Still running... (61s elapsed)
+[03:08:58] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:08:58]   Still running... (76s elapsed)
+[03:09:13] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:09:14]   Still running... (92s elapsed)
+[03:09:29] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:09:29]   Still running... (107s elapsed)
+[03:09:44] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:09:44]   Still running... (122s elapsed)
+[03:09:59] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:09:59]   Still running... (138s elapsed)
+[03:10:14] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:10:15]   Still running... (153s elapsed)
+[03:10:30] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:10:30]   Still running... (168s elapsed)
+[03:10:45] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:10:45]   Still running... (184s elapsed)
+[03:11:00] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:11:01]   Still running... (199s elapsed)
+[03:11:16] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:11:16]   Still running... (214s elapsed)
+[03:11:31] $ kubectl get jobs parsec-vips -o jsonpath={.status.conditions[*].type}
+[03:11:31] Job 'parsec-vips' completed successfully (229s)
+[03:11:31] $ kubectl logs $(kubectl get pods --selector=job-name=parsec-vips --output=jsonpath='{.items[*].metadata.name}')
+[03:11:31] $ kubectl get pods --selector=job-name=parsec-vips --output=jsonpath={.items[*].metadata.name}
+[03:11:31] $ kubectl logs parsec-vips-jm8hk
+[03:11:32] Execution time: 210.1s
+[03:11:32] Cleaning up jobs and pods...
+[03:11:32] $ kubectl delete jobs --all
+job.batch "parsec-vips" deleted from default namespace
+[03:11:32] $ kubectl delete pods --all
+pod "ibench-membw" deleted from default namespace
+[03:12:13] Results saved to part2a-experiments/run1/results.csv
+[03:12:13] 
+============================================================
+[03:12:13] All experiments done! Results in part2a-experiments/run1
+[03:12:13] ============================================================
+[03:12:13] Deleting cluster...
+[03:12:13] $ kops delete cluster part2a.k8s.local --yes
+I0504 03:12:14.633757   62034 delete_cluster.go:143] Looking for cloud resources to delete
+I0504 03:12:15.223460   62034 gce.go:97] Scanning zones: [europe-west1-b europe-west1-d europe-west1-c]
+TYPE			NAME							ID
+Address			api-europe-west1-part2a-k8s-local			api-europe-west1-part2a-k8s-local
+Address			api-part2a-k8s-local					api-part2a-k8s-local
+BackendService		api-part2a-k8s-local					api-part2a-k8s-local
+Disk			a-etcd-events-part2a-k8s-local				a-etcd-events-part2a-k8s-local
+Disk			a-etcd-main-part2a-k8s-local				a-etcd-main-part2a-k8s-local
+FirewallRule		https-api-ipv6-part2a-k8s-local				https-api-ipv6-part2a-k8s-local
+FirewallRule		https-api-part2a-k8s-local				https-api-part2a-k8s-local
+FirewallRule		kops-controller-ipv6-part2a-k8s-local			kops-controller-ipv6-part2a-k8s-local
+FirewallRule		kops-controller-part2a-k8s-local			kops-controller-part2a-k8s-local
+FirewallRule		lb-health-checks-part2a-k8s-local			lb-health-checks-part2a-k8s-local
+FirewallRule		master-to-master-part2a-k8s-local			master-to-master-part2a-k8s-local
+FirewallRule		master-to-node-part2a-k8s-local				master-to-node-part2a-k8s-local
+FirewallRule		node-to-master-part2a-k8s-local				node-to-master-part2a-k8s-local
+FirewallRule		node-to-node-part2a-k8s-local				node-to-node-part2a-k8s-local
+FirewallRule		nodeport-external-to-node-ipv6-part2a-k8s-local		nodeport-external-to-node-ipv6-part2a-k8s-local
+FirewallRule		nodeport-external-to-node-part2a-k8s-local		nodeport-external-to-node-part2a-k8s-local
+FirewallRule		pod-cidrs-to-node-ipv6-part2a-k8s-local			pod-cidrs-to-node-ipv6-part2a-k8s-local
+FirewallRule		pod-cidrs-to-node-part2a-k8s-local			pod-cidrs-to-node-part2a-k8s-local
+FirewallRule		ssh-external-to-master-ipv6-part2a-k8s-local		ssh-external-to-master-ipv6-part2a-k8s-local
+FirewallRule		ssh-external-to-master-part2a-k8s-local			ssh-external-to-master-part2a-k8s-local
+FirewallRule		ssh-external-to-node-ipv6-part2a-k8s-local		ssh-external-to-node-ipv6-part2a-k8s-local
+FirewallRule		ssh-external-to-node-part2a-k8s-local			ssh-external-to-node-part2a-k8s-local
+ForwardingRule		api-europe-west1-part2a-k8s-local			api-europe-west1-part2a-k8s-local
+ForwardingRule		api-part2a-k8s-local					api-part2a-k8s-local
+ForwardingRule		kops-controller-europe-west1-part2a-k8s-local		kops-controller-europe-west1-part2a-k8s-local
+HTTP HealthCheck	api-part2a-k8s-local					api-part2a-k8s-local
+HealthCheck		api-part2a-k8s-local					api-part2a-k8s-local
+Instance		master-europe-west1-b-r97k				europe-west1-b/master-europe-west1-b-r97k
+Instance		parsec-server-xh60					europe-west1-b/parsec-server-xh60
+InstanceGroupManager	b-master-europe-west1-b-part2a-k8s-local		europe-west1-b/b-master-europe-west1-b-part2a-k8s-local
+InstanceGroupManager	b-parsec-server-part2a-k8s-local			europe-west1-b/b-parsec-server-part2a-k8s-local
+InstanceTemplate	master-europe-west1-b-par-itvn9c-1777847370		master-europe-west1-b-par-itvn9c-1777847370
+InstanceTemplate	parsec-server-part2a-k8s-local-1777847370		parsec-server-part2a-k8s-local-1777847370
+Network			part2a-k8s-local					part2a-k8s-local
+Route			part2a-k8s-local-1f467a78-c4e9-4513-a687-9d8c27f69732	part2a-k8s-local-1f467a78-c4e9-4513-a687-9d8c27f69732
+Route			part2a-k8s-local-ac9a5834-86a5-4937-94ed-bd9fa59611d9	part2a-k8s-local-ac9a5834-86a5-4937-94ed-bd9fa59611d9
+Subnet			europe-west1-part2a-k8s-local				europe-west1-part2a-k8s-local
+TargetPool		api-part2a-k8s-local					api-part2a-k8s-local
+
+Address:api-europe-west1-part2a-k8s-local	error deleting resources, will retry: error deleting Address https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/regions/europe-west1/addresses/api-europe-west1-part2a-k8s-local: googleapi: Error 400: The address resource 'projects/cca-eth-2026-group-087/regions/europe-west1/addresses/api-europe-west1-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/forwardingRules/kops-controller-europe-west1-part2a-k8s-local', resourceInUseByAnotherResource
+HealthCheck:api-part2a-k8s-local	still has dependencies, will retry
+BackendService:api-part2a-k8s-local	still has dependencies, will retry
+Address:api-part2a-k8s-local	ok
+E0504 03:12:26.250252   62034 op.go:137] GCE operation failed: googleapi: Error 400: The instance_group_manager resource 'projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/backendServices/api-part2a-k8s-local'
+InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local	error deleting resources, will retry: googleapi: Error 400: The instance_group_manager resource 'projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/backendServices/api-part2a-k8s-local'
+FirewallRule:ssh-external-to-master-ipv6-part2a-k8s-local	ok
+FirewallRule:kops-controller-ipv6-part2a-k8s-local	ok
+FirewallRule:ssh-external-to-node-ipv6-part2a-k8s-local	ok
+FirewallRule:pod-cidrs-to-node-ipv6-part2a-k8s-local	ok
+FirewallRule:https-api-ipv6-part2a-k8s-local	ok
+FirewallRule:nodeport-external-to-node-ipv6-part2a-k8s-local	ok
+FirewallRule:nodeport-external-to-node-part2a-k8s-local	ok
+FirewallRule:lb-health-checks-part2a-k8s-local	ok
+FirewallRule:pod-cidrs-to-node-part2a-k8s-local	ok
+FirewallRule:ssh-external-to-node-part2a-k8s-local	ok
+FirewallRule:node-to-master-part2a-k8s-local	ok
+FirewallRule:kops-controller-part2a-k8s-local	ok
+FirewallRule:master-to-master-part2a-k8s-local	ok
+FirewallRule:ssh-external-to-master-part2a-k8s-local	ok
+FirewallRule:master-to-node-part2a-k8s-local	ok
+FirewallRule:https-api-part2a-k8s-local	ok
+FirewallRule:node-to-node-part2a-k8s-local	ok
+ForwardingRule:api-europe-west1-part2a-k8s-local	ok
+ForwardingRule:kops-controller-europe-west1-part2a-k8s-local	ok
+ForwardingRule:api-part2a-k8s-local	ok
+Instance:europe-west1-b/parsec-server-xh60	ok
+I0504 03:13:25.136752   62034 op.go:123] waitForOperation: long operation (1m1.902788042s): {"endTime":"2026-05-03T18:13:25.007-07:00","id":"469649879415278744","insertTime":"2026-05-03T18:12:23.172-07:00","kind":"compute#operation","name":"operation-1777857142967-650f39f77caf8-6b261aa3-ae866b96","operationType":"delete","progress":100,"selfLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/operations/operation-1777857142967-650f39f77caf8-6b261aa3-ae866b96","startTime":"2026-05-03T18:12:23.189-07:00","status":"DONE","targetId":"6016056223245955727","targetLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/instances/master-europe-west1-b-r97k","user":"anikiforova@student.ethz.ch","zone":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b"}
+Instance:europe-west1-b/master-europe-west1-b-r97k	ok
+I0504 03:13:41.281968   62034 op.go:123] waitForOperation: long operation (1m17.97711225s): {"endTime":"2026-05-03T18:13:41.236-07:00","id":"5488286033413557400","insertTime":"2026-05-03T18:12:23.274-07:00","kind":"compute#operation","name":"operation-1777857142974-650f39f77e69a-cf6ce71f-8f42239f","operationType":"compute.instanceGroupManagers.delete","progress":100,"selfLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/operations/operation-1777857142974-650f39f77e69a-cf6ce71f-8f42239f","startTime":"2026-05-03T18:12:23.278-07:00","status":"DONE","targetId":"902811427299553982","targetLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-parsec-server-part2a-k8s-local","user":"anikiforova@student.ethz.ch","zone":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b"}
+InstanceGroupManager:europe-west1-b/b-parsec-server-part2a-k8s-local	ok
+Disk:a-etcd-events-part2a-k8s-local	ok
+Disk:a-etcd-main-part2a-k8s-local	ok
+InstanceTemplate:parsec-server-part2a-k8s-local-1777847370	ok
+TargetPool:api-part2a-k8s-local	ok
+Route:part2a-k8s-local-ac9a5834-86a5-4937-94ed-bd9fa59611d9	ok
+Route:part2a-k8s-local-1f467a78-c4e9-4513-a687-9d8c27f69732	ok
+HTTP HealthCheck:api-part2a-k8s-local	ok
+Not all resources deleted; waiting before reattempting deletion
+	Network:part2a-k8s-local
+	Address:api-europe-west1-part2a-k8s-local
+	InstanceTemplate:master-europe-west1-b-par-itvn9c-1777847370
+	Subnet:europe-west1-part2a-k8s-local
+	HealthCheck:api-part2a-k8s-local
+	BackendService:api-part2a-k8s-local
+	InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local
+HealthCheck:api-part2a-k8s-local	still has dependencies, will retry
+Address:api-europe-west1-part2a-k8s-local	ok
+E0504 03:14:08.406452   62034 op.go:137] GCE operation failed: googleapi: Error 400: The instance_group_manager resource 'projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/backendServices/api-part2a-k8s-local'
+InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local	error deleting resources, will retry: googleapi: Error 400: The instance_group_manager resource 'projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local' is already being used by 'projects/cca-eth-2026-group-087/regions/europe-west1/backendServices/api-part2a-k8s-local'
+BackendService:api-part2a-k8s-local	ok
+Not all resources deleted; waiting before reattempting deletion
+	InstanceTemplate:master-europe-west1-b-par-itvn9c-1777847370
+	Subnet:europe-west1-part2a-k8s-local
+	HealthCheck:api-part2a-k8s-local
+	InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local
+	Network:part2a-k8s-local
+HealthCheck:api-part2a-k8s-local	ok
+I0504 03:15:49.651506   62034 op.go:123] waitForOperation: long operation (1m27.523202209s): {"endTime":"2026-05-03T18:15:49.592-07:00","id":"1742466444061985793","insertTime":"2026-05-03T18:14:22.096-07:00","kind":"compute#operation","name":"operation-1777857261996-650f3a6900b0a-01ef638e-9aea85fd","operationType":"compute.instanceGroupManagers.delete","progress":100,"selfLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/operations/operation-1777857261996-650f3a6900b0a-01ef638e-9aea85fd","startTime":"2026-05-03T18:14:22.100-07:00","status":"DONE","targetId":"6403464798785925820","targetLink":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b/instanceGroupManagers/b-master-europe-west1-b-part2a-k8s-local","user":"anikiforova@student.ethz.ch","zone":"https://www.googleapis.com/compute/v1/projects/cca-eth-2026-group-087/zones/europe-west1-b"}
+InstanceGroupManager:europe-west1-b/b-master-europe-west1-b-part2a-k8s-local	ok
+InstanceTemplate:master-europe-west1-b-par-itvn9c-1777847370	ok
+Subnet:europe-west1-part2a-k8s-local	ok
+Network:part2a-k8s-local	ok
+Deleted kubectl config for part2a.k8s.local
+
+Deleted cluster: "part2a.k8s.local"
+[03:16:56] Cluster deleted successfully.
