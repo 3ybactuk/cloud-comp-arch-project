@@ -1,0 +1,32 @@
+benchmark: streamcluster
+threads: 4
+success: True
+execution_time_s: 147.265
+timestamp: 2026-05-04T18:55:41.873554
+
+--- raw logs ---
+Launching parsec.streamcluster...
+[PARSEC] Benchmarks to run:  parsec.streamcluster
+
+[PARSEC] [========== Running benchmark parsec.streamcluster [1] ==========]
+[PARSEC] Setting up run directory.
+[PARSEC] No archive for input 'native' available, skipping input setup.
+[PARSEC] Running 'time /parsec/pkgs/kernels/streamcluster/inst/amd64-linux.gcc/bin/streamcluster 10 20 128 1000000 200000 5000 none output.txt 4':
+[PARSEC] [---------- Beginning of output ----------]
+PARSEC Benchmark Suite Version 3.0-beta-20150206
+read 200000 points
+read 200000 points
+read 200000 points
+read 200000 points
+read 200000 points
+
+real	2m27.265s
+user	9m8.999s
+sys	0m1.899s
+[PARSEC] [----------    End of output    ----------]
+[PARSEC]
+[PARSEC] BIBLIOGRAPHY
+[PARSEC]
+[PARSEC] [1] Bienia. Benchmarking Modern Multiprocessors. Ph.D. Thesis, 2011.
+[PARSEC]
+[PARSEC] Done.
