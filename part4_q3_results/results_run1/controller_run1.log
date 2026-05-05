@@ -1,0 +1,200 @@
+2026/05/05 14:13:36 auto-detected memcached PID: 35800
+2026/05/05 14:13:36 logging to log20260505_141336.txt
+2026/05/05 14:13:40 memcached util=0.25 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:40 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:40 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:42 memcached util=0.21 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:42 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:42 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:44 memcached util=0.39 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:44 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:44 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:46 memcached util=0.54 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:46 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:46 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:48 memcached util=0.54 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:48 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:48 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:50 memcached util=0.47 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:50 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:50 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:52 memcached util=0.52 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:52 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:52 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:54 memcached util=0.53 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:54 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:54 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:56 memcached util=0.23 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:56 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:56 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:13:58 memcached util=0.36 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:13:58 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:13:58 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:00 memcached util=0.28 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:14:00 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:14:00 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:02 memcached util=0.26 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:14:02 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:14:02 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:04 memcached util=0.27 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:14:04 starting freqmine cores=[2 3] threads=2
+2026/05/05 14:14:04 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:06 memcached util=0.25 on 2 cores; batchCores=2 active=false pending=7
+2026/05/05 14:14:06 shrinking memcached → 1 core(s)
+2026/05/05 14:14:06 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:06 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:08 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:08 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:08 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:10 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:10 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:10 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:12 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:12 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:12 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:14 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:14 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:14 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:16 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:16 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:16 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:18 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:18 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:18 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:20 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:20 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:20 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:22 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:22 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:22 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:24 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:24 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:24 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:26 memcached util=0.07 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:26 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:26 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:28 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:28 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:28 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:30 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:30 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:30 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:32 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:32 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:32 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:34 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:34 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:34 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:36 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:36 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:36 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:38 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:38 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:38 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:40 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:40 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:40 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:42 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:42 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:42 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:44 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:44 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:44 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:46 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:46 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:46 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:48 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:48 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:48 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:50 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:50 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:50 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:52 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:52 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:52 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:54 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:54 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:54 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:56 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:56 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:56 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:14:58 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:14:58 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:14:58 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:00 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:00 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:00 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:02 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:02 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:02 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:04 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:04 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:04 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:06 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:06 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:06 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:08 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:08 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:08 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:10 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:10 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:10 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:12 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:12 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:12 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:14 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:14 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:14 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:16 memcached util=0.07 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:16 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:16 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:18 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:18 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:18 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:20 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:20 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:20 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:22 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:22 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:22 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:24 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:24 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:24 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:26 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:26 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:26 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:28 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:28 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:28 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:30 memcached util=0.10 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:30 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:30 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:32 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:32 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:32 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:34 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:34 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:34 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:36 memcached util=0.07 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:36 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:36 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:38 memcached util=0.08 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:38 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:38 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:40 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:40 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:40 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:42 memcached util=0.10 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:42 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:42 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:44 memcached util=0.09 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:44 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:44 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:46 memcached util=0.10 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:46 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:46 failed to start freqmine: create parsec-freqmine: Error response from daemon: Conflict. The container name "/parsec-freqmine" is already in use by container "dde55c8887045ea24ae0613da6dcfdbbf9e2504f4dffb2652c33cae548e73429". You have to remove (or rename) that container to be able to reuse that name. — re-queuing
+2026/05/05 14:15:48 memcached util=0.10 on 1 cores; batchCores=3 active=false pending=7
+2026/05/05 14:15:48 starting freqmine cores=[1 2 3] threads=3
+2026/05/05 14:15:49 received signal — stopping
+2026/05/05 14:15:49 shutting down — removing active container
+2026/05/05 14:15:49 done. log: log20260505_141336.txt

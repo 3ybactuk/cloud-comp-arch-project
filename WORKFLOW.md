@@ -641,39 +641,62 @@ can then be used when generating the plots to synchronize events that take place
 Run the following command to create a kubernetes cluster with 1 master and 3 nodes.
 
 ```sh
-$ export KOPS_STATE_STORE=<your-gcp-state-store>
-$ PROJECT='gcloud config get-value project'
-$ kops create -f part4.yaml
-You are now ready to deploy the cluster by running:
-$ kops update cluster --name part4.k8s.local --yes --admin
+export KOPS_STATE_STORE=gs://cca-eth-2026-group-087-ethzid/
+
+PROJECT='gcloud config get-value project'
+kops create -f part4.yaml
+# You are now ready to deploy the cluster by running:
+kops update cluster --name part4.k8s.local --yes --admin
 ```
 
 Your cluster should need around 5-10 minutes to be deployed. You can validate the cluster with
 the command:
 ```sh
-$ kops validate cluster --wait 10m
+kops validate cluster --wait 10m
 ```
 
 The command will terminate when your cluster is ready to use. Afterwards you can run:
 ```sh
-$ kubectl get nodes -o wide
+kubectl get nodes -o wide
 ```
 to get the status and details of your nodes as follows:
 
 ```
-NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP
-client-agent-20lc Ready node 4m53s v1.31.5 10.0.16.3 34.76.26.190
-client-measure-4lkz Ready node 5m12s v1.31.5 10.0.16.6 34.79.109.216
-master-europe-west1-b-th6m Ready control-plane 8m49s v1.31.5 10.0.16.5 34.22.137.71
-memcache-server-9806 Ready node 5m16s v1.31.5 10.0.16.4 34.38.138.2
+NAME                         STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP  ...
+client-agent-k7hc            Ready    node            2m57s   v1.31.5   10.0.16.4     34.77.131.97 ...
+client-measure-lzvb          Ready    node            3m2s    v1.31.5   10.0.16.5     34.79.133.79 ...
+master-europe-west1-b-jpzs   Ready    control-plane   6m3s    v1.31.5   10.0.16.6     34.62.61.22  ...
+memcache-server-j4p2         Ready    node            3m7s    v1.31.5   10.0.16.3     34.140.218.74 ..
 ```
 
 You will first need to manually install memcached on the memcache-sever VM. To do so, you must
 first use the following commands:
 
+#### Automated setup (scripts)
+! Use a script for the whole setup (and skip the following sections):
+
 ```sh
-$ sudo apt update
-$ sudo apt install -y memcached libmemcached-tools
+scp -r scripts/ ubuntu@<MEMCACHE-SERVER-IP>:/home/ubuntu/
+scp -r controller/ ubuntu@<MEMCACHE-SERVER-IP>:/home/ubuntu/
+
+scp -r scripts/ ubuntu@<client-agent-IP>:/home/ubuntu/
+scp -r scripts/ ubuntu@<client-measure-IP>:/home/ubuntu/
+
+ssh ubuntu@<MEMCACHE-SERVER-IP>
+
+bash scripts/setup_memcache_server.sh 10.0.16.3 
+```
+
+On `client-agent` and `client-measure`:
+```sh
+bash scripts/setup_client_mcperf.sh
+```
+
+#### Manual setup
+
+```sh
+sudo apt update
+sudo apt install -y memcached libmemcached-tools
 ```
 
 To make sure the installation succeeded, run the following command:
@@ -701,12 +724,16 @@ To do so, open memcached’s configuration file using the command:
 $ sudo vim /etc/memcached.conf
 ```
 
-To update memcached’s memory limit, look for the line starting with -m and update the value to
-1024. Similarly, to expose the memcached server to external requests, locate the line starting with
--l and replace the localhost address with the internal IP of the memcache-server VM. In this
-file you can also specify the number of memcached threads by introducing a line starting with -t,
-followed by the number of threads. After entering all of the desired changes, save the file, and then
-execute the next command to restart memcached with the new configuration:
+To update memcached’s memory limit, look for the line starting with -m and update the value to 1024. Similarly, to expose the memcached server to external requests, locate the line starting with -l and replace the localhost address with the internal IP of the memcache-server VM. In this file you can also specify the number of memcached threads by introducing a line starting with -t, followed by the number of threads. After entering all of the desired changes, save the file, and then execute the next command to restart memcached with the new configuration:
+
+```sh
+# /etc/memcached.conf
+-m 1024
+-p 11211
+-u memcache
+-l $MEMCACHED_IP
+-t $MEMCACHED_THREADS
+```
 
 ```sh
 $ sudo systemctl restart memcached
@@ -715,7 +742,22 @@ $ sudo systemctl restart memcached
 Running sudo systemctl status memcached again should yield an output similar as before, but
 you should see the updated parameters in the command line. If you completed these steps successfully, memcached should be running and listening for requests on the VMs internal IP on port 11211.
 
+
 On client-agent and client-measure machines, install the augmented version of mcperf following the instructions from Part 3.
+
+To install the augmented version of mcperf on client-agent-*
+and client-measure, follow the instructions below:
+```sh
+$ sudo sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
+$ sudo apt-get update
+$ sudo apt-get install libevent-dev libzmq3-dev git make g++ --yes
+$ sudo apt-get build-dep memcached --yes
+$ git clone https://github.com/eth-easl/memcache-perf-dynamic.git
+$ cd memcache-perf-dynamic
+$ make
+```
+
+### Experiments
 
 On the client-agent VM, you should then run the following command to launch the mcperf
 memcached client load agent with 8 threads:
@@ -723,6 +765,71 @@ memcached client load agent with 8 threads:
 ```sh
 $ ./mcperf -T 8 -A
 ```
+
+#### Task 1.
+
+SSH and forward the ssh agent to client measure
+
+```sh
+ssh -A -i ~/.ssh/cloud-computing ubuntu@<client-measure-ip>
+```
+
+Run the script:
+
+```sh
+bash scripts/q1_sweep.sh <INTERNAL_MEMCACHE_SERVER_IP> <INTERNAL_AGENT_IP>
+# bash scripts/q1_sweep.sh 10.0.16.3 10.0.16.4
+```
+
+Results are stored in /home/ubuntu/part4_q1_results/. Get them:
+
+```sh
+scp -r ubuntu@<client-measure-ip>:/home/ubuntu/part4_q1_results/ .
+# scp -r ubuntu@34.79.133.79:/home/ubuntu/part4_q1_results/ .
+```
+
+Two types of data files - `cpu_...` and `mcperf_...`, where cpu are `/proc/stat` snapshots, and mcperf are the latency measurements. 
+
+Assemble the plots with python script:
+```sh
+source .venv/bin/activate   
+python3 part4-q1-graphing.py --results part4_q1_results --out q1_plots    
+```
+
+#### Task 3
+
+Get the images for the benchmarks on `memcache-server`:
+
+```sh
+docker pull anakli/cca:parsec_freqmine
+docker pull anakli/cca:parsec_canneal     
+docker pull anakli/cca:parsec_blackscholes
+docker pull anakli/cca:parsec_streamcluster           
+docker pull anakli/cca:splash2x_barnes
+docker pull anakli/cca:parsec_vips        
+docker pull anakli/cca:splash2x_radix 
+```
+
+Run controller:
+
+```sh
+cd ~/controller && ./controller -memcached-ip 127.0.0.1
+```
+
+Run experiments from client-measure:
+
+```sh
+bash scripts/run_experiment.sh 1 <INTERNAL_MEMCACHE_SERVER_IP> <INTERNAL_AGENT_IP> 2345 15
+# bash scripts/run_experiment.sh 1 10.0.16.3 10.0.16.4 2345 15
+```
+
+Plot:
+
+```sh
+python3 plot_q3.py --results part4_q3_results --out q3_plots
+```
+
+####
 
 On the client-measure VM, run the following commands to first load the memcached database
 with key-value pairs and then to query memcached with a dynamic load generator, which will
@@ -770,7 +877,7 @@ you will easily use up all of your cloud credits! When you are ready to work on 
 again, you can easily re-launch the cluster using the instructions above.
 To delete your cluster, use the following command:
 ```sh
-$ kops delete cluster --name part4.k8s.local --yes
+kops delete cluster --name part4.k8s.local --yes
 ```
 
 ### Setting resource limits

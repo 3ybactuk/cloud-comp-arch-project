@@ -1,0 +1,13 @@
+2026-05-05T13:56:05.677889 start scheduler
+2026-05-05T13:56:05.681069 start memcached [0,1] 2
+2026-05-05T13:56:15.717110 update_cores memcached [0]
+2026-05-05T14:04:03.722434 update_cores memcached [0,1]
+2026-05-05T14:04:05.717275 update_cores memcached [0,1,2]
+2026-05-05T14:04:13.718468 update_cores memcached [0,1]
+2026-05-05T14:04:31.718233 update_cores memcached [0]
+2026-05-05T14:04:35.721111 update_cores memcached [0,1]
+2026-05-05T14:04:37.722324 update_cores memcached [0,1,2]
+2026-05-05T14:04:57.717632 update_cores memcached [0,1]
+2026-05-05T14:05:05.717010 update_cores memcached [0]
+2026-05-05T14:10:16.232254 start freqmine [1,2,3] 3
+2026-05-05T14:12:33.826499 end scheduler

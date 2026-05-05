@@ -1,0 +1,6 @@
+2026-05-05T14:05:51.646498 start scheduler
+2026-05-05T14:05:51.649199 start memcached [0,1] 2
+2026-05-05T14:06:16.618017 start freqmine [2,3] 2
+2026-05-05T14:10:15.561967 end freqmine
+2026-05-05T14:10:16.182444 start canneal [2,3] 2
+2026-05-05T14:12:33.887818 end scheduler
