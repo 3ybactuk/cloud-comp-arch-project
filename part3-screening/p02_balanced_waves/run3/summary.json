@@ -48,47 +48,47 @@
       "threads": 2
     }
   ],
-  "batch_start_epoch": 1778339794.0,
-  "batch_end_epoch": 1778340283.0,
-  "makespan_s": 489.0,
+  "batch_start_epoch": 1778340969.0,
+  "batch_end_epoch": 1778341489.0,
+  "makespan_s": 520.0,
   "job_times_s": {
     "parsec-barnes": {
-      "start": 1778340230.0,
-      "end": 1778340283.0,
-      "runtime_s": 53.0
+      "start": 1778341437.0,
+      "end": 1778341489.0,
+      "runtime_s": 52.0
     },
     "parsec-blackscholes": {
-      "start": 1778339794.0,
-      "end": 1778339841.0,
-      "runtime_s": 47.0
+      "start": 1778340969.0,
+      "end": 1778341017.0,
+      "runtime_s": 48.0
     },
     "parsec-canneal": {
-      "start": 1778339856.0,
-      "end": 1778339951.0,
-      "runtime_s": 95.0
+      "start": 1778341033.0,
+      "end": 1778341127.0,
+      "runtime_s": 94.0
     },
     "parsec-freqmine": {
-      "start": 1778340054.0,
-      "end": 1778340219.0,
-      "runtime_s": 165.0
+      "start": 1778341250.0,
+      "end": 1778341429.0,
+      "runtime_s": 179.0
     },
     "parsec-radix": {
-      "start": 1778339794.0,
-      "end": 1778339807.0,
-      "runtime_s": 13.0
+      "start": 1778340969.0,
+      "end": 1778340981.0,
+      "runtime_s": 12.0
     },
     "parsec-streamcluster": {
-      "start": 1778339856.0,
-      "end": 1778340049.0,
-      "runtime_s": 193.0
+      "start": 1778341033.0,
+      "end": 1778341238.0,
+      "runtime_s": 205.0
     },
     "parsec-vips": {
-      "start": 1778340054.0,
-      "end": 1778340096.0,
-      "runtime_s": 42.0
+      "start": 1778341250.0,
+      "end": 1778341290.0,
+      "runtime_s": 40.0
     }
   },
-  "mcperf_samples_total": 43,
+  "mcperf_samples_total": 46,
   "gates": {
     "validity": true,
     "qps_coverage": 1.0,

@@ -53,7 +53,7 @@ MCPERF_REMOTE_OUT = "/tmp/mcperf_part3_measure.txt"
 
 # mcperf total measurement duration in seconds.
 # Must be larger than the longest expected makespan (~60 min to be safe).
-MCPERF_TOTAL_DURATION_SEC = 10
+MCPERF_TOTAL_DURATION_SEC = 4000
 
 
 def _remote_bash_login_c(script_body: str) -> str:
@@ -453,12 +453,13 @@ def run_remote_mcperf_clients(node_map: dict[str, dict[str, str]], mem_ip: str) 
         )
     time.sleep(2)
 
-    # Start agent A with nohup + </dev/null so it survives SSH session close.
+    # Start agent A — setsid creates a new session so the process survives
+    # SSH disconnect regardless of nohup/TTY quirks.
     log("Starting mcperf agent A...")
     vm_ssh(
         na["name"],
         node_external_ip(na),
-        f"nohup {MCPERF_REMOTE_ABSPATH}/mcperf -T 2 -A >/tmp/mcperf_agent_a.log 2>&1 </dev/null &",
+        f"bash -c 'setsid {MCPERF_REMOTE_ABSPATH}/mcperf -T 2 -A >/tmp/mcperf_agent_a.log 2>&1 </dev/null & disown' && sleep 1 && pgrep -a mcperf",
     )
     time.sleep(1)
 
@@ -467,7 +468,7 @@ def run_remote_mcperf_clients(node_map: dict[str, dict[str, str]], mem_ip: str) 
     vm_ssh(
         nb["name"],
         node_external_ip(nb),
-        f"nohup {MCPERF_REMOTE_ABSPATH}/mcperf -T 4 -A >/tmp/mcperf_agent_b.log 2>&1 </dev/null &",
+        f"bash -c 'setsid {MCPERF_REMOTE_ABSPATH}/mcperf -T 4 -A >/tmp/mcperf_agent_b.log 2>&1 </dev/null & disown' && sleep 1 && pgrep -a mcperf",
     )
     time.sleep(2)
 
@@ -480,14 +481,17 @@ def run_remote_mcperf_clients(node_map: dict[str, dict[str, str]], mem_ip: str) 
     )
     log("Memcached loaded.")
 
-    # Start measurement with nohup + </dev/null so it survives SSH session close.
+    # Start measurement — setsid creates a new session so the process survives
+    # SSH disconnect regardless of nohup/TTY quirks.
+    # stdbuf -oL forces line-buffered stdout so each 10-s block is flushed
+    # to disk immediately; without it pkill can discard the last buffer.
     log("Starting mcperf measurement (background)...")
     measure_cmd = (
-        f"nohup {MCPERF_REMOTE_ABSPATH}/mcperf -s {mem_ip} "
+        f"bash -c 'setsid stdbuf -oL {MCPERF_REMOTE_ABSPATH}/mcperf -s {mem_ip} "
         f"-a {agent_a_ip} -a {agent_b_ip} "
-        f"--noload -T 6 -C 4 -D 4 -Q 1000 -c 4 -t {MCPERF_TOTAL_DURATION_SEC} "
+        f"--noload -T 6 -C 4 -D 4 -Q 1000 -c 4 -t 10 "
         f"--scan 30000:30500:5 "
-        f">{MCPERF_REMOTE_OUT} 2>&1 </dev/null &"
+        f">{MCPERF_REMOTE_OUT} 2>&1 </dev/null & disown'"
     )
     vm_ssh(
         nm["name"],
@@ -543,35 +547,68 @@ class McperfSample:
 
 
 def parse_mcperf_samples(text: str) -> list[McperfSample]:
+    """Parse mcperf-dynamic output into samples.
+
+    Handles two formats:
+
+    1. Row-per-sample (--scan output):
+       #type avg std min p5 p10 p50 p67 p75 p80 p85 p90 p95 p99 p999 p9999 QPS target ts_start ts_end
+       read  ...                                               p95_µs      QPS       ts_ms    ts_ms
+
+    2. Block format (single --qps shot, legacy):
+       Timestamp start: <epoch_ms>
+       Timestamp end:   <epoch_ms>
+       #type  avg ... p95 ...
+       read   ...values in µs...
+       Total QPS = X
+    """
     samples: list[McperfSample] = []
-    seq_t = 0.0
-    for raw in text.splitlines():
-        line = raw.strip()
-        if not line:
+
+    # Format 1: row-per-sample — "read" lines with >= 20 fields ending in ts_start ts_end
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith('#'):
             continue
-        nums = [float(x) for x in re.findall(r"-?\d+(?:\.\d+)?", line)]
-        if len(nums) < 3:
+        parts = line.split()
+        if parts[0] != 'read' or len(parts) < 20:
+            continue
+        try:
+            p95_us  = float(parts[12])   # p95 column (µs)
+            qps     = float(parts[16])   # QPS column
+            ts_start = float(parts[18])  # ts_start (ms)
+            ts_end   = float(parts[19])  # ts_end   (ms)
+            if ts_start > 1e11:
+                ts_start /= 1000.0
+                ts_end   /= 1000.0
+            samples.append(McperfSample(ts_start=ts_start, ts_end=ts_end,
+                                        qps=qps, p95_ms=p95_us / 1000.0))
+        except (ValueError, IndexError):
             continue
 
-        ts_candidates = [x for x in nums if x >= 1_000_000_000]
-        if len(ts_candidates) >= 2:
-            ts_start, ts_end = ts_candidates[0], ts_candidates[1]
-        else:
-            ts_start, ts_end = seq_t, seq_t + 10.0
-            seq_t += 10.0
+    if samples:
+        return samples
 
-        tail = nums[2:] if len(ts_candidates) >= 2 else nums
-        qps_candidates = [x for x in tail if 1000 <= x <= 200000]
-        if not qps_candidates:
+    # Format 2: block format fallback
+    for block in re.split(r'(?=Timestamp start:)', text):
+        if not block.strip():
             continue
-        qps = qps_candidates[0]
-
-        p95_candidates = [x for x in tail if 0 < x <= 100]
-        if not p95_candidates:
+        ts_s  = re.search(r'Timestamp start:\s*(\d+)', block)
+        ts_e  = re.search(r'Timestamp end:\s*(\d+)', block)
+        qps_m = re.search(r'Total QPS\s*=\s*([\d.]+)', block)
+        read_m = re.search(r'^read\s+([\d.]+(?:\s+[\d.]+)+)', block, re.MULTILINE)
+        if not (ts_s and ts_e and qps_m and read_m):
             continue
-        p95 = p95_candidates[-1]
-
-        samples.append(McperfSample(ts_start=ts_start, ts_end=ts_end, qps=qps, p95_ms=p95))
+        ts_start = float(ts_s.group(1))
+        ts_end   = float(ts_e.group(1))
+        if ts_start > 1e11:
+            ts_start /= 1000.0
+            ts_end   /= 1000.0
+        qps = float(qps_m.group(1))
+        read_vals = [float(x) for x in read_m.group(1).split()]
+        if len(read_vals) < 12:
+            continue
+        samples.append(McperfSample(ts_start=ts_start, ts_end=ts_end,
+                                    qps=qps, p95_ms=read_vals[11] / 1000.0))
     return samples
 
 
@@ -631,7 +668,10 @@ def evaluate_gates(
     violation_max: float,
     max_streak_sec: float,
 ) -> dict[str, Any]:
-    in_window = [s for s in samples if s.ts_start >= batch_start and s.ts_end <= batch_end]
+    # Include any sample that overlaps the batch window, not just ones that start inside it.
+    # mcperf 10-s windows are aligned to its own clock, so the first window often
+    # starts a few seconds before batch_start but still covers the batch period.
+    in_window = [s for s in samples if s.ts_start < batch_end and s.ts_end > batch_start]
     if not in_window:
         return {
             "validity": False,
@@ -680,8 +720,12 @@ def run_policy_once(
     max_streak_sec: float,
 ) -> dict[str, Any]:
     policy_id = policy["id"]
-    out = base_output_dir / policy_id / "run1"
+    run_num = 1
+    while (base_output_dir / policy_id / f"run{run_num}" / "summary.json").exists():
+        run_num += 1
+    out = base_output_dir / policy_id / f"run{run_num}"
     out.mkdir(parents=True, exist_ok=True)
+    log(f"Output directory: {out}")
 
     log(f"\n{'=' * 80}")
     log(f"Running policy: {policy_id}")
