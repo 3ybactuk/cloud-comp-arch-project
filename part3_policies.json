@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "description": "Hand-crafted policy candidates for Part 3 screening (run #1 only).",
+    "notes": [
+      "Memcached should stay on node-a-8core for all policies.",
+      "Batch jobs use native dataset and are scheduled in waves.",
+      "Jobs sensitive to cache interference (barnes, freqmine, vips) are kept away from memcached in conservative policies."
+    ]
+  },
+  "policies": [
+    {
+      "id": "p01_conservative_isolation",
+      "description": "Conservative: heavy cache jobs on node-b, light jobs near memcached.",
+      "memcached": {
+        "node": "node-a-8core",
+        "threads": 2
+      },
+      "waves": [
+        [
+          {"job": "radix", "node": "node-a-8core", "threads": 4},
+          {"job": "canneal", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "streamcluster", "node": "node-a-8core", "threads": 4},
+          {"job": "blackscholes", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "vips", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "freqmine", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "barnes", "node": "node-b-4core", "threads": 2}
+        ]
+      ]
+    },
+    {
+      "id": "p02_balanced_waves",
+      "description": "Balanced: use both nodes continuously with moderate thread counts.",
+      "memcached": {
+        "node": "node-a-8core",
+        "threads": 2
+      },
+      "waves": [
+        [
+          {"job": "radix", "node": "node-a-8core", "threads": 4},
+          {"job": "blackscholes", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "streamcluster", "node": "node-a-8core", "threads": 4},
+          {"job": "canneal", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "freqmine", "node": "node-b-4core", "threads": 2},
+          {"job": "vips", "node": "node-a-8core", "threads": 2}
+        ],
+        [
+          {"job": "barnes", "node": "node-b-4core", "threads": 2}
+        ]
+      ]
+    },
+    {
+      "id": "p03_cache_aware_staggered",
+      "description": "Cache-aware: isolate LLC-sensitive jobs and stagger aggressive phases.",
+      "memcached": {
+        "node": "node-a-8core",
+        "threads": 2
+      },
+      "waves": [
+        [
+          {"job": "radix", "node": "node-a-8core", "threads": 6}
+        ],
+        [
+          {"job": "streamcluster", "node": "node-a-8core", "threads": 4},
+          {"job": "canneal", "node": "node-b-4core", "threads": 3}
+        ],
+        [
+          {"job": "blackscholes", "node": "node-a-8core", "threads": 3},
+          {"job": "vips", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "freqmine", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "barnes", "node": "node-b-4core", "threads": 2}
+        ]
+      ]
+    },
+    {
+      "id": "p04_aggressive_parallel",
+      "description": "Aggressive: maximize overlap, likely faster but riskier for SLO.",
+      "memcached": {
+        "node": "node-a-8core",
+        "threads": 2
+      },
+      "waves": [
+        [
+          {"job": "radix", "node": "node-a-8core", "threads": 6},
+          {"job": "blackscholes", "node": "node-b-4core", "threads": 3}
+        ],
+        [
+          {"job": "streamcluster", "node": "node-a-8core", "threads": 4},
+          {"job": "canneal", "node": "node-b-4core", "threads": 3}
+        ],
+        [
+          {"job": "freqmine", "node": "node-a-8core", "threads": 3},
+          {"job": "vips", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "barnes", "node": "node-a-8core", "threads": 3}
+        ]
+      ]
+    },
+    {
+      "id": "p05_memcached_guarded",
+      "description": "Memcached-guarded: smallest interference footprint on node-a.",
+      "memcached": {
+        "node": "node-a-8core",
+        "threads": 3
+      },
+      "waves": [
+        [
+          {"job": "radix", "node": "node-b-4core", "threads": 4}
+        ],
+        [
+          {"job": "blackscholes", "node": "node-a-8core", "threads": 2},
+          {"job": "canneal", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "streamcluster", "node": "node-b-4core", "threads": 3}
+        ],
+        [
+          {"job": "vips", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "freqmine", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "barnes", "node": "node-b-4core", "threads": 2}
+        ]
+      ]
+    }
+  ]
+}

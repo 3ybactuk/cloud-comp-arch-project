@@ -1,0 +1,20 @@
+{
+  "policy_id": "p05_memcached_guarded",
+  "description": "Memcached-guarded: smallest interference footprint on node-a.",
+  "all_jobs_completed": false,
+  "completed_jobs": [
+    "radix"
+  ],
+  "job_specs": [
+    {
+      "job": "radix",
+      "node": "node-b-4core",
+      "threads": 4
+    }
+  ],
+  "gates": {
+    "validity": false,
+    "reason": "not_all_jobs_completed"
+  },
+  "screening_pass": false
+}

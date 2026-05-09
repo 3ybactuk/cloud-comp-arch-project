@@ -1,0 +1,25 @@
+{
+  "policy_id": "p04_aggressive_parallel",
+  "description": "Aggressive: maximize overlap, likely faster but riskier for SLO.",
+  "all_jobs_completed": false,
+  "completed_jobs": [
+    "blackscholes"
+  ],
+  "job_specs": [
+    {
+      "job": "radix",
+      "node": "node-a-8core",
+      "threads": 6
+    },
+    {
+      "job": "blackscholes",
+      "node": "node-b-4core",
+      "threads": 3
+    }
+  ],
+  "gates": {
+    "validity": false,
+    "reason": "not_all_jobs_completed"
+  },
+  "screening_pass": false
+}

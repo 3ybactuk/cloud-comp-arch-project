@@ -1,0 +1,950 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue255;\red251\green0\blue7;
+}
+{\*\expandedcolortbl;;\csgray\c0;\cspthree\c22\c0\c95960;\cspthree\c91747\c20037\c13852;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs34\fsmilli17215 \cf2 Cloud Computing Architecture\
+
+\fs23\fsmilli11955 Course Project\
+February 21, 2026\
+
+\fs28\fsmilli14346 Overview\
+
+\fs21\fsmilli10909 The semester project consists of four parts, two of which are described in detail in this handout.\
+In this project, you will explore how to schedule latency-sensitive and batch applications in a cloud\
+cluster. You will deploy applications inside containers and gain experience using a popular con-\
+tainer orchestration platform, \cf3 Kubernetes\cf2 . Containers are a convenient and lightweight mechanism\
+for packaging code and all its dependencies so that applications can run quickly and reliably from\
+one computing environment to another. Parts 1 and 2 of this project are not graded, but will\
+help you understand how to build an optimal scheduling policy for parts 3 and 4.\
+You will work in groups of three students and submit a single report per group. Please submit your\
+report in the format of the project report template, which you can find on \cf3 Moodle\cf2 .\
+We will be assigning groups for the project, however you will have a chance to optionally let\
+us know your preferences for teammates. If you know one or two other students in the class that\
+you would like to work with on the project, please submit your group preference by March 6th,\
+2026. To do so, each student in your preferred group should sign up for the same group number in\
+the Project Group Selection page on Moodle. We will notify you about final group assignments on\
+March 10th and then you may redeem your cloud credits and begin working on the project.\
+
+\fs28\fsmilli14346 Important Dates\
+
+\fs21\fsmilli10909 March 6th, 2026: Deadline to submit group preferences. \cf4 Remember that you must either sub-\
+scribe to a group or join the general group (Group 1) to be assigned randomly by us.\
+\cf2 March 10th, 2026: Groups are assigned and announced. Start working on project.\
+May 16th, 2026 at 23:59: Deadline to submit Part 3 and 4 of the project.\
+
+\fs28\fsmilli14346 Cloud Environment and Credits\
+
+\fs21\fsmilli10909 To run experiments for the project, you will use Google Cloud. We will provide you with Google\
+Cloud credits for your project. To redeem your cloud credits, please follow the steps in Part 1\
+(Section \cf3 1.1\cf2 ), when your project group assignment is confirmed. Each group member should create\
+a Google Cloud account at \cf3 https://accounts.google.com\cf2 . Please use your ETH email address\
+to create the account.\
+1
+\fs28\fsmilli14346 1 Part 1\
+
+\fs21\fsmilli10909 In Part 1 of this project, you will run a latency-critical application, memcached, inside a container.\
+Memcached is a distributed memory caching system that serves requests from clients over the net-\
+work. Acommonperformancemetricformemcachedisthetaillatency(e.g., 95thpercentilelatency)\
+under a desired query rate. You will measure tail latency as a function of queries per second and\
+explore the impact of hardware resource interference. To add different types of hardware resource\
+contention, you will use the iBench microbenchmark suite to apply different sources of interference\
+(e.g., CPU, caches, memory bandwidth).\
+Follow the setup instructions below to deploy a Google Cloud cluster using the kops tool. Your\
+cluster will consist of four virtual machines (VMs). One VM will serve as the Kubernetes cluster\
+master, one VM will be used to run the memcached server application and iBench workloads, and\
+two VMs will be used to run a client program that generates load for the memcached server.\
+This document contains setup instructions. Please find the project report template containing the\
+questions and free space you should use on \cf3 Moodle\cf2 .\
+
+\fs23\fsmilli11955 1.1 Setup Instructions\
+
+\fs21\fsmilli10909 Installing necessary tools\
+For the setup of the project, you will need to install \cf3 kubernetes\cf2 , \cf3 google-tools\cf2 and \cf3 kops\cf2 . Instruc-\
+tions based on the operating system on your local machine are provided in the links above.\
+Throughout this document, bash commands (denoted by the $ symbol, you shouldn\'92t type this\
+symbol explicitly) are provided to accompany the instructions.\
+Most of these commands will run seamlessly in other environments (such as e.g. PowerShell or\
+cmd on Windows), but you may need to change some details such as file paths or newline escape\
+characters ("\\" in bash vs e.g."`" in PowerShell).\
+Note that you will be working with Linux VMs throughout this project, and will therefore need to\
+familiarize yourself with the bash environment.\
+Having installed all the tools successfully, the following three commands should return output in\
+your terminal:\
+1. $ kubectl --help\
+2. $ kops --help\
+3. $ ./google-cloud-sdk/bin/gcloud --help\
+Note that the final command is relative to where you have downloaded the google cloud tools. If\
+you have installed via a package manager or have added the gcloud tools to your $PATH you don\'92t\
+need the prefix and you can just type gcloud. Note that you have to open a new terminal or refresh\
+your shell using source for your $PATH to be updated.\
+All the scripts that you will need for both parts of the project are available \cf3 here\cf2 :\
+
+\fs19\fsmilli9963 git clone https://github.com/eth-easl/cloud-comp-arch-project.git\
+
+\fs21\fsmilli10909 2Redeeming cloud credits and creating Google Cloud project\
+Each group member should create a Google Cloud account at \cf3 https://accounts.google.com\cf2 . Use\
+your ETH email address to create the account. Each group will receive a $50 Google Cloud coupon\
+code. Select one group member to enter their name and ETH email address at the link you will\
+receive when the groups have been assigned. Only redeem one coupon per group. If you need more\
+credits you can get in touch with the TA team.\
+Note on cloud credits: In addition to the coupon(s) we provide, there may be other sources of free\
+cloud credits available to you, such as free trials or student offers. You may take advantage of such\
+opportunities at your own risk, however this is not necessary for you to be able to run all required\
+measurements and additional experiments in order to achieve great results for the project. The\
+provided credits will be sufficient if used carefully. Learning how to estimate, keep track of\
+and manage your cloud expenses is part of the goals of this course project.\
+After installing kubernetes tools, connect your local client to your google cloud account using:\
+gcloud init\
+A browser window will open and you will have to login in with your ETH address. Afterwards,\
+you will give google-cloud-sdk permissions to your account and then in the command line you\
+will pick a name for the project. When creating the project name use cca-eth-2026-group-XXX\
+(where XXX is your group number). Only one group member (who also redeemed the cloud\
+credit coupon) should create the Google Cloud project. This person will add other group\
+members as Project Owners (see instructions below). After the other group members are added as\
+Project Owners, they will simply select the existing project name when they run the gcloud init\
+command. All group members will have access to the project and share the cloud credits.\
+Do not configure any default computer region and zone. For deploying a cluster on Google Cloud\
+we will modify some of the instructions listed \cf3 here\cf2 , which will be given below.\
+After creating the project you can log into the \cf3 google cloud console \cf2 and will be prompted to select\
+a billing account for the project. In the pop up choose Billing account for education as below\
+and click Set account:\
+Afterwards, you can try the command gcloud compute zones list. The first time you should\
+get a prompt to enable the compute engine API that looks like this:\
+API [compute.googleapis.com] not enabled on project [project number].\
+Would you like to enable and retry (this will take a few minutes)? (y/N)?\
+3After the API is enabled you can repeat the command which should now yield the following output:\
+
+\fs19\fsmilli9963 $ gcloud compute zones list\
+NAME REGION STATUS\
+us-east1-b us-east1 UP\
+us-east1-c us-east1 UP\
+us-east1-d us-east1 UP\
+us-east4-c us-east4 UP\
+us-east4-b us-east4 UP\
+us-east4-a us-east4 UP\
+us-central1-c us-central1 UP\
+us-central1-a us-central1 UP\
+us-central1-f us-central1 UP\
+us-central1-b us-central1 UP\
+us-west1-b us-west1 UP\
+us-west1-c us-west1 UP\
+us-west1-a us-west1 UP\
+europe-west4-a europe-west4 UP\
+europe-west4-b europe-west4 UP\
+europe-west4-c europe-west4 UP\
+europe-west1-b europe-west1 UP\
+europe-west1-d europe-west1 UP\
+europe-west1-c europe-west1 UP\
+europe-west3-c europe-west3 UP\
+europe-west3-a europe-west3 UP\
+europe-west3-b europe-west3 UP\
+europe-west2-c europe-west2 UP\
+europe-west2-b europe-west2 UP\
+europe-west2-a europe-west2 UP\
+
+\fs21\fsmilli10909 Then you will need to configure your default credentials using:\
+$ gcloud auth application-default login\
+This will redirect you to a browser window where you will login with the same account you used\
+when you setup the gcloud init command.\
+4Giving your teammates owner permission to the project\
+After creating the cca-eth-2026-group-XXX project on Google Cloud, give your group members\
+access to the project and cloud credits by navigating to the \cf3 Google Cloud console menu\cf2 . Make sure\
+your project is properly displayed on the top left as below:\
+In the project info click Add people to this project.\
+Type the email addresses of your teammates, select Owner as a role and click Save. Note that\
+your teammates should have created a google cloud account with their ETH address\
+in advance to put them as project owners.\
+5Deploying a cluster using kops\
+At this point you will deploy a cluster using kops. First of all you will need to create an empty\
+bucket to store the configuration for your clusters. Do this by running:\
+$ gsutil mb gs://cca-eth-2026-group-XXX-ethzid/\
+... where XXX is your group number and ethzid is your ETH username. Then run the following\
+command to have the KOPS_STATE_STORE command to your environment for the subsequent steps:\
+$ export KOPS_STATE_STORE=gs://cca-eth-2026-group-XXX-ethzid/\
+If you open another terminal this and other environmental variables will not be pre-\
+served. You can preserve it by adding it with an export command to your .bashrc. You\
+should substitute the number of your group and your ETH username as before.\
+Small Hint: Since Windows users cannot use the export command, you can manually add this envi-\
+ronmentvariable. Thistipalsoappliestothefollowingexport commandsandthePROJECT=`gcloud\
+config get-value project` command.\
+For the first part of the exercise you will need a 3 node cluster. Two VMs will have 2 cores. One\
+of these VMs will be the node where memcached and iBench will be deployed and another will be\
+used for for the mcperf memcached client which will measure the round-trip latency of memcached\
+requests. The third VM will have 8 cores and hosts the mcperf client which generates the request\
+load for the experiments.\
+Before you deploy the cluster with kops you will need an ssh key to login to your nodes once they\
+are created. Execute the following commands to go to your .ssh folder and create a key:\
+$ cd ~/.ssh\
+$ ssh-keygen -t rsa -b 4096 -f cloud-computing\
+Note: on Windows, you will typically find this folder under C:\\Users\\<username>\\.ssh. Change\
+the path accordingly here and in following commands.\
+Once you have created the key, go to lines 16 and 43 of the part1.yaml file (provided in the github\
+link above) and substitute the placeholder values with your group number and ethzid.\
+Then run the following commands to create a kubernetes cluster with 1 master and 2 nodes.\
+$ PROJECT=`gcloud config get-value project`\
+$ kops create -f part1.yaml\
+We will now add the key as a login key for our nodes. Type the following command:\
+$ kops create secret --name part1.k8s.local sshpublickey admin -i ~/.ssh/cloud-computing.pub\
+At this point, your cluster has not yet been deployed.\
+The configurations we provide are such that only one student in each group may run and work with\
+a cluster at a given time. Different group members attempting to deploy clusters at the\
+same time will run into errors.\
+The intended workflow is that only one group member should be working on collecting measure-\
+ments at a given time, and then share their results with the rest of the group. You can then discuss\
+and analyze these measurement results as a group and work together to fill out the report and\
+6develop your scheduling policies for parts 3 and 4.\
+Feel free to experiment by modifying cluster configurations such that multiple clusters can be run\
+at the same time or to allow multiple group members to work with the same cluster simultaneously,\
+however neither of these are necessary.\
+Keepinmindthatdeployingmultipleclusterswillincreaseyourcloudcreditconsumption, andmake\
+sure that you do not compromise each others\'92 measurements by e.g. running multiple versions of\
+the same jobs or otherwise causing interference if you work on the same cluster simultaneously.\
+We are ready now to deploy the cluster by typing:\
+$ kops update cluster --name part1.k8s.local --yes --admin\
+Your cluster should need around 5-10 minutes to be deployed. You can validate this by typing:\
+$ kops validate cluster --wait 10m\
+The command will terminate when your cluster is ready to use. If you get a connection refused\
+or cluster not yet healthy messages, wait while the previous command automatically retries.\
+When the command completes, you can type:\
+$ kubectl get nodes -o wide\
+... to get the status and details of your nodes as follows:\
+
+\fs19\fsmilli9963 NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP\
+master-europe-west1-b-2s21 Ready master 3m2s v1.19.7 10.156.0.63 34.107.107.152\
+memcache-server-jrk4 Ready node 102s v1.19.7 10.156.0.61 34.107.94.26\
+client-agent-vg5v Ready node 98s v1.19.7 10.156.0.62 34.89.236.52\
+client-measure-ngwk Ready node 102s v1.19.7 10.156.0.60 35.246.185.27\
+
+\fs21\fsmilli10909 You can connect to any of the nodes by using your generated ssh key and the node name. For\
+example, you can connect to the client-agent node as follows:\
+$ gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-agent-vg5v \\\
+--zone europe-west1-b\
+You can also directly use ssh to connect to a node using its external IP address, for example:\
+$ ssh -i ~/.ssh/cloud-computing ubuntu@34.89.236.52\
+Note that node names (last four characters) and IP addresses will be different each time you launch\
+a cluster.\
+7Running memcached and the mcperf load generator\
+To launch memcached using Kubernetes, run the following:\
+$ kubectl create -f memcache-t1-cpuset.yaml\
+$ kubectl expose pod some-memcached --name some-memcached-11211 \\\
+--type LoadBalancer --port 11211 \\\
+--protocol TCP\
+$ sleep 60\
+$ kubectl get service some-memcached-11211\
+Then run the following:\
+$ kubectl get pods -o wide\
+The output should look like:\
+
+\fs19\fsmilli9963 NAME READY STATUS RESTARTS AGE IP NODE\
+some-memcached 1/1 Running 0 42m 100.96.3.3 memcache-server-zns8\
+
+\fs21\fsmilli10909 Use the IP address above (100.96.3.3 in this example) as the MEMCACHED_IP in the remaining\
+instructions. Now ssh into both the client-agent and client-measure VMs and run the following\
+commands to compile the mcperf memcached load generator:\
+$ sudo apt-get update\
+$ sudo apt-get install libevent-dev libzmq3-dev git make g++ --yes\
+$ sudo sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources\
+$ sudo apt-get update\
+$ sudo apt-get build-dep memcached --yes\
+$ cd && git clone https://github.com/shaygalon/memcache-perf.git\
+$ cd memcache-perf\
+$ git checkout 0afbe9b\
+$ make\
+On the client-agent VM, you should now run the following command to launch the mcperf\
+memcached client load agent with 8 threads:\
+$ ./mcperf -T 8 -A\
+On the client-measure VM, run the following command to first load the memcached database\
+with key-value pairs and then query memcached with throughput increasing from 5000 queries per\
+second (QPS) to 80000 QPS in increments of 5000:\
+$ ./mcperf -s MEMCACHED_IP --loadonly\
+$ ./mcperf -s MEMCACHED_IP -a INTERNAL_AGENT_IP \\\
+--noload -T 8 -C 8 -D 4 -Q 1000 -c 8 -t 5 -w 2\\\
+--scan 5000:80000:5000\
+... whereMEMCACHED_IP isfromtheoutputof kubectl get pods -o wide aboveandINTERNAL_AGENT_IP\
+is from the Internal IP of the client-agent node from the output of kubectl get nodes -o wide.\
+You should look at the output of ./mcperf -h to understand the different flags in the above com-\
+mands.\
+8Introducing Resource Interference\
+Nowwearegoingtointroducedifferenttypesofresourceinterferencewith\cf3 iBench\cf2 microbenchmarks.\
+Run the following commands:\
+$ kubectl create -f interference/ibench-cpu.yaml\
+This will launch a CPU interference microbenchmark. You can check it is running correctly with:\
+$ kubectl get pods -o wide\
+(wait until READY 1/1 and STATUS Running shows before starting a run).\
+When you have finished collecting memcached performance measurements with CPU interference,\
+you should kill the job by running:\
+$ kubectl delete pods ibench-cpu\
+You can apply the above three steps for any of the six ibench-cpu, ibench-l1d, ibench-l1i,\
+ibench-l2, ibench-llc, and ibench-membw interference microbenchmarks. For Part 1 you will\
+perform experiments to investigate the effect of the different types of interference. After now having\
+followed this tutorial, you are able to run those experiments. First, start with reading the informa-\
+tion of what to run for Part 1 in the project report template.\
+Deleting your cluster\
+\cf4 IMPORTANT: you must delete your cluster when you are not using it! Otherwise,\
+you will easily use up all of your cloud credits! \cf2 When you are ready to work on the project,\
+you can easily re-launch the cluster with the instructions above.\
+To delete your cluster, run on your local machine the command:\
+$ kops delete cluster part1.k8s.local --yes\
+If you encounter an API permissions error, make sure to enable the IAM API by visiting \cf3 https:\
+//console.cloud.google.com/apis/api/iam.googleapis.com/overview?project=<yourprojecthere>\cf2 .\
+Make sure to replace the placeholder with your project name.\
+
+\fs23\fsmilli11955 1.2 Notes\
+
+\fs21\fsmilli10909 \'95 Parts 1 and 2 of the project are ungraded. They will help you analyze the behavior of the\
+applications you will have to run on parts 3 and 4 (graded), for which you will have to design\
+a scheduling policy based on the information you will gather on the current parts.\
+\'95 Parts 1 and 2 can be done without writing scripts to automate data collection. However, using\
+automation scripts will be required for parts 3 and 4, thus we encourage you to practice this\
+approach in order to save time in the future.\
+\'95 Parts 3 and 4 of the project are more resource-demanding and more costly in comparison to\
+Parts 1 and 2 so make sure to plan your budget (usage of redeemed cloud credits) accordingly.\
+9
+\fs28\fsmilli14346 2 Part 2\
+
+\fs21\fsmilli10909 In Part 2 of this project, you will run eight different throughput-oriented (\'93batch\'94) workloads from\
+the \cf3 PARSEC \cf2 (and SPLASH-2x) benchmark suite: barnes, blackscholes, canneal, freqmine, radix,\
+streamcluster and vips. You will first explore each workload\'92s sensitivity to resource interference\
+using iBench on a small 2 core VM (e2-standard-2). This is somewhat similar to what you did\
+in Part 1 for memcache. Next, you will investigate how each workload benefits from parallelism by\
+measuringtheperformanceofeachjobwith1, 2, 4, 8threadsonalarge8coreVM(e2-standard-8).\
+In the latter scenario, no interference is used.\
+Follow the setup instructions below to deploy a Google Cloud cluster and run the batch appli-\
+cations. Please find the project report template containing the questions and free space you should\
+use on \cf3 Moodle\cf2 .\
+
+\fs23\fsmilli11955 2.1 Setup\
+
+\fs21\fsmilli10909 In order to complete this part of the project, we will have to study the behavior of PARSEC in two\
+different contexts. For both, we will require that kubectl, kops and gcloud sdk are set up. This\
+should already be the case if you have completed Part 1.\
+Wehaveprovidedyouwithasetof yaml fileswhichareusefultowardsspawning kubectl jobsfor\
+workloads and interference. The interference files are the same as in Part 1, but you must change\
+thenodetypefrommemcachedtoparsec. Theworkloadsareintheparsec-benchmarks folder\
+in the github repo. All these files cover the workloads in the PARSEC suite, as well as the iBench\
+interference sources relevant for this part: cpu, l1d, l1i, l2, llc, memBW.\
+2.1.1 PARSEC Behavior with Interference\
+For the first half of Part 2, you will have to set up a single node cluster consisting of a VM with 2\
+CPUs. For this, we will employ kops and make use of the part2a.yaml file (make sure to update\
+the file with values for your GCP project and configBase):\
+$ export KOPS_STATE_STORE=<your-gcp-state-store>\
+$ PROJECT=`gcloud config get-value project`\
+$ kops create -f part2a.yaml\
+$ kops update cluster part2a.k8s.local --yes --admin\
+$ kops validate cluster --wait 10m\
+$ kubectl get nodes -o wide\
+If successful, you should see something like this:\
+
+\fs19\fsmilli9963 NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP\
+master-europe-west1-b-9nxl Ready master 3m2s v1.19.7 10.156.0.46 34.107.0.118\
+parsec-server-s28x Ready node 104s v1.19.7 10.156.0.47 35.234.110.58\
+
+\fs21\fsmilli10909 Now you should be able to connect to the parsec-server VM using either ssh:\
+$ ssh -i ~/.ssh/cloud-computing ubuntu@35.234.110.58\
+Or by using gcloud:\
+10$ gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@parsec-server-s28x \\\
+--zone europe-west1-b\
+To make sure that the jobs can be scheduled successfully, run the following command in order to\
+assign the appropriate label to the parsec node (replace the <parsec-server-name> with the name\
+of the parsec server observed in the output of the kubectl get nodes command):\
+$ kubectl label nodes <parsec-server-name> cca-project-nodetype=parsec\
+For this part of the study we will sometimes require to set up some form of interference, and also\
+deploy a job. For this example, we will use the PARSEC barnes job together with iBench CPU\
+interference. Here is where we will use kubectl together with some of the yaml files we provide.\
+The following code snippet spins up the interference, and runs the PARSEC barnes job:\
+$ kubectl create -f interference/ibench-cpu.yaml # Wait for interference to start\
+$ kubectl create -f parsec-benchmarks/part2a/parsec-barnes.yaml\
+Pleasenotethat,forPart2a,youshouldusethejobtemplatescontainedintheparsec-benchmarks/part2a\
+folder. blackscholes, canneal, streamcluster and freqmine use the simlarge dataset, while\
+barnes, radix, and vips use the native dataset. This is specified in the startup command for the\
+container in the template file.\
+Make sure that the interference has properly started before running the PARSEC job. One way to\
+see if the interference and the PARSEC job has started refers to ssh-ing into the VM and using the\
+htop command to inspect running processes. You should see an image like below:\
+You can get information on submitted jobs using:\
+$ kubectl get jobs\
+In order to get the output of the PARSEC job, you will have to collect the logs of its pods. To do\
+so, you will have to run the following commands.\
+$ kubectl logs $(kubectl get pods --selector=job-name=<job_name> \\\
+--output=jsonpath='\{.items[*].metadata.name\}')\
+Note that the job name needs to match the one you get from kubectl get jobs.\
+Run experiments sequentially and wait for one benchmark to finish before you spin\
+up the next one. Once you are done with running one experiment, make sure to terminate the\
+started jobs. You can terminate them all together using:\
+$ kubectl delete jobs --all\
+$ kubectl delete pods --all\
+11Alternatively, you can do so one-by-one using the following command:\
+$ kubectl delete job <job_name>\
+\cf4 IMPORTANT: you must delete your cluster when you are not using it! Otherwise,\
+you will easily use up all of your cloud credits! \cf2 When you are ready to work on the project,\
+you can easily re-launch the cluster with the instructions above. To delete your cluster, use the\
+command:\
+$ kops delete cluster part2a.k8s.local --yes\
+If you encounter an API permissions error, make sure to enable the IAM API by visiting \cf3 https:\
+//console.cloud.google.com/apis/api/iam.googleapis.com/overview?project=<yourprojecthere>\cf2 .\
+Make sure to replace the placeholder with your project name.\
+2.1.2 PARSEC Parallel Behavior\
+For the second half of Part 2, you will have to look into the parallel behavior of PARSEC, more\
+specifically, how does the performance of various jobs in PARSEC change as more threads are added\
+(more specifically 1, 2, 4 and 8 threads). For this part of the study, no interference is used.\
+You will first have to spawn a cluster as in section \cf3 2.1.1\cf2 , however, this time use the part2b.yaml\
+file we provided (make sure to update the file with values for your GCP project and configBase).\
+Once more, this will be a single node cluster with an 8 CPU VM. You will have to vary the number\
+of threads for each PARSEC job. To do so, change the value of the -n parameter in the relevant yaml\
+files. The corresponding .yaml files are in parsec-benchmarks/part2b folder of the GitHub repo.\
+Note that, for Part 2b, all of the jobs use the native dataset.\
+Other relevant instructions for this task can be found in section \cf3 2.1.1\cf2 .\
+\cf4 IMPORTANT: you must delete your cluster when you are not using it! Otherwise,\
+you will easily use up all of your cloud credits! \cf2 When you are ready to work on the project,\
+you can easily re-launch the cluster with the instructions above. To delete your cluster, use the\
+command:\
+$ kops delete cluster part2b.k8s.local --yes\
+
+\fs23\fsmilli11955 2.2 Notes\
+
+\fs21\fsmilli10909 \'95 Parts 1 and 2 of the project are ungraded. They will help you analyze the behavior of the\
+applications you will have to run on parts 3 and 4 (graded), for which you will have to design\
+a scheduling policy based on the information you will gather on the current parts.\
+\'95 Parts 1 and 2 can be done without writing scripts to automate data collection. However, using\
+automation scripts will be required for parts 3 and 4, thus we encourage you to practice this\
+approach in order to save time in the future.\
+\'95 Parts 3 and 4 of the project are more resource-demanding and more costly in comparison to\
+Parts 1 and 2 so make sure to plan your budget (usage of redeemed cloud credits) accordingly.\
+12
+\fs28\fsmilli14346 3 Part 3\
+
+\fs21\fsmilli10909 InPart3oftheproject, youwillcombinetheinputgainedfromtheprevioustwoparts. Youwillnow\
+co-schedule the latency-critical memcached application from Part 1 and all seven batch applications\
+from Part 2 in a heterogeneous cluster, consisting of VMs with a different number of cores. Your\
+cluster will consist of a VM for the Kubernetes master (same as in Part 1), 3 VMs for the mcperf\
+clients (2 agents and 1 measure machine), and 2 heterogeneous VMs (node-a-8core with 8 cores\
+and node-b-4core with 4 cores) which are used to run memcached and the batch applications.\
+Note that these VMs also have different configurations (as you can see in the part3.yaml file):\
+node-a-8core is of type e2-standard-8, node-b-4core is of type n2d-highcpu-4. The number\
+of CPUs, the CPU platform, and the amount of memory differ in these VMs, which is something\
+that you should take into account when designing your scheduling policy.\
+Your goal is to design a scheduling policy that will minimize the time it takes for all seven batch\
+workloads to complete (their makespan), while guaranteeing a tail latency service level objective\
+(SLO) for the long-running memcached service. It might be helpful to take into account the charac-\
+teristics of the batch applications you noted in Part 2 of the project(e.g. speedup across cores, total\
+runtime, etc.). For this part of the project, the memcached service will receive requests from the\
+client at a steady rate, and you will measure the request tail latency. Your scheduling policy should\
+minimize the makespan of all batch applications, without violating a strict service level ob-\
+jective for memcached of 1 ms 95th percentile latency at 30K QPS. You also must ensure that\
+all seven batch applications complete successfully, as jobs may abort due to errors (e.g. out of\
+memory). \cf4 Use the native dataset size for all batch applications. \cf2 At every point in time, you\
+must use as many resources of your cluster as possible.\
+When designing and implementing your scheduling policy, you will experiment with different col-\
+location and resource management strategies using Kubernetes mechanisms. Utilize the knowledge\
+you gained about the performance characteristics of each application in Parts 1 and 2 of the project.\
+This information will help you decide the degree of parallelism you should run each workload with,\
+and which applications you should collocate on shared resources.\
+Please find the project report template containing the questions and free space you should use to\
+enter your results on \cf3 Moodle\cf2 .\
+You may modify the YAML files provided, write a script for controlling the batch applications, or\
+apply any other techniques you choose, as long as you describe them clearly in your report. You can\
+choose which jobs to collocate, which degree of parallelism to use, and when to launch particular\
+batch applications. You may use any Kubernetes mechanism you wish to implement your scheduling\
+policy. You may find \cf3 node/pod affinity \cf2 and/or \cf3 resource requests/limits \cf2 particularly useful. You\
+also may want to use taskset in the container command arguments to pin containers to certain\
+CPU cores of a node. Keep in mind that a job may fail due to the lack of resources. You can use\
+kubectl describe jobs to monitor jobs.\
+
+\fs23\fsmilli11955 3.1 Setup\
+
+\fs21\fsmilli10909 Run the following command to create a Kubernetes cluster with 1 master and 5 nodes. Make sure\
+to update the part3.yaml file with the name of your project and your ConfigBase.\
+13
+\fs19\fsmilli9963 $ export KOPS_STATE_STORE=<your-gcp-state-store>\
+$ PROJECT=`gcloud config get-value project`\
+$ kops create -f part3.yaml\
+
+\fs21\fsmilli10909 You are now ready to deploy the cluster by executing:\
+
+\fs19\fsmilli9963 $ kops update cluster --name part3.k8s.local --yes --admin\
+
+\fs21\fsmilli10909 Your cluster should need around 5-10 minutes to be deployed. You can validate the cluster with\
+the command:\
+
+\fs19\fsmilli9963 $ kops validate cluster --wait 10m\
+
+\fs21\fsmilli10909 The command will terminate when your cluster is ready to use. Afterwards, you can run:\
+
+\fs19\fsmilli9963 $ kubectl get nodes -o wide\
+
+\fs21\fsmilli10909 to get the status and details of your nodes as follows:\
+
+\fs19\fsmilli9963 NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP O\
+client-agent-a-s8mr Ready node 5m5s v1.31.5 10.0.16.3 34.79.156.52 U\
+client-agent-b-7g2h Ready node 5m10s v1.31.5 10.0.16.7 34.79.109.216 U\
+client-measure-m4cg Ready node 4m42s v1.31.5 10.0.16.8 34.22.137.71 U\
+master-europe-west1-b-sd4j Ready control-plane 7m45s v1.31.5 10.0.16.6 35.195.216.176 U\
+node-a-8core-sjn0 Ready node 4m48s v1.31.5 10.0.16.4 35.233.71.64 U\
+node-b-4core-678h Ready node 5m27s v1.31.5 10.0.16.5 34.38.138.2 U\
+
+\fs21\fsmilli10909 To connect to any of the machines you can run:\
+$ gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@<MACHINE_NAME> \\\
+--zone europe-west1-b\
+Modify the memcached and batch applications YAML files from Parts 1 and 2 of the project and\
+use the kubectl create commands to launch the workloads in the cluster. You may want to write\
+automated scripts to launch the jobs. Automated scripts are not a requirement in this part of the\
+project, but we encourage you to use them here as they will be compulsory in Part 4. The mem-\
+cached job must start first and continue running throughout the whole experiment, while receiving\
+a constant load of 30K QPS from the mcperf client. After making sure you have started memcached\
+and the client load, you can start the batch jobs in the desired order. Your goal is to minimize the\
+time from the moment the first batch job was started, to the moment the last batch job completes,\
+while also ensuring that the 95th percentile latency for memcached remains below 1ms.\
+For Part 3 and Part 4, you must use a modified version of mcperf. It provides two features: it adds\
+two columns that contain the start and end time for each measurement, and it allows variable traces\
+(needed for Part 4 of the project). To install the augmented version of mcperf on client-agent-*\
+and client-measure, follow the instructions below:\
+
+\fs19\fsmilli9963 $ sudo sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources\
+$ sudo apt-get update\
+$ sudo apt-get install libevent-dev libzmq3-dev git make g++ --yes\
+$ sudo apt-get build-dep memcached --yes\
+$ git clone https://github.com/eth-easl/memcache-perf-dynamic.git\
+$ cd memcache-perf-dynamic\
+$ make\
+
+\fs21\fsmilli10909 14Insteadofsweepingtherequestthroughput, asinPart1, younowwanttogenerateloadataconstant\
+rate of approximately 30K QPS, while periodically reporting latency (e.g. every 10 seconds). To\
+do this, run the following command on the client-agent-a machine:\
+$ ./mcperf -T 2 -A\
+and the following command on the client-agent-b machine:\
+$ ./mcperf -T 4 -A\
+and the following command on the client-measure VM:\
+$ ./mcperf -s MEMCACHED_IP --loadonly\
+$ ./mcperf -s MEMCACHED_IP -a INTERNAL_AGENT_A_IP -a INTERNAL_AGENT_B_IP \\\
+--noload -T 6 -C 4 -D 4 -Q 1000 -c 4 -t 10 \\\
+--scan 30000:30500:5\
+You can get the execution time of each batch job by parsing the JSON output of the kubectl\
+command that returns information about the jobs, including their start and completion time. To\
+do this, run the following command after all jobs have been completed:\
+$ kubectl get pods -o json > results.json\
+$ python3 get_time.py results.json\
+where get_time.py is a python script that you can find \cf3 here\cf2 .\
+\cf4 IMPORTANT: you must delete your cluster when you are not using it! Otherwise,\
+you will easily use up all of your cloud credits! \cf2 When you are ready to work on the project\
+again, you can easily re-launch the cluster with the instructions from above.\
+To delete your cluster, use the command:\
+$ kops delete cluster --name part3.k8s.local --yes\
+
+\fs23\fsmilli11955 3.2 OpenEvolve\
+
+\fs21\fsmilli10909 For the second subtask of part 3, you will use LLMs to autonomously discover a new scheduling\
+policy, and you will compare it with your hand-crafted one. To do this, you will utilize the open-\
+source framework \cf3 OpenEvolve\cf2 .\
+OpenEvolve uses LLMs to progressively modify a code snippet to maximize a user-defined score.\
+For the project, you will be using OpenEvolve to evolve a starting scheduling policy, aiming to\
+minimize the total makespan while maintaining the SLO goal, similarly to subtask 1.\
+There are three major components in an OpenEvolve project:\
+\'95 Initial program: This is the baseline program that the framework will "evolve". The\
+source file must contain a single block delimited by comments # EVOLVE-BLOCK-START and\
+# EVOLVE-BLOCK-END. The LLM is instructed to modify code only inside this specific block.\
+Refer to the examples in the OpenEvolve repository for more information.\
+\'95 Evaluator: The evaluator measures how well the currently evolved program performs. Your\
+evaluator program will need to run the evolved scheduler, collect metrics to compute a "com-\
+bined score", which then guides the direction of the next evolution. It\'92s important to handle\
+errors gracefully to explicitly inform the LLM that their generated code is incorrect.\
+15\'95 Config: The configuration file config.yaml contains your evolution settings. Here, you will\
+define the API access to the LLM and, most importantly, the system message. The latter\
+is extremely important, as it provides the LLM with all the required information to make\
+sensible decisions. Take time and care in optimizing and perfecting this prompt.\
+You must set checkpoint_interval: 1 in your config; you can find a compliant template\
+configuration file in the Git repository.\
+In order to use OpenEvolve, you will need API access to an LLM. We have granted you access\
+to the \cf3 Swiss AI Research Platform\cf2 , which hosts a selection of different models.\
+1. Log into the Research Platform with your ETH account to receive your API key\
+2. Export this key as the environment variable OPENAI_API_KEY\
+3. Set the api_base field in your config.yaml to https://api.swissai.cscs.ch/v1\
+4. Set the primary_model field in your config to any available model.\
+You can install OpenEvolve using pip (or pipx):\
+$ pip install openevolve\
+This will make the command openevolve-run available. You can now start the evolution by\
+running:\
+$ openevolve-run --config config.yaml -o <out dir> <initial program> <evaluator>\
+In the output directory, OpenEvolve will create log files and checkpoints, saving the current result\
+of the evolution. We strongly suggest that you use a different output directory every time you\
+start a new evolution to make it easier to collect the artifacts for submission. If you run multiple\
+evolutions with the same output folder, OpenEvolve will start overwriting past checkpoints, which\
+could potentially result in loss of data required for submission.\
+Evolution will run for the number of iterations specified in the config; at any time, you can\
+(gracefully!) stop evolution with Ctrl+C. If you wish, you can resume evolution from a specific\
+checkpoint by using the --checkpoint argument of openevolve-run.\
+For a given checkpoint, the best evolved program is saved as\
+<out_dir>/checkpoints/checkpoint_XXX/best_program.py; at the end of the evolution process,\
+thebestprogramisalsostoredin<out_dir>/best. Youcanthenuseittorunthesamebenchmarks\
+you ran in subtask 1 and add the results to your report. Make sure to note the run log and final\
+checkpoint directory you are considering when benchmarking, as you are required to submit them\
+along with your code; see the submission section (\cf3 3.4\cf2 ) for more information.\
+We invite you to check out the examples folder in the OpenEvolve repository to get used to the\
+framework and its different features.\
+To better track the progress, you can run the OpenEvolve visualizer, which interactively shows the\
+evolution, along with the metrics from each program and the changes that the LLM applies. To use\
+it, you can run the following:\
+$ git clone https://github.com/algorithmicsuperintelligence/openevolve.git\
+$ cd openevolve\
+$ python3 -m venv .venv\
+$ source .venv/bin/activate\
+$ pip install -r scripts/requirements.txt\
+$ python3 scripts/visualizer.py --path <out-directory-or-specific-checkpoint>\
+16If given the output directory, the visualizer will show the latest saved checkpoint in real-time.\
+\cf4 IMPORTANT: you must delete your cluster when you are not using it! Otherwise,\
+you will easily use up all of your cloud credits! \cf2 When you are ready to work on the project\
+again, you can easily re-launch the cluster with the instructions from above.\
+To delete your cluster, use the command:\
+$ kops delete cluster --name part3.k8s.local --yes\
+
+\fs23\fsmilli11955 3.3 Questions\
+
+\fs21\fsmilli10909 Use the report template to answer the questions and submit your results for Part 3 of the project.\
+
+\fs23\fsmilli11955 3.4 Submission\
+
+\fs21\fsmilli10909 For Part 3 of the project, we expect you to submit:\
+\'95 The PDF file containing the answers to the posed questions, in the form of the filled project\
+report template.\
+\'95 All YAML files you have modified or newly created.\
+\'95 All scripts you have used for automation (if you used any).\
+\'95 All other scripts or files you used, and consider useful for the understanding of your scheduling\
+policy.\
+\'95 In the root of your submission archive, place a directory part_3_openevolve/. Inside, place\
+your config, initial program, evaluator program, and best evolved program. Also, place the log\
+of the run that generated your best program and the latest checkpoint containing your best\
+program. These can be found respectively in <out-dir>/logs and <out-dir>/checkpoints;\
+for convenience, we provide a script openevolve_collect.py that can collect them automat-\
+ically. Make sure to double-check that all these files correspond to the evolution run that\
+produced the benchmarked scheduler.\
+\'95 Your measurement output files, in the format explained below:\
+\'96 Your submission \cf4 must\cf2 contain the measurements for the results described in your report.\
+\'96 In the root of your submission archive, place two directories called\
+part_3_1_results_group_XXX and part_3_2_results_group_XXX, where XXX is your\
+group number represented with 3 digits (e.g. for group 1, XXX equals 001).\
+\'96 The folder part_3_1_results_group_XXX must contain the results of task 1 (hand-\
+crafted policy evaluation), while part_3_2_results_group_XXX must contain the results\
+of task 2 (OpenEvolve-generated policy evaluation).\
+\'96 In each directory, place 6 files - 3 .json and 3 .txt files. The .json files must be\
+named pods_1.json, pods_2.json and pods_3.json. The .txt files must be named\
+mcperf_1.txt, mcperf_2.txt and mcperf_3.txt.\
+\'96 Each .json file should contain the full output of the get pods command of the corre-\
+sponding run.\
+17\'96 Each .txt file should contain the output of the mcperf execution for the corresponding\
+run. You can find an example of the expected mcperf output format \cf3 here\cf2 . In the general\
+case, copying from the console should be sufficient to match the required format. But,\
+it is your responsibility to make sure that the format of all your .txt files matches the\
+one in the example given above.\
+Note: Trailing new lines and whitespaces are ignored. You can use either Unix-like line\
+endings (\\n) or Windows-like line endings (\\r\\n).\
+\'96 Please follow the instructions stated above. Divergence from the required format\
+can lead to subtraction of points.\
+There are no additional requirements regarding the structure of the other requested files.\
+18
+\fs28\fsmilli14346 4 Part 4\
+
+\fs21\fsmilli10909 In Part 4 of the project you will co-schedule the batch applications on a single 4-core server running\
+memcached. In contrast to Part 3, the load on the long-running memcached service will now be\
+dynamically varied, such that the number of cores needed by the memcached service to meet the tail\
+latency SLO may require more than a single node. Your goal is to design a scheduling policy that\
+grows and shrinks the resource allocation of memcached and opportunistically uses (temporarily)\
+available cores to complete the batch jobs as quickly as possible. Your scheduling policy must guar-\
+antee a memcached tail latency SLO of 0.8ms 95th percentile latency. For this part of the project,\
+you will be using a cluster consisting of 4 nodes: a 2-core VM cluster master, a 4-core high memory\
+VM for the memcached server and batch jobs, a 8-core VM for the mcperf agent, and a 2-core VM\
+for the mcperf measurement machine.\
+You are required to implement your own controller to launch jobs and dynamically adjust their\
+available resources based on your scheduling policy. In this part of the project, we will not be using\
+Kubernetes because it does not provide an API to change a container\'92s resource allocation during\
+runtime. Instead, you will use Docker to launch containers and run the batch workloads, and to\
+dynamically adjust their resources. For memcached, we provide instructions for installing and run-\
+ning it directly on the VM (rather than in a Docker container) and for using the taskset command\
+to dynamically adjust its resources. The reason why we do not use Docker to run memcached in\
+this part of the assignment is that we have observed that memcached\'92s resources are not effectively\
+constrained with docker --cpuset-cpus. This occurs due to the fact that most of the processing in\
+memcached is network packet processing, which executes in kernel threads. Your controller should\
+monitor CPU utilization and/or other types of resources and metrics to decide if resources need to\
+be adjusted to meet the SLO. Your controller should make dynamic resource allocation decisions,\
+suchthatthebatchjobsarecompletedasquicklyaspossible, whilestillenforcingmemcached\'92sSLO.\
+For this part of the project you should also use the augmented version of mcperf, which is capable\
+of generating random loads on the memcached server, as well as specific load traces. Refer to the\
+instructions provided in Part 3 to install this version.\
+Implementing the controller and the scheduling policy\
+We recommend implementing your controller in python and using the \cf3 Docker Python SDK \cf2 to man-\
+age containers. Alternatively, you may implement the controller in Go using the \cf3 Docker Go SDK\cf2 .\
+You can find \cf3 examples of managing containers using the Docker SDK\cf2 , for both Python and Go. If\
+you plan on using such an SDK, you might find it useful to use the shell command sudo usermod\
+-a -G docker <your-username>. This will allow you to use the SDK programmatically, without\
+encountering permission errors. You will also be able to run docker commands without using sudo.\
+In addition to running containers, you will also need to update containers while they are running.\
+Updating a container refers to dynamically adjusting the properties of the container, such as the\
+CPU allocation. You can read more about updating containers in the \cf3 Docker update command\
+documentation\cf2 . You can update docker containers using Docker SDK commands. In case you find\
+it helpful, you can also \cf3 pause \cf2 and \cf3 unpause \cf2 containers. This is an option you may explore, but it\
+is not required. Pausing a container has the effect of temporarily stopping the execution of the\
+processes in the container (i.e. releasing CPU resources), while retaining the container\'92s state (i.e.\
+keeping the container\'92s memory resources). Unpausing a container resumes the execution of the\
+19processes in that container.\
+Your controller should run on the 4-core high memory memcached server and monitor the CPU uti-\
+lization. The controller should then use the CPU utilization statistics to make dynamic scheduling\
+decisions. You can \cf3 monitor CPU utilization on the server \cf2 by reading and post-processing data from\
+/proc/stat files on the VM. There are also language specific options for monitoring metrics, such\
+as \cf3 psutil \cf2 for Python.\
+In addition to CPU utilization, you can also use other inputs for your scheduling policy if you wish\
+to do so. This is not required, but may let you implement an even better scheduling policy. Make\
+sure that your project report contains explanations of any additional controller inputs you choose\
+to consider in your scheduling policy.\
+Evaluating the scheduling policy\
+You will evaluate your scheduling policy with a dynamic mcperf load trace we provide (see instruc-\
+tions below). You should use mcperf to investigate the performance of your scheduling policy with\
+various load traces (e.g. try different random seeds and time intervals). Experimenting with various\
+load traces will allow you to analyze when and why does your policy perform well and to understand\
+in which scenarios the policy does not adapt appropriately.\
+Generating the plots\
+In this part of the project you will be asked to generate some plots which often require you to\
+aggregatedatagatheredfromdifferentVMs. Thiscanbechallenging, sinceyou\'92llneedtotemporally\
+correlate data across different VMs. A straightforward way to do this is to save the Unix time\
+whenever you log an event, as this time is roughly synchronized across VMs. You can further use\
+other information such as dynamic mcperf\'92s --qps_interval or -t parameter (see documentation\
+\cf3 here\cf2 ). Our dynamic mcperf version should also print the simulation\'92s start and end Unix times in\
+the output logs by default. Another alternative is to use the shell command date +%s. These times\
+can then be used when generating the plots to synchronize events that take place on different VMs.\
+
+\fs23\fsmilli11955 4.1 Setup\
+
+\fs21\fsmilli10909 4.1.1 Installation\
+Run the following command to create a kubernetes cluster with 1 master and 3 nodes.\
+
+\fs19\fsmilli9963 $ export KOPS_STATE_STORE=<your-gcp-state-store>\
+$ PROJECT='gcloud config get-value project'\
+$ kops create -f part4.yaml\
+
+\fs21\fsmilli10909 You are now ready to deploy the cluster by running:\
+
+\fs19\fsmilli9963 $ kops update cluster --name part4.k8s.local --yes --admin\
+
+\fs21\fsmilli10909 Your cluster should need around 5-10 minutes to be deployed. You can validate the cluster with\
+the command:\
+
+\fs19\fsmilli9963 $ kops validate cluster --wait 10m\
+
+\fs21\fsmilli10909 20The command will terminate when your cluster is ready to use. Afterwards you can run:\
+
+\fs19\fsmilli9963 $ kubectl get nodes -o wide\
+
+\fs21\fsmilli10909 to get the status and details of your nodes as follows:\
+
+\fs19\fsmilli9963 NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP\
+client-agent-20lc Ready node 4m53s v1.31.5 10.0.16.3 34.76.26.190\
+client-measure-4lkz Ready node 5m12s v1.31.5 10.0.16.6 34.79.109.216\
+master-europe-west1-b-th6m Ready control-plane 8m49s v1.31.5 10.0.16.5 34.22.137.71\
+memcache-server-9806 Ready node 5m16s v1.31.5 10.0.16.4 34.38.138.2\
+
+\fs21\fsmilli10909 You will first need to manually install memcached on the memcache-sever VM. To do so, you must\
+first use the following commands:\
+
+\fs19\fsmilli9963 $ sudo apt update\
+$ sudo apt install -y memcached libmemcached-tools\
+
+\fs21\fsmilli10909 To make sure the installation succeeded, run the following command:\
+
+\fs19\fsmilli9963 $ sudo systemctl status memcached\
+
+\fs21\fsmilli10909 You should see an output similar to the one pasted underneath:\
+
+\fs19\fsmilli9963 memcached.service - memcached daemon\
+Loaded: loaded (/lib/systemd/system/memcached.service; enabled; vendor preset: enabled)\
+Active: active (running) since Thu 2021-04-01 08:21:26 UTC; 10min ago\
+Docs: man:memcached(1)\
+Main PID: 11796 (memcached)\
+Tasks: 10 (limit: 4915)\
+CGroup: /system.slice/memcached.service\
+-11796 /usr/bin/memcached -m 64 -p 11211 -u memcache -l 127.0.0.1 ...\
+
+\fs21\fsmilli10909 You will need to expose the service to the outside world, and increase its default starting memory.\
+To do so, open memcached\'92s configuration file using the command:\
+
+\fs19\fsmilli9963 $ sudo vim /etc/memcached.conf\
+
+\fs21\fsmilli10909 To update memcached\'92s memory limit, look for the line starting with -m and update the value to\
+1024. Similarly, to expose the memcached server to external requests, locate the line starting with\
+-l and replace the localhost address with the internal IP of the memcache-server VM. In this\
+file you can also specify the number of memcached threads by introducing a line starting with -t,\
+followed by the number of threads. After entering all of the desired changes, save the file, and then\
+execute the next command to restart memcached with the new configuration:\
+
+\fs19\fsmilli9963 $ sudo systemctl restart memcached\
+
+\fs21\fsmilli10909 Running sudo systemctl status memcached again should yield an output similar as before, but\
+you should see the updated parameters in the command line. If you completed these steps success-\
+fully, memcached should be running and listening for requests on the VMs internal IP on port 11211.\
+On client-agent and client-measure machines, install the augmented version of mcperf follow-\
+ing the instructions from Part 3.\
+On the client-agent VM, you should then run the following command to launch the mcperf\
+memcached client load agent with 8 threads:\
+21
+\fs19\fsmilli9963 $ ./mcperf -T 8 -A\
+
+\fs21\fsmilli10909 On the client-measure VM, run the following commands to first load the memcached database\
+with key-value pairs and then to query memcached with a dynamic load generator, which will\
+produce a random throughput between 5k and 110k queries per second during each interval. The\
+throughput target will change and will be assigned to another QPS value for the next time interval.\
+Note that, in contrast to the previous task, the output appears only at the end of the measurement.\
+In the example below the interval duration is set to 15 seconds, whilst the overall execution time is\
+1800 seconds or 30 minutes, this will result in 120 different QPS intervals:\
+
+\fs19\fsmilli9963 $ ./mcperf -s INTERNAL_MEMCACHED_IP --loadonly\
+$ ./mcperf -s INTERNAL_MEMCACHED_IP -a INTERNAL_AGENT_IP \\\
+--noload -T 8 -C 8 -D 4 -Q 1000 -c 8 -t 1800 \\\
+--qps_interval 15 --qps_min 5000 --qps_max 110000\
+
+\fs21\fsmilli10909 The INTERNAL_MEMCACHED_IP and INTERNAL_AGENT_IP are the internal IPs of the memcache-sever\
+and client-agent retrieved from the output of kubectl get nodes -o wide.\
+For more information on the dynamic load generator, and the available options it provides, check\
+the guide in the \cf3 README.md \cf2 of the public repository.\
+Batch jobs can be started using Docker. For instance, one can start the blackscholes job on\
+core 0 (--cpuset-cpus="0" parameter) and with 2 threads (-n 2 parameter) using the following\
+command:\
+
+\fs19\fsmilli9963 docker run --cpuset-cpus="0" -d --rm --name parsec \\\
+anakli/cca:parsec_blackscholes \\\
+./run -a run -S parsec -p blackscholes -i native -n 2\
+
+\fs21\fsmilli10909 Feel free to inspect the YAML files for the batch jobs, provided in the previous parts of the project, to\
+further understand their command line arguments. You can find the rest of the docker images \cf3 here\cf2 .\
+\cf4 Make sure to use the native datasets for the jobs and the following image versions:\
+\cf2 \'95 barnes: anakli/cca:splash2x_barnes\
+\'95 blackscholes: anakli/cca:parsec_blackscholes\
+\'95 canneal: anakli/cca:parsec_canneal\
+\'95 freqmine: anakli/cca:parsec_freqmine\
+\'95 radix: anakli/cca:splash2x_radix\
+\'95 streamcluster: anakli/cca:parsec_streamcluster\
+\'95 vips: anakli/cca:parsec_vips\
+\cf4 IMPORTANT: You must delete your cluster when you are not using it! Otherwise,\
+you will easily use up all of your cloud credits! \cf2 When you are ready to work on the project\
+again, you can easily re-launch the cluster using the instructions above.\
+To delete your cluster, use the following command:\
+$ kops delete cluster --name part4.k8s.local --yes\
+224.1.2 Setting resource limits\
+taskset is an essential command used for setting the process CPU affinity. For instance, running\
+taskset -a -cp 0-2 <pid> will bind all threads (-a switch) of the running process indicated by\
+<pid> (-p parameter) to the CPUs 0, 1 and 2 (-c parameter). One can also use this command\
+when starting up processes. More information on taskset can be obtained \cf3 here\cf2 .\
+For Docker, the --cpuset-cpus parameter is used to set the cores a container is able to use. This\
+parameter can be set when spinning up a container (e.g. sudo docker run --cpuset-cpus="0-2"\
+...) orupdatedwhenacontainerisalreadyrunning(e.g. docker container update --cpuset-cpus="0-2"\
+CONTAINER).\
+You are also free to use other methods to dynamically adjust resource allocation for your jobs. This\
+can refer to resources other than CPU cores.\
+
+\fs23\fsmilli11955 4.2 Questions\
+
+\fs21\fsmilli10909 Use the report template to answer the questions and submit your results for Part 4 of the project.\
+
+\fs23\fsmilli11955 4.3 Submission\
+
+\fs21\fsmilli10909 For part 4 of the project, we expect you to submit:\
+\'95 The PDF file containing the answers to the posed questions, in the form of the filled project\
+report template.\
+\'95 The script you used to automate the scheduler.\
+\'95 All other scripts or files you used, and consider needed/useful for the script above.\
+\'95 Your measurement output files, in the format explained below:\
+\'96 Your submission \cf4 must\cf2 contain the measurements for the results described in your report.\
+\'96 Intherootofyoursubmissionarchive,placetwodirectoriescalledpart_4_3_results_group_XXX\
+and part_4_4_results_group_XXX, where XXX is your group number represented with\
+3 digits (e.g. for group 1, XXX equals 001).\
+\'96 Each of the directories should have 6 files inside. They must be named jobs_1.txt,\
+jobs_2.txt, jobs_3.txt and mcperf_1.txt, mcperf_2.txt, mcperf_3.txt.\
+\'96 Each mcperf_i.txt file should contain the output of the mcperf execution for the corre-\
+sponding run. You can find an example of the expected mcperf output format \cf3 here\cf2 . In\
+the general case, copying from the console should be sufficient to match the required for-\
+mat. But, it is your responsibility to make sure that the format of all your mcperf_i.txt\
+files matches the one in the example given above.\
+Note: Trailing new lines and whitespaces are ignored. You can use either Unix-like line\
+endings (\\n) or Windows-like line endings (\\r\\n).\
+\'96 The jobs_i.txt files should contain the container execution log for the corresponding\
+run.\
+\uc0\u8727  Since you are not expected to use Kubernetes for this part, you have to produce a\
+text-based log.\
+23\uc0\u8727  We provide a \cf3 utility class \cf2 in Python that does exactly that. Feel free to re-implement\
+this class in any language you decide to use, but the output must adhere to the\
+format of the provided Python class.\
+\uc0\u8727  Each line in the file represents an event. It starts with a date in the ISO for-\
+mat (e.g. 2023-04-12T09:52:37.019688), followed by the event name (start,\
+end, update_cores, pause, unpause, or custom), and the job name (memcached,\
+blackscholes, canneal, dedup, ferret, freqmine, radix, vips, scheduler).\
+\uc0\u8727  A start event must be followed by two more elements that represent: 1) the list of\
+CPU cores ([0, 1, 2, 3]) the process was assigned at the beginning and 2) the\
+number of (software) threads it is started with.\
+\uc0\u8727  An update_cores event has an additional argument that represents the new list of\
+assigned cores.\
+\uc0\u8727  A custom event has an arbitrary string (that is URL-encoded ) as the last parameter.\
+Use this event if you are applying different techniques, that are not supported by\
+the logger, or if you want to add comments to the trace.\
+\uc0\u8727  Trailing whitespaces and newlines are ignored, you can use either Unix-like line\
+endings (\\n) or Windows-like line endings (\\r\\n).\
+\uc0\u8727  The file must start with a start event for the scheduler, and end with an end event\
+for the scheduler. These two events should not have a core assignment specified.\
+\uc0\u8727  Remember that each PARSEC job that you start must eventually end.\
+\uc0\u8727  Remember that memcached needs a start event, but it doesn\'92t necessarily need an\
+end. If memcached is already running, log the start memcached event just after the\
+start scheduler event.\
+\uc0\u8727  Refer to \cf3 this file \cf2 for an example.\
+\'96 Please follow the instructions stated above. Divergence from the required format\
+can lead to subtraction of points.\
+\'96 Please make sure your files are complete and that the measurement files match the plots\
+and descriptions used in your project report. Divergence from these instructions\
+can lead to subtraction of points.\
+There are no additional requirements regarding the structure of the other requested files.\
+24
+\fs28\fsmilli14346 5 FAQ\
+
+\fs21\fsmilli10909 \'95 When running kops create:\
+\'96 if you get the following error: \cf4 failed to create file as already exists:\
+gs://cca-eth-2026-group-XXX-ethzid/part1.k8s.local/config. error: error creating\
+cluster: file already exists\cf2 , you need to delete the contents of your Google Cloud\
+storage bucket, the recreate it with the following commands:\
+$ gsutil rm -r gs://cca-eth-2026-group-XXX-ethzid/\
+$ gsutil mb gs://cca-eth-2026-group-XXX-ethzid/\
+\'96 ifyougetthefollowingerror: \cf4 Error: error creating cluster: error writing Cluster\
+"part1.k8s.local": error from acl provider "k8s.io/kops/acl/gce": error querying\
+bucket "...": googleapi: Error 404: The requested project was not found.,\
+notFound\cf2 , make sure you have set the credentials correctly:\
+$ gcloud auth application-default login\
+\'95 When ssh-ing into a cluster node, if you get an error like\
+\cf4 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!\
+...\
+Offending ED25519 key in /Users/username/.ssh/known_hosts:9\
+...\
+Host key verification failed\
+\cf2 then you need to run ssh-keygen -R <host> where <host> is the IP address of the server\
+you want to access.\
+\'95 If kubectl commands prompt you for a username and password, or if kops validate says\
+\cf4 Unauthorized\cf2 , first try to re-export the k8s credentials configuration using kops export\
+kubecfg --admin. If it still does not work, delete the cluster and recreate it from scratch.\
+\'95 If for any reason you cannot delete the cluster with the kops command do the following:\
+\'96 Go to console.cloud.google.com\
+\'96 Type in the search bar the term \'93Load balancers\'94. You should be redirected to a page\
+similar to the one below:\
+25\'96 Select and delete the load balancer.\
+\'96 Then type in the search bar the term \'93Instance groups\'94. You should be redirected to a\
+page similar to the one below:\
+\'96 Select and delete all the instance groups.\
+\'96 Delete your Google Cloud storage bucket by typing:\
+$ gsutil rm -r gs://cca-eth-2026-group-XXX-ethzid/\
+\'96 Also under \'94External IP addresses\'94 check there are no charges for left over static IPs.\
+\'95 If your Google Cloud Credits are disappearing even though no charges appear on your Billing\
+Overview, make sure you have unselected \'94Promotions\'94\
+\'96 Go to console.cloud.google.com\
+\'96 Typeinthesearchbartheterm\'93AccountOverview\'94. Select\'94Gotolinkedbillingaccount\'94\
+if prompted. You should be redirected to a page similar to the one below:\
+\'96 Click on \'94View report\'94.\
+\'96 Make sure you unclick \'94Promotions and Other\'94 as shown below and select a reasonable\
+To/From time range:\
+26\'95 Ifyourunoutofcreditsforyourproject, pleaseemail\cf3 cloud-arch-ta@lists.inf.ethz.ch\cf2 torequest\
+additional cloud credits.\
+27}

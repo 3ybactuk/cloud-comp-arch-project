@@ -1,0 +1,18 @@
+{
+  "policy_id": "p03_cache_aware_staggered",
+  "description": "Cache-aware: isolate LLC-sensitive jobs and stagger aggressive phases.",
+  "all_jobs_completed": false,
+  "completed_jobs": [],
+  "job_specs": [
+    {
+      "job": "radix",
+      "node": "node-a-8core",
+      "threads": 6
+    }
+  ],
+  "gates": {
+    "validity": false,
+    "reason": "not_all_jobs_completed"
+  },
+  "screening_pass": false
+}
