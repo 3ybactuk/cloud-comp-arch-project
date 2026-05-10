@@ -13,6 +13,32 @@
 
 To limit cloud costs while exploring the design space, we designed
 \textbf{5 candidate policies} and ran each one \emph{once} (screening run).
+
+The policies were not picked at random: they sample a small, interpretable
+design space tied to what we already measured in Part~1 and Part~2.
+Part~1 showed that memcached tail latency reacts strongly to CPU and
+last-level-cache pressure, which motivates (i) placing memcached on the
+larger \texttt{node-a-8core} with a modest thread count, and (ii) controlling
+which batch phases run alongside it.
+Part~2a/2b supply parallel efficiency $E(8)$ and interference characterisations:
+strong scalers such as \texttt{radix} and \texttt{streamcluster} justify
+higher thread counts when co-scheduled with memcached, whereas jobs with
+heavy LLC or memory traffic (\texttt{barnes}, \texttt{freqmine},
+\texttt{vips}) are natural candidates for isolation on \texttt{node-b-4core}
+or for capped parallelism.
+Against that background, \texttt{p01\_conservative\_isolation} stresses
+maximum separation of cache-heavy batch work from node-a;
+\texttt{p02\_balanced\_waves} uses paired waves (one batch job per physical
+node per wave) with moderate threads to avoid intra-node batch contention while
+keeping both worker nodes busy;
+\texttt{p03\_cache\_aware\_staggered} and \texttt{p04\_aggressive\_parallel}
+deliberately increase thread counts and overlap to hunt for shorter makespan at
+higher risk of oversubscription on the 4-core node;
+\texttt{p05\_memcached\_guarded} tests keeping node-a as ``Memcached-first''
+by moving the short \texttt{radix} phase to node-b.
+Screening then filters out candidates that are infeasible on the Part~3
+heterogeneous capacity regardless of these hypotheses.
+
 After the screening run we applied four hard gates:
 \begin{enumerate}
   \item \textbf{Validity gate}: all 7 PARSEC jobs must complete
@@ -40,9 +66,11 @@ Table~\ref{tab:screening} summarises the outcome for all five candidates.
 \textbf{Policy} & \textbf{All jobs} & \textbf{Makespan [s]} &
 \textbf{SLO viol.} & \textbf{Gate failure reason} \\
 \midrule
-p01\_conservative\_isolation & Yes & 673 & --- &
-  No mcperf samples captured in batch window (measurement timing issue;
-  mcperf started before the service IP was stable). \\
+p01\_conservative\_isolation & Yes & 679 & 0\% &
+  Gates passed in an earlier valid run (\texttt{run1\_old}); official
+  \texttt{run1} had empty mcperf output (script bug: Service IP not yet
+  stable when mcperf connected).  Not promoted: makespan 39\% worse than
+  p02 and only 1 valid run available. \\
 \textbf{p02\_balanced\_waves} & Yes & 489 / 490 / 520 & 0\% &
   \textbf{PASSED — promoted to 3 runs} \\
 p03\_cache\_aware\_staggered & No & --- & --- &
@@ -66,7 +94,7 @@ fundamental resource-overcommitment in the policy specification.
 Running two more repetitions would have wasted cluster time without
 producing useful data.
 Policy p01 failed a different gate (mcperf measurement setup), but its
-makespan of 673\,s was already 37\% worse than p02 (489\,s) and therefore
+makespan of 679\,s was already 39\% worse than p02 (489\,s) and therefore
 not worth the cost of a corrected re-run.
 
 % ────────────────────────────────────────────────────────────
@@ -394,15 +422,15 @@ We deliberately avoided this complexity in the hand-crafted design to
 guarantee predictable, verifiable SLO compliance.
 
 \textbf{Second-best candidate — p01\_conservative\_isolation.}
-This policy assigned \emph{all four LLC-heavy jobs} to node-b
-(\texttt{blackscholes}, \texttt{canneal}, \texttt{freqmine},
-\texttt{barnes}) and routed only \texttt{radix}, \texttt{streamcluster},
-and \texttt{vips} to node-a — a stricter isolation strategy.
-In its single screening run it recorded a makespan of \textbf{673\,s},
-37\% longer than p02.
-The root cause is that node-a became idle after \texttt{vips} finished at
-${\approx}5$\,min while node-b was still processing \texttt{freqmine} and
-\texttt{barnes} for another ${\approx}3.5$\,min.
+This policy assigned \emph{five LLC-heavy or longer jobs} to node-b
+(\texttt{canneal}, \texttt{blackscholes}, \texttt{vips},
+\texttt{freqmine}, \texttt{barnes}) and routed only \texttt{radix} and
+\texttt{streamcluster} to node-a — a stricter isolation strategy.
+In its single screening run it recorded a makespan of \textbf{679\,s},
+39\% longer than p02.
+The root cause is that node-a became idle after \texttt{streamcluster}
+finished at ${\approx}4.7$\,min while node-b was still processing
+\texttt{freqmine} and \texttt{barnes} for another ${\approx}6.6$\,min.
 The policy failed the QPS-coverage gate (no valid mcperf samples were
 captured in the batch window) due to a timing issue in the measurement
 setup (mcperf started before the memcached Service IP was stable), so it
