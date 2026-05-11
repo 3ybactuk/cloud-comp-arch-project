@@ -1,0 +1,100 @@
+{
+  "policy_id": "p07_shorttail_radix_last",
+  "description": "Same as p02 but keep radix as a short final wave.",
+  "all_jobs_completed": true,
+  "completed_jobs": [
+    "barnes",
+    "blackscholes",
+    "canneal",
+    "freqmine",
+    "radix",
+    "streamcluster",
+    "vips"
+  ],
+  "job_specs": [
+    {
+      "job": "barnes",
+      "node": "node-b-4core",
+      "threads": 2
+    },
+    {
+      "job": "blackscholes",
+      "node": "node-a-8core",
+      "threads": 2
+    },
+    {
+      "job": "streamcluster",
+      "node": "node-a-8core",
+      "threads": 4
+    },
+    {
+      "job": "freqmine",
+      "node": "node-b-4core",
+      "threads": 2
+    },
+    {
+      "job": "vips",
+      "node": "node-a-8core",
+      "threads": 2
+    },
+    {
+      "job": "canneal",
+      "node": "node-b-4core",
+      "threads": 2
+    },
+    {
+      "job": "radix",
+      "node": "node-a-8core",
+      "threads": 4
+    }
+  ],
+  "batch_start_epoch": 1778431072.0,
+  "batch_end_epoch": 1778431448.0,
+  "makespan_s": 376.0,
+  "job_times_s": {
+    "parsec-barnes": {
+      "start": 1778431072.0,
+      "end": 1778431126.0,
+      "runtime_s": 54.0
+    },
+    "parsec-blackscholes": {
+      "start": 1778431078.0,
+      "end": 1778431124.0,
+      "runtime_s": 46.0
+    },
+    "parsec-canneal": {
+      "start": 1778431313.0,
+      "end": 1778431427.0,
+      "runtime_s": 114.0
+    },
+    "parsec-freqmine": {
+      "start": 1778431136.0,
+      "end": 1778431301.0,
+      "runtime_s": 165.0
+    },
+    "parsec-radix": {
+      "start": 1778431437.0,
+      "end": 1778431448.0,
+      "runtime_s": 11.0
+    },
+    "parsec-streamcluster": {
+      "start": 1778431135.0,
+      "end": 1778431286.0,
+      "runtime_s": 151.0
+    },
+    "parsec-vips": {
+      "start": 1778431312.0,
+      "end": 1778431352.0,
+      "runtime_s": 40.0
+    }
+  },
+  "mcperf_samples_total": 33,
+  "gates": {
+    "validity": true,
+    "qps_coverage": 1.0,
+    "slo_violation_ratio": 0.0,
+    "longest_violation_streak_sec": 0.0,
+    "pass_gate": true
+  },
+  "screening_pass": true
+}

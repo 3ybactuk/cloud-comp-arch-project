@@ -138,11 +138,11 @@ kubectl label node <client-measure-XXXX> cca-project-nodetype=client-measure
 kubectl label node <node-a-8core-XXXX>   cca-project-nodetype=node-a-8core
 kubectl label node <node-b-4core-XXXX>   cca-project-nodetype=node-b-4core
 
-kubectl label node client-agent-a-9dz7 cca-project-nodetype=client-agent-a
-kubectl label node client-agent-b-qxkf cca-project-nodetype=client-agent-b
-kubectl label node client-measure-qlk9 cca-project-nodetype=client-measure
-kubectl label node node-a-8core-57gb   cca-project-nodetype=node-a-8core
-kubectl label node node-b-4core-hjkf   cca-project-nodetype=node-b-4core
+kubectl label node client-agent-a-m6lz cca-project-nodetype=client-agent-a
+kubectl label node client-agent-b-jw1c cca-project-nodetype=client-agent-b
+kubectl label node client-measure-2zzr cca-project-nodetype=client-measure
+kubectl label node node-a-8core-bjd9   cca-project-nodetype=node-a-8core
+kubectl label node node-b-4core-4r3k   cca-project-nodetype=node-b-4core
 
 # Проверить
 kubectl get nodes --show-labels | grep cca-project-nodetype

@@ -1,7 +1,7 @@
 [
   {
-    "policy_id": "p02_balanced_waves",
-    "description": "Balanced: use both nodes continuously with moderate thread counts.",
+    "policy_id": "p07_shorttail_radix_last",
+    "description": "Same as p02 but keep radix as a short final wave.",
     "all_jobs_completed": true,
     "completed_jobs": [
       "barnes",
@@ -14,24 +14,19 @@
     ],
     "job_specs": [
       {
-        "job": "radix",
-        "node": "node-a-8core",
-        "threads": 4
+        "job": "barnes",
+        "node": "node-b-4core",
+        "threads": 2
       },
       {
         "job": "blackscholes",
-        "node": "node-b-4core",
+        "node": "node-a-8core",
         "threads": 2
       },
       {
         "job": "streamcluster",
         "node": "node-a-8core",
         "threads": 4
-      },
-      {
-        "job": "canneal",
-        "node": "node-b-4core",
-        "threads": 2
       },
       {
         "job": "freqmine",
@@ -44,52 +39,57 @@
         "threads": 2
       },
       {
-        "job": "barnes",
+        "job": "canneal",
         "node": "node-b-4core",
         "threads": 2
+      },
+      {
+        "job": "radix",
+        "node": "node-a-8core",
+        "threads": 4
       }
     ],
-    "batch_start_epoch": 1778340969.0,
-    "batch_end_epoch": 1778341489.0,
-    "makespan_s": 520.0,
+    "batch_start_epoch": 1778432424.0,
+    "batch_end_epoch": 1778432802.0,
+    "makespan_s": 378.0,
     "job_times_s": {
       "parsec-barnes": {
-        "start": 1778341437.0,
-        "end": 1778341489.0,
-        "runtime_s": 52.0
+        "start": 1778432424.0,
+        "end": 1778432478.0,
+        "runtime_s": 54.0
       },
       "parsec-blackscholes": {
-        "start": 1778340969.0,
-        "end": 1778341017.0,
-        "runtime_s": 48.0
+        "start": 1778432425.0,
+        "end": 1778432471.0,
+        "runtime_s": 46.0
       },
       "parsec-canneal": {
-        "start": 1778341033.0,
-        "end": 1778341127.0,
-        "runtime_s": 94.0
+        "start": 1778432665.0,
+        "end": 1778432780.0,
+        "runtime_s": 115.0
       },
       "parsec-freqmine": {
-        "start": 1778341250.0,
-        "end": 1778341429.0,
-        "runtime_s": 179.0
+        "start": 1778432487.0,
+        "end": 1778432654.0,
+        "runtime_s": 167.0
       },
       "parsec-radix": {
-        "start": 1778340969.0,
-        "end": 1778340981.0,
-        "runtime_s": 12.0
+        "start": 1778432791.0,
+        "end": 1778432802.0,
+        "runtime_s": 11.0
       },
       "parsec-streamcluster": {
-        "start": 1778341033.0,
-        "end": 1778341238.0,
-        "runtime_s": 205.0
+        "start": 1778432487.0,
+        "end": 1778432653.0,
+        "runtime_s": 166.0
       },
       "parsec-vips": {
-        "start": 1778341250.0,
-        "end": 1778341290.0,
-        "runtime_s": 40.0
+        "start": 1778432665.0,
+        "end": 1778432704.0,
+        "runtime_s": 39.0
       }
     },
-    "mcperf_samples_total": 46,
+    "mcperf_samples_total": 34,
     "gates": {
       "validity": true,
       "qps_coverage": 1.0,

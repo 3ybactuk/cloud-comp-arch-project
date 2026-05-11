@@ -1,22 +1,18 @@
 """
 plot_part3a.py  –  Generate Part 3a plots for the CCA report.
 
-For each of the 3 runs of policy p02_balanced_waves we produce one figure with
-three stacked panels:
-
-  1. p95 latency bar chart (y-axis = ms, x-axis = time relative to first
-     batch-job start).  Each bar spans [ts_start, ts_end] from mcperf and is
-     shaded by which batch job is active on node-a at that moment.
-  2. Gantt timeline for node-a-8core (memcached + batch jobs).
-  3. Gantt timeline for node-b-4core (batch jobs only).
+For each available run under part3-screening/<policy>/runN we produce one figure
+with three stacked panels (p95, node-a Gantt, node-b Gantt).
 
 Usage:
     python3 plot_part3a.py
-Outputs are written to plots/part3a_run{1,2,3}.{pdf,png}.
+    python3 plot_part3a.py --screening-subdir p07_shorttail_radix_last \\
+        --out-prefix part3a_p07 --suptitle "p07 radix-last"
+Outputs: plots/<out-prefix>_run{N}.{pdf,png}
 """
 
+import argparse
 import json
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -24,13 +20,23 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-import numpy as np
+
+plt.rcParams.update(
+    {
+        "font.size": 14,
+        "axes.titlesize": 15,
+        "axes.labelsize": 15,
+        "xtick.labelsize": 13,
+        "ytick.labelsize": 13,
+        "legend.fontsize": 14,
+    }
+)
 
 # ── config ────────────────────────────────────────────────────────────────────
 
 BASE = Path(__file__).parent
-SCREENING = BASE / "part3-screening" / "p02_balanced_waves"
-OUT_DIR   = BASE / "plots"
+DEFAULT_SUBDIR = "p02_balanced_waves"
+OUT_DIR = BASE / "plots"
 OUT_DIR.mkdir(exist_ok=True)
 
 SLO_MS = 1.0
@@ -185,7 +191,7 @@ def build_gantt_segments(job_list, node_key: str, n_cores: int, t0: float):
 
 # ── plot ──────────────────────────────────────────────────────────────────────
 
-def plot_run(run_dir: Path, run_num: int):
+def plot_run(run_dir: Path, run_num: int, *, out_prefix: str, suptitle: str):
     mcperf_rows = parse_mcperf(run_dir / "mcperf_1.txt")
     pod_data    = parse_pods(run_dir   / "pods_1.json")
 
@@ -223,8 +229,8 @@ def plot_run(run_dir: Path, run_num: int):
         gridspec_kw={"height_ratios": [2.5, 2, 1.5]},
     )
     fig.suptitle(
-        f"Run {run_num} — p02 balanced-waves policy",
-        fontsize=13, fontweight="bold", y=0.99,
+        f"Run {run_num} — {suptitle}",
+        fontsize=20, fontweight="bold", y=0.995,
     )
 
     # ── panel 1: p95 latency bar chart ────────────────────────────────────────
@@ -257,7 +263,7 @@ def plot_run(run_dir: Path, run_num: int):
             color=JOB_COLORS[j["job"]], edgecolor="none", alpha=0.9,
         )
     ax_lat.text(x_min + 0.05, y_strip, "node-b →", va="center",
-                fontsize=6.5, color="#444")
+                fontsize=13, color="#444")
 
     # Vertical dashed lines at wave boundaries (when first job of each wave starts)
     wave_starts = {}
@@ -275,14 +281,15 @@ def plot_run(run_dir: Path, run_num: int):
     ax_lat.axhline(SLO_MS, color="black", linewidth=1.2, linestyle="--",
                    label=f"SLO {SLO_MS} ms")
     ax_lat.axhline(0, color="#cccccc", linewidth=0.5)
-    ax_lat.set_ylabel("p95 latency (ms)", fontsize=10)
+    ax_lat.set_ylabel("p95 latency (ms)", fontsize=16)
     ax_lat.set_xlim(x_min, x_max)
     ax_lat.grid(axis="y", alpha=0.35)
-    ax_lat.legend(fontsize=9, loc="upper right")
+    ax_lat.legend(fontsize=14, loc="upper right")
+    ax_lat.tick_params(axis="both", labelsize=13)
     ax_lat.set_title(
         "memcached p95 latency  (bar color = active job on node-a;  "
         "bottom strip = active job on node-b;  dotted lines = wave starts)",
-        fontsize=8.5,
+        fontsize=14,
     )
 
     # ── panel 2: node-a gantt ─────────────────────────────────────────────────
@@ -296,13 +303,16 @@ def plot_run(run_dir: Path, run_num: int):
             edgecolor="black", linewidth=0.3, height=0.75,
         )
     ax_a.set_yticks(range(n_a_cores))
-    ax_a.set_yticklabels([f"core {c}" for c in range(n_a_cores)], fontsize=8)
-    ax_a.set_ylabel("node-a-8core", fontsize=9)
+    ax_a.set_yticklabels([f"core {c}" for c in range(n_a_cores)], fontsize=13)
+    ax_a.set_ylabel("node-a-8core", fontsize=15)
     ax_a.set_ylim(-0.5, n_a_cores - 0.5)
     ax_a.set_xlim(x_min, x_max)
     ax_a.grid(axis="x", alpha=0.3)
-    ax_a.set_title("node-a-8core (e2-standard-8) — job → core assignment",
-                   fontsize=9)
+    ax_a.set_title(
+        "node-a-8core (e2-standard-8) — job → core assignment",
+        fontsize=15,
+    )
+    ax_a.tick_params(axis="both", labelsize=13)
 
     # ── panel 3: node-b gantt ─────────────────────────────────────────────────
     n_b_cores = 4
@@ -315,35 +325,46 @@ def plot_run(run_dir: Path, run_num: int):
             edgecolor="black", linewidth=0.3, height=0.75,
         )
     ax_b.set_yticks(range(n_b_cores))
-    ax_b.set_yticklabels([f"core {c}" for c in range(n_b_cores)], fontsize=8)
-    ax_b.set_ylabel("node-b-4core", fontsize=9)
+    ax_b.set_yticklabels([f"core {c}" for c in range(n_b_cores)], fontsize=13)
+    ax_b.set_ylabel("node-b-4core", fontsize=15)
     ax_b.set_ylim(-0.5, n_b_cores - 0.5)
     ax_b.set_xlim(x_min, x_max)
     ax_b.grid(axis="x", alpha=0.3)
-    ax_b.set_title("node-b-4core (n2d-highcpu-4) — job → core assignment",
-                   fontsize=9)
-    ax_b.set_xlabel("Time (minutes from first batch-job start, t = 0)", fontsize=10)
+    ax_b.set_title(
+        "node-b-4core (n2d-highcpu-4) — job → core assignment",
+        fontsize=15,
+    )
+    ax_b.set_xlabel(
+        "Time (minutes from first batch-job start, t = 0)", fontsize=16
+    )
+    ax_b.tick_params(axis="both", labelsize=13)
 
-    # ── shared legend — show [node] for each batch job ────────────────────────
+    # Legend: job colours only (node placement differs by policy; Gantt shows actual node).
     legend_entries = [
-        ("memcached [node-a]",     "memcached"),
-        ("radix [node-a]",         "radix"),
-        ("streamcluster [node-a]", "streamcluster"),
-        ("vips [node-a]",          "vips"),
-        ("blackscholes [node-b]",  "blackscholes"),
-        ("canneal [node-b]",       "canneal"),
-        ("freqmine [node-b]",      "freqmine"),
-        ("barnes [node-b]",        "barnes"),
+        ("memcached", "memcached"),
+        ("radix", "radix"),
+        ("streamcluster", "streamcluster"),
+        ("vips", "vips"),
+        ("blackscholes", "blackscholes"),
+        ("canneal", "canneal"),
+        ("freqmine", "freqmine"),
+        ("barnes", "barnes"),
     ]
     patches = [mpatches.Patch(color=JOB_COLORS[job], label=label)
                for label, job in legend_entries]
-    fig.legend(handles=patches, loc="lower center", ncol=4,
-               fontsize=8, bbox_to_anchor=(0.5, 0.0), framealpha=0.9)
+    fig.legend(
+        handles=patches,
+        loc="lower center",
+        ncol=4,
+        fontsize=14,
+        bbox_to_anchor=(0.5, 0.01),
+        framealpha=0.9,
+    )
 
-    fig.tight_layout(rect=[0, 0.07, 1, 1])
+    fig.tight_layout(rect=[0, 0.10, 1, 0.98])
 
     for ext in ("pdf", "png"):
-        out = OUT_DIR / f"part3a_run{run_num}.{ext}"
+        out = OUT_DIR / f"{out_prefix}_run{run_num}.{ext}"
         fig.savefig(out, dpi=180, bbox_inches="tight")
         print(f"  saved {out}")
     plt.close(fig)
@@ -352,17 +373,34 @@ def plot_run(run_dir: Path, run_num: int):
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    run_dirs = {
-        1: SCREENING / "run1",
-        2: SCREENING / "run2",
-        3: SCREENING / "run3",
-    }
+    parser = argparse.ArgumentParser(description="Part 3a mcperf + Gantt plots")
+    parser.add_argument(
+        "--screening-subdir",
+        default=DEFAULT_SUBDIR,
+        help="Folder under part3-screening/ (default: p02_balanced_waves)",
+    )
+    parser.add_argument(
+        "--out-prefix",
+        default="part3a",
+        help="Output basename prefix, e.g. part3a_p07 → part3a_p07_run1.pdf",
+    )
+    parser.add_argument(
+        "--suptitle",
+        default="",
+        help="Subtitle for each figure (default: derived from --screening-subdir)",
+    )
+    args = parser.parse_args()
+
+    screening = BASE / "part3-screening" / args.screening_subdir
+    suptitle = args.suptitle.strip() or args.screening_subdir.replace("_", " ")
+
+    run_dirs = {1: screening / "run1", 2: screening / "run2", 3: screening / "run3"}
     for run_num, run_dir in sorted(run_dirs.items()):
         if not run_dir.exists():
             print(f"run{run_num}: directory missing, skipping")
             continue
-        print(f"Plotting run {run_num} …")
-        plot_run(run_dir, run_num)
+        print(f"Plotting run {run_num} ({screening}) …")
+        plot_run(run_dir, run_num, out_prefix=args.out_prefix, suptitle=suptitle)
     print("Done.")
 
 

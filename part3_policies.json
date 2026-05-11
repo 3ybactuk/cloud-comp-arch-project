@@ -140,6 +140,56 @@
           {"job": "barnes", "node": "node-b-4core", "threads": 2}
         ]
       ]
+    },
+    {
+      "id": "p06_longpair_then_shortpair",
+      "description": "Same as p02 but wave order pairs the two long jobs first.",
+      "memcached": {
+        "node": "node-a-8core",
+        "threads": 2
+      },
+      "waves": [
+        [
+          {"job": "radix", "node": "node-a-8core", "threads": 4},
+          {"job": "blackscholes", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "streamcluster", "node": "node-a-8core", "threads": 4},
+          {"job": "freqmine", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "vips", "node": "node-a-8core", "threads": 2},
+          {"job": "canneal", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "barnes", "node": "node-b-4core", "threads": 2}
+        ]
+      ]
+    },
+    {
+      "id": "p07_shorttail_radix_last",
+      "description": "Same as p02 but keep radix as a short final wave.",
+      "memcached": {
+        "node": "node-a-8core",
+        "threads": 2
+      },
+      "waves": [
+        [
+          {"job": "barnes", "node": "node-b-4core", "threads": 2},
+          {"job": "blackscholes", "node": "node-a-8core", "threads": 2}
+        ],
+        [
+          {"job": "streamcluster", "node": "node-a-8core", "threads": 4},
+          {"job": "freqmine", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "vips", "node": "node-a-8core", "threads": 2},
+          {"job": "canneal", "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "radix", "node": "node-a-8core", "threads": 4}
+        ]
+      ]
     }
   ]
 }
