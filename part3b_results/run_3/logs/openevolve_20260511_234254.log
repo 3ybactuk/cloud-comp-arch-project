@@ -1,0 +1,12 @@
+2026-05-11 23:42:54,147 - openevolve.controller - INFO - Logging to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_3/logs/openevolve_20260511_234254.log
+2026-05-11 23:42:54,305 - openevolve.controller - INFO - Set random seed to 42 for reproducibility
+2026-05-11 23:42:54,352 - openevolve.llm.openai - INFO - Initialized OpenAI LLM with model: Qwen/Qwen3-Next-80B-A3B-Instruct-GICA
+2026-05-11 23:42:54,352 - openevolve.llm.ensemble - INFO - Initialized LLM ensemble with models: Qwen/Qwen3-Next-80B-A3B-Instruct-GICA (weight: 1.00)
+2026-05-11 23:42:54,366 - openevolve.prompt.sampler - INFO - Initialized prompt sampler
+2026-05-11 23:42:54,367 - openevolve.prompt.sampler - INFO - Set custom templates: system=evaluator_system_message, user=None
+2026-05-11 23:42:54,367 - openevolve.database - INFO - Initialized program database with 0 programs
+2026-05-11 23:42:54,369 - openevolve.evaluator - INFO - Successfully loaded evaluation function from /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/evaluator.py
+2026-05-11 23:42:54,369 - openevolve.evaluator - INFO - Initialized evaluator with /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/evaluator.py
+2026-05-11 23:42:54,369 - openevolve.controller - INFO - Initialized OpenEvolve with /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/initial_program.py
+2026-05-11 23:42:54,369 - openevolve.controller - INFO - Adding initial program to database
+2026-05-11 23:43:21,109 - openevolve.evaluator - WARNING - Evaluation attempt 1/4 failed for program e6d99282-c8f3-474c-91cf-aa28cc9219a0: EvaluationResult.__init__() got an unexpected keyword argument 'scores'

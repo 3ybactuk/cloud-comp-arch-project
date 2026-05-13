@@ -172,19 +172,33 @@ def build_gantt_segments(job_list, node_key: str, n_cores: int, t0: float):
 
     first_core = MEM_THREADS if is_node_a else 0
 
+    # Assign cores greedily: find lowest free core slot at job's start time.
+    # core_free_at[c] = earliest time (relative) that core c is free.
+    core_free_at = [0.0] * n_cores
+
     for j in sorted(node_jobs, key=lambda x: x["start"]):
         if j["job"] not in BATCH:
             continue
         threads = THREAD_COUNTS.get(j["job"], 1)
         t_start_rel = j["start"] - t0
         t_end_rel   = (j["end"] or j["start"] + 1) - t0
-        for c in range(first_core, first_core + threads):
-            if c < n_cores:
-                segments.append({
-                    "job": j["job"], "core": c,
-                    "t_start_rel": t_start_rel,
-                    "t_end_rel": t_end_rel,
-                })
+        # Find `threads` consecutive free cores starting from first_core
+        assigned = []
+        for c in range(first_core, n_cores):
+            if core_free_at[c] <= t_start_rel + 0.5:
+                assigned.append(c)
+                if len(assigned) == threads:
+                    break
+        # Fallback: pack from first_core if not enough consecutive free cores
+        if len(assigned) < threads:
+            assigned = list(range(first_core, min(first_core + threads, n_cores)))
+        for c in assigned:
+            core_free_at[c] = t_end_rel
+            segments.append({
+                "job": j["job"], "core": c,
+                "t_start_rel": t_start_rel,
+                "t_end_rel": t_end_rel,
+            })
 
     return segments
 
@@ -394,7 +408,7 @@ def main():
     screening = BASE / "part3-screening" / args.screening_subdir
     suptitle = args.suptitle.strip() or args.screening_subdir.replace("_", " ")
 
-    run_dirs = {1: screening / "run1", 2: screening / "run2", 3: screening / "run3"}
+    run_dirs = {n: screening / f"run{n}" for n in range(1, 5)}
     for run_num, run_dir in sorted(run_dirs.items()):
         if not run_dir.exists():
             print(f"run{run_num}: directory missing, skipping")

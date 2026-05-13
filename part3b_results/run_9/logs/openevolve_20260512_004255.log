@@ -1,0 +1,59 @@
+2026-05-12 00:42:55,950 - openevolve.controller - INFO - Logging to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_9/logs/openevolve_20260512_004255.log
+2026-05-12 00:42:55,970 - openevolve.controller - INFO - Set random seed to 42 for reproducibility
+2026-05-12 00:42:56,011 - openevolve.llm.openai - INFO - Initialized OpenAI LLM with model: meta-llama/Llama-3.3-70B-Instruct
+2026-05-12 00:42:56,011 - openevolve.llm.ensemble - INFO - Initialized LLM ensemble with models: meta-llama/Llama-3.3-70B-Instruct (weight: 1.00)
+2026-05-12 00:42:56,026 - openevolve.prompt.sampler - INFO - Initialized prompt sampler
+2026-05-12 00:42:56,027 - openevolve.prompt.sampler - INFO - Set custom templates: system=evaluator_system_message, user=None
+2026-05-12 00:42:56,027 - openevolve.database - INFO - Initialized program database with 0 programs
+2026-05-12 00:42:56,028 - openevolve.evaluator - INFO - Successfully loaded evaluation function from /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/evaluator.py
+2026-05-12 00:42:56,028 - openevolve.evaluator - INFO - Initialized evaluator with /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/evaluator.py
+2026-05-12 00:42:56,028 - openevolve.controller - INFO - Initialized OpenEvolve with /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/initial_program.py
+2026-05-12 00:42:56,028 - openevolve.controller - INFO - Adding initial program to database
+2026-05-12 00:51:16,053 - openevolve.evaluator - WARNING - Evaluation timed out after 500s
+2026-05-12 00:51:16,071 - openevolve.database - INFO - New MAP-Elites cell occupied in island 0: {'complexity': 5, 'diversity': 0}
+2026-05-12 00:51:16,071 - openevolve.controller - WARNING - ⚠️  No 'combined_score' metric found in evaluation results. Using average of all numeric metrics (0.0000) for evolution guidance. For better evolution results, please modify your evaluator to return a 'combined_score' metric that properly weights different aspects of program performance.
+2026-05-12 00:51:16,098 - openevolve.process_parallel - INFO - Initialized process parallel controller with 1 workers
+2026-05-12 00:51:16,101 - openevolve.process_parallel - INFO - Set max None tasks per child
+2026-05-12 00:51:16,103 - openevolve.process_parallel - INFO - Started process pool with 1 processes
+2026-05-12 00:51:16,103 - openevolve.controller - INFO - Using island-based evolution with 5 islands
+2026-05-12 00:51:16,103 - openevolve.database - INFO - Island Status:
+2026-05-12 00:51:16,103 - openevolve.database - INFO -  * Island 0: 1 programs, best=0.5000, avg=0.5000, diversity=0.00, gen=0 (best: cc08d248-7d62-4d16-88a9-0f26ad515a28)
+2026-05-12 00:51:16,103 - openevolve.database - INFO -    Island 1: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:51:16,103 - openevolve.database - INFO -    Island 2: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:51:16,103 - openevolve.database - INFO -    Island 3: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:51:16,103 - openevolve.database - INFO -    Island 4: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:51:16,103 - openevolve.process_parallel - INFO - Starting process-based evolution from iteration 1 for 50 iterations (total: 51)
+2026-05-12 00:51:16,110 - openevolve.process_parallel - INFO - Early stopping disabled
+2026-05-12 00:51:34,583 - openevolve.process_parallel - WARNING - Iteration 1 error: No valid diffs found in response
+2026-05-12 00:52:00,744 - openevolve.process_parallel - WARNING - Iteration 2 error: No valid diffs found in response
+2026-05-12 00:52:17,494 - openevolve.process_parallel - WARNING - Iteration 3 error: No valid diffs found in response
+2026-05-12 00:52:25,851 - openevolve.process_parallel - WARNING - Iteration 4 error: No valid diffs found in response
+2026-05-12 00:52:41,815 - openevolve.process_parallel - WARNING - Iteration 5 error: No valid diffs found in response
+2026-05-12 00:52:59,057 - openevolve.process_parallel - WARNING - Iteration 6 error: No valid diffs found in response
+2026-05-12 00:53:14,022 - openevolve.process_parallel - WARNING - Iteration 7 error: No valid diffs found in response
+2026-05-12 00:53:26,999 - openevolve.process_parallel - WARNING - Iteration 8 error: No valid diffs found in response
+2026-05-12 00:53:39,463 - openevolve.process_parallel - WARNING - Iteration 9 error: No valid diffs found in response
+2026-05-12 00:53:55,312 - openevolve.process_parallel - WARNING - Iteration 10 error: No valid diffs found in response
+2026-05-12 00:54:10,749 - openevolve.process_parallel - WARNING - Iteration 11 error: No valid diffs found in response
+2026-05-12 00:54:22,138 - openevolve.process_parallel - WARNING - Iteration 12 error: No valid diffs found in response
+2026-05-12 00:54:35,089 - openevolve.process_parallel - WARNING - Iteration 13 error: No valid diffs found in response
+2026-05-12 00:54:50,328 - openevolve.process_parallel - WARNING - Iteration 14 error: No valid diffs found in response
+2026-05-12 00:55:01,252 - openevolve.process_parallel - WARNING - Iteration 15 error: No valid diffs found in response
+2026-05-12 00:55:12,959 - openevolve.process_parallel - WARNING - Iteration 16 error: No valid diffs found in response
+2026-05-12 00:55:29,948 - openevolve.process_parallel - WARNING - Iteration 17 error: No valid diffs found in response
+2026-05-12 00:55:42,425 - openevolve.process_parallel - WARNING - Iteration 18 error: No valid diffs found in response
+2026-05-12 00:55:54,279 - openevolve.process_parallel - WARNING - Iteration 19 error: No valid diffs found in response
+2026-05-12 00:56:12,484 - openevolve.process_parallel - WARNING - Iteration 20 error: No valid diffs found in response
+2026-05-12 00:56:44,665 - openevolve.process_parallel - WARNING - Iteration 21 error: No valid diffs found in response
+2026-05-12 00:57:01,629 - openevolve.process_parallel - WARNING - Iteration 22 error: No valid diffs found in response
+2026-05-12 00:57:16,929 - openevolve.process_parallel - WARNING - Iteration 23 error: No valid diffs found in response
+2026-05-12 00:57:29,273 - openevolve.process_parallel - WARNING - Iteration 24 error: No valid diffs found in response
+2026-05-12 00:57:40,460 - openevolve.process_parallel - WARNING - Iteration 25 error: No valid diffs found in response
+2026-05-12 00:57:51,213 - openevolve.process_parallel - WARNING - Iteration 26 error: No valid diffs found in response
+2026-05-12 00:58:06,019 - openevolve.process_parallel - WARNING - Iteration 27 error: No valid diffs found in response
+2026-05-12 00:58:11,027 - openevolve.controller - INFO - Received signal 2, initiating graceful shutdown...
+2026-05-12 00:58:11,030 - openevolve.process_parallel - INFO - Graceful shutdown requested...
+2026-05-12 00:58:11,033 - openevolve.process_parallel - INFO - Shutdown requested, canceling remaining evaluations...
+2026-05-12 00:58:11,033 - openevolve.process_parallel - INFO - ✅ Evolution completed - Shutdown requested
+2026-05-12 00:58:11,034 - openevolve.controller - INFO - Evolution stopped due to shutdown request
+2026-05-12 00:59:03,051 - openevolve.controller - INFO - Force exit requested - terminating immediately

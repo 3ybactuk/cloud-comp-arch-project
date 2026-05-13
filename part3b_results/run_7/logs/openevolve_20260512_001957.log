@@ -1,0 +1,52 @@
+2026-05-12 00:19:57,100 - openevolve.controller - INFO - Logging to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_7/logs/openevolve_20260512_001957.log
+2026-05-12 00:19:57,135 - openevolve.controller - INFO - Set random seed to 42 for reproducibility
+2026-05-12 00:19:57,199 - openevolve.llm.openai - INFO - Initialized OpenAI LLM with model: Qwen/Qwen3-Next-80B-A3B-Instruct-GICA
+2026-05-12 00:19:57,199 - openevolve.llm.ensemble - INFO - Initialized LLM ensemble with models: Qwen/Qwen3-Next-80B-A3B-Instruct-GICA (weight: 1.00)
+2026-05-12 00:19:57,215 - openevolve.prompt.sampler - INFO - Initialized prompt sampler
+2026-05-12 00:19:57,215 - openevolve.prompt.sampler - INFO - Set custom templates: system=evaluator_system_message, user=None
+2026-05-12 00:19:57,216 - openevolve.database - INFO - Initialized program database with 0 programs
+2026-05-12 00:19:57,217 - openevolve.evaluator - INFO - Successfully loaded evaluation function from /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/evaluator.py
+2026-05-12 00:19:57,217 - openevolve.evaluator - INFO - Initialized evaluator with /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/evaluator.py
+2026-05-12 00:19:57,217 - openevolve.controller - INFO - Initialized OpenEvolve with /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/initial_program.py
+2026-05-12 00:19:57,217 - openevolve.controller - INFO - Adding initial program to database
+2026-05-12 00:26:37,223 - openevolve.evaluator - WARNING - Evaluation timed out after 400s
+2026-05-12 00:26:37,231 - openevolve.database - INFO - New MAP-Elites cell occupied in island 0: {'complexity': 5, 'diversity': 0}
+2026-05-12 00:26:37,231 - openevolve.controller - WARNING - ⚠️  No 'combined_score' metric found in evaluation results. Using average of all numeric metrics (0.0000) for evolution guidance. For better evolution results, please modify your evaluator to return a 'combined_score' metric that properly weights different aspects of program performance.
+2026-05-12 00:26:37,254 - openevolve.process_parallel - INFO - Initialized process parallel controller with 1 workers
+2026-05-12 00:26:37,259 - openevolve.process_parallel - INFO - Set max None tasks per child
+2026-05-12 00:26:37,259 - openevolve.process_parallel - INFO - Started process pool with 1 processes
+2026-05-12 00:26:37,259 - openevolve.controller - INFO - Using island-based evolution with 5 islands
+2026-05-12 00:26:37,260 - openevolve.database - INFO - Island Status:
+2026-05-12 00:26:37,260 - openevolve.database - INFO -  * Island 0: 1 programs, best=0.5000, avg=0.5000, diversity=0.00, gen=0 (best: 9ad66798-1ed4-4e79-8299-8d666a41c2f2)
+2026-05-12 00:26:37,260 - openevolve.database - INFO -    Island 1: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:26:37,260 - openevolve.database - INFO -    Island 2: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:26:37,260 - openevolve.database - INFO -    Island 3: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:26:37,260 - openevolve.database - INFO -    Island 4: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:26:37,261 - openevolve.process_parallel - INFO - Starting process-based evolution from iteration 1 for 50 iterations (total: 51)
+2026-05-12 00:26:37,267 - openevolve.process_parallel - INFO - Early stopping disabled
+2026-05-12 00:38:27,372 - openevolve.database - INFO - New MAP-Elites cell occupied in island 0: {'complexity': 9, 'diversity': 5}
+2026-05-12 00:38:27,382 - openevolve.process_parallel - INFO - Iteration 1: Program 31f55eae-0805-4229-9def-604bed7e6374 (parent: 9ad66798-1ed4-4e79-8299-8d666a41c2f2) completed in 709.38s
+2026-05-12 00:38:27,382 - openevolve.process_parallel - INFO - Metrics: error=0.0000, timeout=1.0000
+2026-05-12 00:38:27,383 - openevolve.process_parallel - WARNING - ⚠️  No 'combined_score' metric found in evaluation results. Using average of all numeric metrics (0.5000) for evolution guidance. For better evolution results, please modify your evaluator to return a 'combined_score' metric that properly weights different aspects of program performance.
+2026-05-12 00:38:27,384 - openevolve.process_parallel - INFO - Checkpoint interval reached at iteration 1
+2026-05-12 00:38:27,384 - openevolve.database - INFO - Island Status:
+2026-05-12 00:38:27,384 - openevolve.database - INFO -  * Island 0: 2 programs, best=0.5000, avg=0.5000, diversity=79.70, gen=1 (best: 9ad66798-1ed4-4e79-8299-8d666a41c2f2)
+2026-05-12 00:38:27,384 - openevolve.database - INFO -    Island 1: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:38:27,384 - openevolve.database - INFO -    Island 2: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:38:27,384 - openevolve.database - INFO -    Island 3: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:38:27,384 - openevolve.database - INFO -    Island 4: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 00:38:27,393 - openevolve.database - INFO - Saved database with 2 programs to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_7/checkpoints/checkpoint_1
+2026-05-12 00:38:27,397 - openevolve.controller - INFO - Saved best program at checkpoint 1 with metrics: error=0.0000, timeout=1.0000
+2026-05-12 00:38:27,397 - openevolve.controller - INFO - Saved checkpoint at iteration 1 to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_7/checkpoints/checkpoint_1
+2026-05-12 00:38:55,929 - openevolve.process_parallel - WARNING - Iteration 2 error: LLM generation failed: Error code: 503 - {'error': 'No provider found for the requested service.'}
+2026-05-12 00:39:24,060 - openevolve.process_parallel - WARNING - Iteration 3 error: LLM generation failed: Error code: 503 - {'error': 'No provider found for the requested service.'}
+2026-05-12 00:39:52,140 - openevolve.process_parallel - WARNING - Iteration 4 error: LLM generation failed: Error code: 503 - {'error': 'No provider found for the requested service.'}
+2026-05-12 00:40:20,087 - openevolve.process_parallel - WARNING - Iteration 5 error: LLM generation failed: Error code: 503 - {'error': 'No provider found for the requested service.'}
+2026-05-12 00:40:48,191 - openevolve.process_parallel - WARNING - Iteration 6 error: LLM generation failed: Error code: 503 - {'error': 'No provider found for the requested service.'}
+2026-05-12 00:41:16,772 - openevolve.process_parallel - WARNING - Iteration 7 error: LLM generation failed: Error code: 503 - {'error': 'No provider found for the requested service.'}
+2026-05-12 00:41:25,310 - openevolve.controller - INFO - Received signal 2, initiating graceful shutdown...
+2026-05-12 00:41:25,314 - openevolve.process_parallel - INFO - Graceful shutdown requested...
+2026-05-12 00:41:25,314 - openevolve.process_parallel - INFO - Shutdown requested, canceling remaining evaluations...
+2026-05-12 00:41:25,315 - openevolve.process_parallel - INFO - ✅ Evolution completed - Shutdown requested
+2026-05-12 00:41:25,315 - openevolve.controller - INFO - Evolution stopped due to shutdown request
+2026-05-12 00:41:39,058 - openevolve.controller - INFO - Force exit requested - terminating immediately

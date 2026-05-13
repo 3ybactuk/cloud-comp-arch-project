@@ -1,0 +1,87 @@
+2026-05-12 20:04:58,691 - openevolve.controller - INFO - Logging to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/logs/openevolve_20260512_200458.log
+2026-05-12 20:04:58,711 - openevolve.controller - INFO - Set random seed to 42 for reproducibility
+2026-05-12 20:04:58,754 - openevolve.llm.openai - INFO - Initialized OpenAI LLM with model: Qwen/Qwen2.5-Coder-14B-Instruct
+2026-05-12 20:04:58,754 - openevolve.llm.ensemble - INFO - Initialized LLM ensemble with models: Qwen/Qwen2.5-Coder-14B-Instruct (weight: 1.00)
+2026-05-12 20:04:58,769 - openevolve.prompt.sampler - INFO - Initialized prompt sampler
+2026-05-12 20:04:58,769 - openevolve.prompt.sampler - INFO - Set custom templates: system=evaluator_system_message, user=None
+2026-05-12 20:04:58,769 - openevolve.database - INFO - Initialized program database with 0 programs
+2026-05-12 20:04:58,770 - openevolve.evaluator - INFO - Successfully loaded evaluation function from /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/evaluator.py
+2026-05-12 20:04:58,770 - openevolve.evaluator - INFO - Initialized evaluator with /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/evaluator.py
+2026-05-12 20:04:58,770 - openevolve.controller - INFO - Initialized OpenEvolve with /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/openevolve/policy.py
+2026-05-12 20:04:58,770 - openevolve.controller - INFO - Adding initial program to database
+2026-05-12 20:14:55,032 - openevolve.evaluator - INFO - Evaluated program 9405a9d4-5a00-4182-a739-c7d42da39156 in 596.26s: combined_score=0.1622, combined=0.1622, makespan_score=0.8112, slo_factor=0.0000
+2026-05-12 20:14:55,037 - openevolve.database - INFO - New MAP-Elites cell occupied in island 0: {'complexity': 5, 'diversity': 0}
+2026-05-12 20:14:55,064 - openevolve.process_parallel - INFO - Initialized process parallel controller with 1 workers
+2026-05-12 20:14:55,066 - openevolve.process_parallel - INFO - Set max None tasks per child
+2026-05-12 20:14:55,067 - openevolve.process_parallel - INFO - Started process pool with 1 processes
+2026-05-12 20:14:55,068 - openevolve.controller - INFO - Using island-based evolution with 5 islands
+2026-05-12 20:14:55,068 - openevolve.database - INFO - Island Status:
+2026-05-12 20:14:55,068 - openevolve.database - INFO -  * Island 0: 1 programs, best=0.1622, avg=0.1622, diversity=0.00, gen=0 (best: 9405a9d4-5a00-4182-a739-c7d42da39156)
+2026-05-12 20:14:55,068 - openevolve.database - INFO -    Island 1: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:14:55,068 - openevolve.database - INFO -    Island 2: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:14:55,068 - openevolve.database - INFO -    Island 3: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:14:55,068 - openevolve.database - INFO -    Island 4: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:14:55,068 - openevolve.process_parallel - INFO - Starting process-based evolution from iteration 1 for 50 iterations (total: 51)
+2026-05-12 20:14:55,076 - openevolve.process_parallel - INFO - Early stopping disabled
+2026-05-12 20:21:02,964 - openevolve.database - INFO - New MAP-Elites cell occupied in island 0: {'complexity': 0, 'diversity': 5}
+2026-05-12 20:21:02,968 - openevolve.database - INFO - New best program ef0864b0-d023-4725-aa7f-c335e6b49d8e replaces 9405a9d4-5a00-4182-a739-c7d42da39156 (combined_score: 0.1622 → 0.2000, +0.0378)
+2026-05-12 20:21:02,969 - openevolve.process_parallel - INFO - Iteration 1: Program ef0864b0-d023-4725-aa7f-c335e6b49d8e (parent: 9405a9d4-5a00-4182-a739-c7d42da39156) completed in 367.20s
+2026-05-12 20:21:02,970 - openevolve.process_parallel - INFO - Metrics: combined_score=0.2000, combined=0.2000, makespan_score=1.0000, slo_factor=0.0000
+2026-05-12 20:21:02,970 - openevolve.process_parallel - INFO - 🌟 New best solution found at iteration 1: ef0864b0-d023-4725-aa7f-c335e6b49d8e
+2026-05-12 20:21:02,970 - openevolve.process_parallel - INFO - Checkpoint interval reached at iteration 1
+2026-05-12 20:21:02,970 - openevolve.database - INFO - Island Status:
+2026-05-12 20:21:02,970 - openevolve.database - INFO -  * Island 0: 2 programs, best=0.2000, avg=0.1811, diversity=147.80, gen=1 (best: ef0864b0-d023-4725-aa7f-c335e6b49d8e)
+2026-05-12 20:21:02,970 - openevolve.database - INFO -    Island 1: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:21:02,970 - openevolve.database - INFO -    Island 2: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:21:02,980 - openevolve.database - INFO -    Island 3: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:21:02,980 - openevolve.database - INFO -    Island 4: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:21:02,983 - openevolve.database - INFO - Saved database with 2 programs to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/checkpoints/checkpoint_1
+2026-05-12 20:21:02,984 - openevolve.controller - INFO - Saved best program at checkpoint 1 with metrics: combined_score=0.2000, combined=0.2000, makespan_score=1.0000, slo_factor=0.0000
+2026-05-12 20:21:02,984 - openevolve.controller - INFO - Saved checkpoint at iteration 1 to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/checkpoints/checkpoint_1
+2026-05-12 20:26:56,822 - openevolve.database - INFO - New MAP-Elites cell occupied in island 1: {'complexity': 0, 'diversity': 5}
+2026-05-12 20:26:56,826 - openevolve.process_parallel - INFO - Iteration 2: Program 0dc8b379-5edf-434e-bd7d-705cfa476d9c (parent: 9405a9d4-5a00-4182-a739-c7d42da39156) completed in 353.86s
+2026-05-12 20:26:56,826 - openevolve.process_parallel - INFO - Metrics: combined_score=0.2000, combined=0.2000, makespan_score=1.0000, slo_factor=0.0000
+2026-05-12 20:26:56,826 - openevolve.process_parallel - INFO - Checkpoint interval reached at iteration 2
+2026-05-12 20:26:56,828 - openevolve.database - INFO - Island Status:
+2026-05-12 20:26:56,828 - openevolve.database - INFO -  * Island 0: 2 programs, best=0.2000, avg=0.1811, diversity=147.80, gen=1 (best: ef0864b0-d023-4725-aa7f-c335e6b49d8e)
+2026-05-12 20:26:56,828 - openevolve.database - INFO -    Island 1: 1 programs, best=0.2000, avg=0.2000, diversity=0.00, gen=1 (best: 0dc8b379-5edf-434e-bd7d-705cfa476d9c)
+2026-05-12 20:26:56,828 - openevolve.database - INFO -    Island 2: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:26:56,828 - openevolve.database - INFO -    Island 3: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:26:56,828 - openevolve.database - INFO -    Island 4: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:26:56,834 - openevolve.database - INFO - Saved database with 3 programs to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/checkpoints/checkpoint_2
+2026-05-12 20:26:56,835 - openevolve.controller - INFO - Saved best program at checkpoint 2 with metrics: combined_score=0.2000, combined=0.2000, makespan_score=1.0000, slo_factor=0.0000
+2026-05-12 20:26:56,835 - openevolve.controller - INFO - Saved checkpoint at iteration 2 to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/checkpoints/checkpoint_2
+2026-05-12 20:33:00,606 - openevolve.database - INFO - New MAP-Elites cell occupied in island 2: {'complexity': 0, 'diversity': 5}
+2026-05-12 20:33:00,612 - openevolve.process_parallel - INFO - Iteration 3: Program ee53f67f-46f3-4560-bd3a-60ca09401954 (parent: 9405a9d4-5a00-4182-a739-c7d42da39156) completed in 363.78s
+2026-05-12 20:33:00,612 - openevolve.process_parallel - INFO - Metrics: combined_score=0.2000, combined=0.2000, makespan_score=1.0000, slo_factor=0.0000
+2026-05-12 20:33:00,612 - openevolve.process_parallel - INFO - Checkpoint interval reached at iteration 3
+2026-05-12 20:33:00,612 - openevolve.database - INFO - Island Status:
+2026-05-12 20:33:00,613 - openevolve.database - INFO -  * Island 0: 2 programs, best=0.2000, avg=0.1811, diversity=147.80, gen=1 (best: ef0864b0-d023-4725-aa7f-c335e6b49d8e)
+2026-05-12 20:33:00,613 - openevolve.database - INFO -    Island 1: 1 programs, best=0.2000, avg=0.2000, diversity=0.00, gen=1 (best: 0dc8b379-5edf-434e-bd7d-705cfa476d9c)
+2026-05-12 20:33:00,613 - openevolve.database - INFO -    Island 2: 1 programs, best=0.2000, avg=0.2000, diversity=0.00, gen=1 (best: ee53f67f-46f3-4560-bd3a-60ca09401954)
+2026-05-12 20:33:00,613 - openevolve.database - INFO -    Island 3: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:33:00,613 - openevolve.database - INFO -    Island 4: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:33:00,618 - openevolve.database - INFO - Saved database with 4 programs to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/checkpoints/checkpoint_3
+2026-05-12 20:33:00,618 - openevolve.controller - INFO - Saved best program at checkpoint 3 with metrics: combined_score=0.2000, combined=0.2000, makespan_score=1.0000, slo_factor=0.0000
+2026-05-12 20:33:00,618 - openevolve.controller - INFO - Saved checkpoint at iteration 3 to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/checkpoints/checkpoint_3
+2026-05-12 20:39:05,595 - openevolve.database - INFO - New MAP-Elites cell occupied in island 3: {'complexity': 0, 'diversity': 5}
+2026-05-12 20:39:05,597 - openevolve.process_parallel - INFO - Iteration 4: Program f78d857e-b4ba-424c-abce-1f9efaecfe18 (parent: 9405a9d4-5a00-4182-a739-c7d42da39156) completed in 364.98s
+2026-05-12 20:39:05,597 - openevolve.process_parallel - INFO - Metrics: combined_score=0.2000, combined=0.2000, makespan_score=1.0000, slo_factor=0.0000
+2026-05-12 20:39:05,597 - openevolve.process_parallel - INFO - Checkpoint interval reached at iteration 4
+2026-05-12 20:39:05,597 - openevolve.database - INFO - Island Status:
+2026-05-12 20:39:05,597 - openevolve.database - INFO -  * Island 0: 2 programs, best=0.2000, avg=0.1811, diversity=147.80, gen=1 (best: ef0864b0-d023-4725-aa7f-c335e6b49d8e)
+2026-05-12 20:39:05,597 - openevolve.database - INFO -    Island 1: 1 programs, best=0.2000, avg=0.2000, diversity=0.00, gen=1 (best: 0dc8b379-5edf-434e-bd7d-705cfa476d9c)
+2026-05-12 20:39:05,597 - openevolve.database - INFO -    Island 2: 1 programs, best=0.2000, avg=0.2000, diversity=0.00, gen=1 (best: ee53f67f-46f3-4560-bd3a-60ca09401954)
+2026-05-12 20:39:05,597 - openevolve.database - INFO -    Island 3: 1 programs, best=0.2000, avg=0.2000, diversity=0.00, gen=1 (best: f78d857e-b4ba-424c-abce-1f9efaecfe18)
+2026-05-12 20:39:05,597 - openevolve.database - INFO -    Island 4: 0 programs, best=0.0000, avg=0.0000, diversity=0.00, gen=0
+2026-05-12 20:39:05,625 - openevolve.database - INFO - Saved database with 5 programs to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/checkpoints/checkpoint_4
+2026-05-12 20:39:05,626 - openevolve.controller - INFO - Saved best program at checkpoint 4 with metrics: combined_score=0.2000, combined=0.2000, makespan_score=1.0000, slo_factor=0.0000
+2026-05-12 20:39:05,626 - openevolve.controller - INFO - Saved checkpoint at iteration 4 to /Users/yogurt2003/Desktop/uzh/2 semestr/cloud/cloud-comp-arch-project/part3b_results/run_24/checkpoints/checkpoint_4
+2026-05-12 20:44:00,289 - openevolve.controller - INFO - Received signal 2, initiating graceful shutdown...
+2026-05-12 20:44:00,294 - openevolve.process_parallel - INFO - Graceful shutdown requested...
+2026-05-12 20:44:00,296 - openevolve.process_parallel - INFO - Shutdown requested, canceling remaining evaluations...
+2026-05-12 20:44:00,296 - openevolve.process_parallel - INFO - ✅ Evolution completed - Shutdown requested
+2026-05-12 20:44:00,297 - openevolve.controller - INFO - Evolution stopped due to shutdown request
+2026-05-12 20:46:07,363 - openevolve.controller - INFO - Force exit requested - terminating immediately
+2026-05-12 20:46:08,716 - openevolve.controller - INFO - Force exit requested - terminating immediately
+2026-05-12 20:46:08,933 - openevolve.controller - INFO - Force exit requested - terminating immediately

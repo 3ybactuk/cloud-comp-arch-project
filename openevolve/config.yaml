@@ -5,38 +5,46 @@ checkpoint_interval: 1 # Do not change this
 
 llm:
   api_base: "https://api.swissai.cscs.ch/v1"
-  primary_model: "<your model>"
-  top_p: 0.7 # Feel free to experiment with this value
-  # Possible additional parameters to configure the LLM:
-  # temperature: 
-  # max_tokens: 
-  # timeout: 
+  primary_model: "Qwen/Qwen2.5-Coder-14B-Instruct"
+  top_p: 0.95
+  temperature: 0.85
+  timeout: 600
+  retries: 4
+  max_tokens: 4096
 
 prompt:
-  # Prompts to provide the LLM with. You can directly write the prompt in the config, e.g.
-  # system_message: |
-  #   You are an expert programmer tasked with optimizing the following code...
-  #
-  # Alternatively, you can create files containing the prompts, and reference them here, e.g.
-  # template_dir: "<path-to-prompt-directory>"
-  # system_message: "name_of_file"
-  #
-  # The system message will be the content of the file <path-to-prompt-directory>/name_of_file.txt
+  num_top_programs: 3
+  num_diverse_programs: 2
+  include_artifacts: false
+  template_dir: "prompts"
 
-# You can learn more about these and other parameters here: https://github.com/algorithmicsuperintelligence/openevolve/blob/main/configs/default_config.yaml
+  system_message: |
+    You optimize a Kubernetes batch scheduler by modifying get_policy() in a small Python file.
+
+    Cluster: node-a-8core (8 CPU, memcached uses 2 threads → 6 CPUs free for batch),
+    node-b-4core (4 CPU, batch only). CPU budget: threads * 0.9 per job, no overcommit.
+    node values: "node-a-8core" or "node-b-4core". job values: any of the 7 in ALL_JOBS.
+    All 7 jobs must appear exactly once across all waves. Waves run sequentially - jobs in a wave run in parallel.
+
+    Goal: minimize makespan (seconds from first job start to last job end) while keeping
+    memcached p95 < 1ms at 30k QPS. Baseline: 378s.
+
+    HARD CONSTRAINTS (violations → slo_factor=0, combined_score capped at 0.2):
+    - freqmine and vips MUST run on node-b-4core. They trash LLC and break memcached SLO on node-a.
+    - canneal does not scale past 2 threads — never set threads > 2 for canneal.
+    - node-b-4core has 4 CPUs total. Sum of (threads * 0.9) across concurrent jobs must not exceed 4.
+    - node-a-8core has 6 CPUs free (after memcached). Sum of (threads * 0.9) must not exceed 6.
+
+    Return ONLY the complete Python file. No markdown, no fences, no backticks, no prose.
+    Start response with exactly: from __future__ import annotations
+
 database:
   population_size: 200 # Do not change this
-  # Relevant parameters:
-  # num_islands: 
-  # elite_selection_ratio: 
-  # exploitation_ratio: 
 
-# Evaluator configuration
 evaluator:
   cascade_evaluation: false
   parallel_evaluations: 1
-  # Relevant parameters:
-  # timeout: 
+  timeout: 7200
 
-diff_based_evolution: true
+diff_based_evolution: false
 max_code_length: 50000

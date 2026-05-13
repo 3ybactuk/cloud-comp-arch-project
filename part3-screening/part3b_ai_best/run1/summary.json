@@ -1,0 +1,100 @@
+{
+  "policy_id": "part3b_ai_best",
+  "description": "AI-generated best policy from OpenEvolve run_26 checkpoint_5. Wave1: streamcluster+freqmine+canneal, Wave2: blackscholes+vips+barnes+radix.",
+  "all_jobs_completed": true,
+  "completed_jobs": [
+    "barnes",
+    "blackscholes",
+    "canneal",
+    "freqmine",
+    "radix",
+    "streamcluster",
+    "vips"
+  ],
+  "job_specs": [
+    {
+      "job": "streamcluster",
+      "node": "node-a-8core",
+      "threads": 4
+    },
+    {
+      "job": "freqmine",
+      "node": "node-b-4core",
+      "threads": 2
+    },
+    {
+      "job": "canneal",
+      "node": "node-b-4core",
+      "threads": 2
+    },
+    {
+      "job": "blackscholes",
+      "node": "node-a-8core",
+      "threads": 2
+    },
+    {
+      "job": "vips",
+      "node": "node-b-4core",
+      "threads": 2
+    },
+    {
+      "job": "barnes",
+      "node": "node-a-8core",
+      "threads": 2
+    },
+    {
+      "job": "radix",
+      "node": "node-a-8core",
+      "threads": 4
+    }
+  ],
+  "batch_start_epoch": 1778618134.0,
+  "batch_end_epoch": 1778618544.0,
+  "makespan_s": 410.0,
+  "job_times_s": {
+    "parsec-barnes": {
+      "start": 1778618419.0,
+      "end": 1778618520.0,
+      "runtime_s": 101.0
+    },
+    "parsec-blackscholes": {
+      "start": 1778618418.0,
+      "end": 1778618524.0,
+      "runtime_s": 106.0
+    },
+    "parsec-canneal": {
+      "start": 1778618134.0,
+      "end": 1778618254.0,
+      "runtime_s": 120.0
+    },
+    "parsec-freqmine": {
+      "start": 1778618134.0,
+      "end": 1778618326.0,
+      "runtime_s": 192.0
+    },
+    "parsec-radix": {
+      "start": 1778618523.0,
+      "end": 1778618544.0,
+      "runtime_s": 21.0
+    },
+    "parsec-streamcluster": {
+      "start": 1778618134.0,
+      "end": 1778618407.0,
+      "runtime_s": 273.0
+    },
+    "parsec-vips": {
+      "start": 1778618418.0,
+      "end": 1778618494.0,
+      "runtime_s": 76.0
+    }
+  },
+  "mcperf_samples_total": 36,
+  "gates": {
+    "validity": true,
+    "qps_coverage": 1.0,
+    "slo_violation_ratio": 0.0,
+    "longest_violation_streak_sec": 0.0,
+    "pass_gate": true
+  },
+  "screening_pass": true
+}

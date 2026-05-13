@@ -1,0 +1,25 @@
+{
+  "policies": [
+    {
+      "id": "part3b_ai_best",
+      "description": "AI-generated best policy from OpenEvolve run_26 checkpoint_5. Wave1: streamcluster+freqmine+canneal, Wave2: blackscholes+vips+barnes+radix.",
+      "memcached": {
+        "node": "node-a-8core",
+        "threads": 2
+      },
+      "waves": [
+        [
+          {"job": "streamcluster", "node": "node-a-8core", "threads": 4},
+          {"job": "freqmine",      "node": "node-b-4core", "threads": 2},
+          {"job": "canneal",       "node": "node-b-4core", "threads": 2}
+        ],
+        [
+          {"job": "blackscholes", "node": "node-a-8core", "threads": 2},
+          {"job": "vips",         "node": "node-b-4core", "threads": 2},
+          {"job": "barnes",       "node": "node-a-8core", "threads": 2},
+          {"job": "radix",        "node": "node-a-8core", "threads": 4}
+        ]
+      ]
+    }
+  ]
+}

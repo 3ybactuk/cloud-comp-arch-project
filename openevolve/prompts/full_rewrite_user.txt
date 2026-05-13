@@ -1,0 +1,31 @@
+# Current Policy Performance
+- Fitness: {fitness_score}
+- Focus areas: {improvement_areas}
+
+{artifacts}
+
+# Evolution History
+{evolution_history}
+
+# Current Policy File
+{current_program}
+
+# Task
+Modify get_policy() to improve fitness (lower makespan, fewer SLO violations).
+Current baseline makespan: 378s. Beat it.
+
+MANDATORY: your output MUST differ from the current policy. Returning the same policy scores 0.
+
+SLO is the bottleneck — slo_factor=0 caps combined_score at 0.2. To get slo_factor > 0:
+- freqmine and vips MUST be on node-b-4core (LLC pressure kills memcached p95 on node-a)
+- minimize jobs on node-a during long waves (streamcluster ok, but avoid LLC-heavy workloads)
+
+Try one of these strategies (pick ONE, apply it aggressively):
+- STRATEGY A: freqmine+vips on node-b in wave 1, all others on node-a — minimize node-a contention
+- STRATEGY B: 2 waves — wave1: [streamcluster@node-a, freqmine@node-b, canneal@node-b], wave2: [blackscholes@node-a, vips@node-b, barnes@node-a, radix@node-a]
+- STRATEGY C: 3 waves — wave1: [freqmine@node-b, streamcluster@node-a], wave2: [canneal@node-b, vips@node-b, blackscholes@node-a], wave3: [barnes@node-a, radix@node-a]
+
+State which strategy you chose in a comment inside get_policy().
+
+Return ONLY the complete Python file with your modified get_policy(). Do not change anything outside get_policy().
+Your response must start exactly with: from __future__ import annotations
