@@ -13,11 +13,13 @@ const (
 	minMemcachedCores = 1
 
 	// CPU utilization thresholds for memcached core scaling.
-	highThreshold = 0.78
-	lowThreshold  = 0.30
+	// 0.60 gives headroom before latency spikes (empirically, the SLO knee occurs
+	// before 78% CPU utilisation, so reacting at 60% prevents violations).
+	highThreshold = 0.60
+	lowThreshold  = 0.25
 
 	// Require lowThreshold to hold for this many consecutive polls before shrinking.
-	stablePollsNeeded = 4
+	stablePollsNeeded = 3
 
 	pollInterval = 2 * time.Second
 )

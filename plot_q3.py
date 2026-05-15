@@ -231,9 +231,10 @@ def plot_run(run_num: int, results_dir: Path, out_dir: Path,
     for r in mcperf_rows:
         r["rel_t_jobs"] = r["rel_t"] + mcperf_offset
 
-    # x limits: scheduler start → scheduler end
-    t_max = max((e[0] for e in events if e[1] == "end" and e[2] == "scheduler"),
-                default=max((r["rel_t_jobs"] for r in mcperf_rows), default=1800))
+    # x limits: full experiment window (scheduler end or last mcperf sample, whichever is later)
+    t_sched_end = max((e[0] for e in events if e[1] == "end" and e[2] == "scheduler"), default=0)
+    t_mcperf_end = max((r["rel_t_jobs"] for r in mcperf_rows), default=1800)
+    t_max = max(t_sched_end, t_mcperf_end)
     t_max_min = t_max / 60
 
     has_cpu = len(cpu_records) > 0

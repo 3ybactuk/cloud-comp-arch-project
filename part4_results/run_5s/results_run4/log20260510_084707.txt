@@ -1,0 +1,20 @@
+2026-05-10T08:47:07.196688 start scheduler
+2026-05-10T08:47:07.199556 start memcached [0,1] 2
+2026-05-10T08:47:11.406142 start freqmine [2,3] 2
+2026-05-10T08:47:15.237371 update_cores memcached [0]
+2026-05-10T08:47:15.263692 update_cores freqmine [1,2,3]
+2026-05-10T08:47:31.247538 update_cores memcached [0,1]
+2026-05-10T08:47:31.279288 update_cores freqmine [2,3]
+2026-05-10T08:47:33.243746 update_cores memcached [0,1,2]
+2026-05-10T08:47:33.275784 update_cores freqmine [3]
+2026-05-10T08:55:37.289335 end freqmine
+2026-05-10T08:55:37.620803 start canneal [3] 1
+2026-05-10T09:00:46.390596 end canneal
+2026-05-10T09:00:46.640961 start blackscholes [3] 1
+2026-05-10T09:02:41.709226 end blackscholes
+2026-05-10T09:02:42.346222 start streamcluster [3] 1
+2026-05-10T09:12:37.473644 end streamcluster
+2026-05-10T09:12:37.668420 start barnes [3] 1
+2026-05-10T09:15:39.266755 end barnes
+2026-05-10T09:15:39.468961 start vips [3] 1
+2026-05-10T09:17:24.983509 end vips

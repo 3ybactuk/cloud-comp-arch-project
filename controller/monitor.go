@@ -89,7 +89,7 @@ func AvgUtil(utils []float64, cores []int) float64 {
 }
 
 func MemcachedStats(ip string, port int) map[string]string {
-	addr := fmt.Sprintf("%s:%d", ip, port)
+	addr := net.JoinHostPort(ip, fmt.Sprintf("%d", port))
 	conn, err := net.DialTimeout("tcp", addr, 2*time.Second)
 	if err != nil {
 		return nil

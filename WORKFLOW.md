@@ -684,7 +684,7 @@ scp -r scripts/ ubuntu@<client-measure-IP>:/home/ubuntu/
 
 ssh ubuntu@<MEMCACHE-SERVER-IP>
 
-bash scripts/setup_memcache_server.sh 10.0.16.3 
+bash scripts/setup_memcache_server.sh <memcache-internal>
 ```
 
 On `client-agent` and `client-measure`:
